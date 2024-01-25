@@ -24,8 +24,7 @@ function App() {
         <Navbar onNavigate={handleNavigate} />
       </header>
       <main>
-      <CombinedDatePicker message={"Your arrival date is"}></CombinedDatePicker>
-        <CheckboxForm></CheckboxForm>
+      <CombinedDatePicker message={"Select an Arrival Date"}></CombinedDatePicker>
         </main>
       </AppProvider>
   )
