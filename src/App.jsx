@@ -6,6 +6,7 @@ import enTranslations from '@shopify/polaris/locales/en.json';
 import { CheckboxForm } from './components/CheckboxForm';
 import Navbar from './components/Navbar';
 import { useState } from 'react';
+import { CombinedDatePicker } from './components/CombinedDatePicker';
 function App() {
 
   const [currentPage, setCurrentPage] = useState('')
@@ -23,7 +24,7 @@ function App() {
         <Navbar onNavigate={handleNavigate} />
       </header>
       <main>
-      <Datepicker message={"Your arrival date is"}></Datepicker>
+      <CombinedDatePicker message={"Your arrival date is"}></CombinedDatePicker>
         <CheckboxForm></CheckboxForm>
         </main>
       </AppProvider>

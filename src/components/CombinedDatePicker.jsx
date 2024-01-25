@@ -1,7 +1,7 @@
 import { DatePicker } from '@shopify/polaris';
 import { useState, useCallback } from 'react';
 import styled from 'styled-components';
-import { SwitchTab } from './SwitchTab';
+import {Pagination} from '@shopify/polaris';
 
 const DatepickerContainer = styled.div`
   width: 40%;
@@ -47,9 +47,29 @@ text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
 text-align:center;
 outline: none;
 `
+const SwitchTabContainer = styled.div`
+display: flex;
+flex-direction row;
+align-items: baseline;
+gap:6rem;
+`
 
-export const Datepicker=(props)=> {
+const DisplayMessage = styled.h4`
+text-size: 13;
+`
+
+const PaginationContainer = styled.div`
+display: flex;
+flex-direction: row;
+gap: 10px;
+`
+
+export const CombinedDatePicker=(props)=> {
     const {message} = props;
+    const [isArrival, setIsArrival] = useState(true);
+    const [arrivalSubmit, setArrivalSubmit] = useState(false)
+    const [departureSubmit, setDepartureSubmit] = useState(false)
+    const subMsg = isArrival ? "Submit arrival" : "Submit depature"
   const [{ month, year }, setDate] = useState({ month: 1, year: 2024 });
   const [selectedDates, setSelectedDates] = useState({
     start: new Date('Wed Feb 07 2024 00:00:00 GMT-0500 (EST)'),
@@ -68,6 +88,43 @@ export const Datepicker=(props)=> {
   const dateParts = formattedDate.split('/');
   const [monthPart, dayPart, yearPart] = dateParts;
 
+
+const SwitchTab=(props)=> {
+
+    const {isArrival, setIsArrival} = props;
+
+    const displayPrev=()=>{
+        setIsArrival(true)
+    }
+    const displayNext=()=>{
+        setIsArrival(false)
+    }
+
+    const msg = isArrival ? "Setting Arrival Date" : "Setting Departure Date"
+
+  return (
+    <div>
+        <PaginationContainer>
+           <DisplayMessage> {msg}</DisplayMessage>
+    <Pagination
+      hasPrevious
+      onPrevious={displayPrev}
+      hasNext
+      onNext={displayNext}
+    />
+    </PaginationContainer>
+    </div>
+  );
+}
+
+  const handleSubmit=()=>{
+    if(isArrival){
+        setArrivalSubmit(true)
+    }
+    setDepartureSubmit(true)
+
+  }
+
   return (
     <>
       <DatepickerContainer>
@@ -79,8 +136,12 @@ export const Datepicker=(props)=> {
           onMonthChange={handleMonthChange}
           selected={selectedDates}
         />
-        <SwitchTab></SwitchTab>
-        <SubButton>Submit</SubButton>
+        <SwitchTabContainer>
+        <SubButton onClick={()=>handleSubmit()}>{subMsg}</SubButton>
+        <SwitchTab isArrival={isArrival} setIsArrival={setIsArrival}></SwitchTab>
+        </SwitchTabContainer>
+        {arrivalSubmit && <p>Your chosen date of arrival is: {formattedDate}</p>}
+        {departureSubmit && <p> Your chosen date of departure is {formattedDate}</p>}
       </DatepickerContainer>
 
     </>
