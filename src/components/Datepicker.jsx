@@ -4,8 +4,12 @@ import styled from 'styled-components';
 
 const DatepickerContainer = styled.div`
   width: 40%;
+  box-shadow: 0 2px 9px rgba(0, 0, 0, 0.2);
   display: flex;
+  padding: 2rem;
+  background-color: white;
   justify-content: center;
+  border-radius: 25px;
   margin: auto;
   align-items: center;
   flex-direction: column;
@@ -24,11 +28,12 @@ padding: 0.5rem;
 color: green;
 `
 
-function Datepicker() {
-  const [{ month, year }, setDate] = useState({ month: 1, year: 2018 });
+export const Datepicker=(props)=> {
+    const {message} = props;
+  const [{ month, year }, setDate] = useState({ month: 1, year: 2024 });
   const [selectedDates, setSelectedDates] = useState({
-    start: new Date('Wed Feb 07 2018 00:00:00 GMT-0500 (EST)'),
-    end: new Date('Wed Feb 07 2018 00:00:00 GMT-0500 (EST)'),
+    start: new Date('Wed Feb 07 2024 00:00:00 GMT-0500 (EST)'),
+    end: new Date('Wed Feb 07 2024 00:00:00 GMT-0500 (EST)'),
   });
 
   const handleMonthChange = useCallback((month, year) => setDate({ month, year }), []);
@@ -46,7 +51,7 @@ function Datepicker() {
   return (
     <>
       <DatepickerContainer>
-      <Title>Your selected date is: <EmphTitle> {formattedDate}</EmphTitle></Title>
+      <Title>{message} <EmphTitle> {formattedDate}</EmphTitle></Title>
         <DatePicker
           month={month}
           year={year}
@@ -60,4 +65,3 @@ function Datepicker() {
   );
 }
 
-export default Datepicker;

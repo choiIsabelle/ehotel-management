@@ -1,21 +1,32 @@
 import './App.css'
-import Datepicker from './components/Datepicker'
+import {Datepicker} from './components/Datepicker'
 import { AppProvider } from '@shopify/polaris';
 import '@shopify/polaris/build/esm/styles.css';
 import enTranslations from '@shopify/polaris/locales/en.json';
 import { CheckboxForm } from './components/CheckboxForm';
-
+import Navbar from './components/Navbar';
+import { useState } from 'react';
 function App() {
 
+  const [currentPage, setCurrentPage] = useState('')
+
+  const handleNavigate=(page)=>{
+    setCurrentPage(page);
+    console.log(page)
+
+  }
+
   return (
-    <>
-    <div>
       <AppProvider i18n={enTranslations}>
-        <Datepicker></Datepicker>
+      <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+      <header>
+        <Navbar onNavigate={handleNavigate} />
+      </header>
+      <main>
+      <Datepicker message={"Your arrival date is"}></Datepicker>
         <CheckboxForm></CheckboxForm>
+        </main>
       </AppProvider>
-    </div>
-    </>
   )
 }
 
