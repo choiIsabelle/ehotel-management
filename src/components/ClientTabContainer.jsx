@@ -2,6 +2,16 @@ import { useState } from 'react';
 import {SwitchTab} from './SwitchTab';
 import { ArrivalDatePicker } from './ArrivalDatePicker';
 import { DepartureDatePicker } from './DepartureDatePicker';
+import { ClientGetInfoSection } from './ClientGetInfoSection';
+import styled from 'styled-components';
+
+const Container = styled.div`
+display: flex;
+width: 500px;
+height: 500px;
+flex-direction: column;
+
+`
 
 export const ClientTabContainer = () => {
   const [activeTab, setActiveTab] = useState(1);
@@ -11,11 +21,12 @@ export const ClientTabContainer = () => {
   };
 
   return (
-    <div>
+    <Container>
       <SwitchTab activeTab={activeTab} onTabChange={handleTabChange} />
       {activeTab === 1 &&       <ArrivalDatePicker message={"Select an Arrival Date"}/>}
       {activeTab === 2 && <DepartureDatePicker message={"Select a Departure Date"} />}
-    </div>
+      {activeTab ===3 && <ClientGetInfoSection/>}
+    </Container>
   );
 };
 

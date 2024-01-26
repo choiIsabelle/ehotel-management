@@ -7,10 +7,8 @@ text-size: 13;
 
 const PaginationContainer = styled.div`
 display: flex;
-top: 0;
-left: 0;
 width: 100%;
-margin: 0;
+position: fixed;
 flex-direction: row;
 gap: 10px;
 `

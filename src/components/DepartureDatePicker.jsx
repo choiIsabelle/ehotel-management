@@ -3,22 +3,25 @@ import { useState, useCallback } from 'react';
 import styled from 'styled-components';
 
 const DatepickerContainer = styled.div`
-  box-shadow: 0 2px 9px rgba(0, 0, 0, 0.2);
-  padding:1rem;
-  width: 35%;
-  height: 20%;
-  background-color: white;
-  justify-content: center;
-  border-radius: 25px;
-  margin: auto;
-  align-items: center;
-  flex-direction: column;
-  gap: 2rem;
+box-shadow: 0 2px 9px rgba(0, 0, 0, 0.2);
+background-color: white;
+justify-content: center;
+border-radius: 25px;
+margin: auto;
+align-items: center;
+flex-direction: column;
+box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+display: flex;
+flex-direction: column;
+width: 400px;
+height: 400px;
+padding: 2rem;
 `;
 
 const Title = styled.h3`
 font-weight: 600;
 margin-bottom: 1rem;
+margin-top: 2rem;
 font-size: 22px;
 `
 
