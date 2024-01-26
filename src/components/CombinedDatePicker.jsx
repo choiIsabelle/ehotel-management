@@ -85,10 +85,6 @@ export const CombinedDatePicker=(props)=> {
         setArrivalSubmit(true)
     }
 
-    const handleUpdate=()=>{
-
-    }
-
   return (
     <>
       <DatepickerContainer>

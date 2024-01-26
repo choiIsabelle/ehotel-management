@@ -6,7 +6,16 @@ import enTranslations from '@shopify/polaris/locales/en.json';
 import { CheckboxForm } from './components/CheckboxForm';
 import Navbar from './components/Navbar';
 import { useState } from 'react';
-import { CombinedDatePicker } from './components/CombinedDatePicker';
+import { ClientTabContainer } from './components/ClientTabContainer';
+import { SwitchTab } from './components/SwitchTab';
+import styled from 'styled-components'
+
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 function App() {
 
   const [currentPage, setCurrentPage] = useState('')
@@ -21,10 +30,14 @@ function App() {
       <AppProvider i18n={enTranslations}>
       <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
       <header>
+        <Wrapper>
         <Navbar onNavigate={handleNavigate} />
+      <SwitchTab></SwitchTab>
+      </Wrapper>
       </header>
       <main>
-      <CombinedDatePicker message={"Select an Arrival Date"}></CombinedDatePicker>
+        <ClientTabContainer></ClientTabContainer>
+
         </main>
       </AppProvider>
   )
