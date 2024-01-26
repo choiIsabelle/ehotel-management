@@ -1,10 +1,6 @@
 import {Pagination} from '@shopify/polaris';
 import styled from 'styled-components';
 
-const DisplayMessage = styled.h4`
-text-size: 13;
-`
-
 const PaginationContainer = styled.div`
 display: flex;
 width: 100%;
@@ -12,16 +8,16 @@ position: fixed;
 flex-direction: row;
 gap: 10px;
 `
-
-
 export const SwitchTab=({activeTab, onTabChange})=> {
+  const validTabValues = [1, 2, 3]
     const displayPrev=()=>{
-        onTabChange(activeTab - 1);
+        onTabChange(activeTab - 1)
     }
 
     
     const displayNext=()=>{
-        onTabChange(activeTab + 1);
+      if(validTabValues.includes(activeTab)){
+        onTabChange(activeTab + 1)}
     }
 
   return (
@@ -29,7 +25,7 @@ export const SwitchTab=({activeTab, onTabChange})=> {
     <Pagination
 hasPrevious={activeTab > 1}
       onPrevious={displayPrev}
-      hasNext
+      hasNext={validTabValues.includes(activeTab)}
       onNext={displayNext}
     />
     </PaginationContainer>
