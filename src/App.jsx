@@ -32,7 +32,6 @@ function App() {
       <header>
         <Wrapper>
         <Navbar onNavigate={handleNavigate} />
-      <SwitchTab></SwitchTab>
       </Wrapper>
       </header>
       <main>

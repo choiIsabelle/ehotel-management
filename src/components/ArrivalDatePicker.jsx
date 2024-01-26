@@ -58,7 +58,7 @@ gap: 1rem;
 flex-direction row;
 `
 
-export const CombinedDatePicker=(props)=> {
+export const ArrivalDatePicker=(props)=> {
     const {message} = props;
     const [arrivalSubmit, setArrivalSubmit] = useState(false)
     const subMsg = "Submit arrival"
