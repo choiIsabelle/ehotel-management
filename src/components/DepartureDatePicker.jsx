@@ -24,26 +24,12 @@ margin-bottom: 1rem;
 margin-top: 2rem;
 font-size: 22px;
 `
-
-const EmphTitle = styled.h3`
-font-weight: bold;
-font-size: 18px;
-padding: 0.5rem;
-color: blue;
-`
-
 const SubButton = styled.button`
 background-color: blue;
 font-weight:bold;
 font-size: 12px;
 color:white;
-`
-
-const SwitchTabContainer = styled.div`
-display: flex;
-flex-direction row;
-align-items: baseline;
-gap:6rem;
+margin-top: 2rem;
 `
 const CurrentDateText = styled.p`
 font-size: 13px;
@@ -53,7 +39,7 @@ margin-bottom: 1rem;
 `
 const ButtonContainer = styled.div`
 display: flex;
-margin-top: 3rem;
+margin-top: 0.2rem;
 align-items: center;
 margin-bottom: 1rem;
 flex-start: right;

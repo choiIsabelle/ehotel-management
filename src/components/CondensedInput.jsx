@@ -5,7 +5,7 @@ const StyledInput = styled.input`
 
 const Title = styled.h3`
 font-size: 16px;
-padding: 0.7rem;
+padding: 0.3rem;
 font-weight: 600;
 `
 const Text = styled.p`
