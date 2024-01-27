@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { PersonIcon } from './icons/PersonIcon';
+import { useState } from 'react';
 
 const Text = styled.span`
 margin-top: 1rem;
@@ -62,8 +63,8 @@ display: flex;
 flex-direction: column;
 `
 
+export const ClientWelcome=({handleOnClick})=>{
 
-export const ClientWelcome=()=>{
     return(
         <Container>
             <IconContainer>
@@ -73,7 +74,7 @@ export const ClientWelcome=()=>{
             <SubText>To use the eHotel Management System, access the Booking portal</SubText>
             <InnerCard>
                 <InnerText>Ready to start a booking?</InnerText>
-            <SubmitButton>Go to Hotels</SubmitButton>
+            <SubmitButton onClick={handleOnClick}>Go to Hotels</SubmitButton>
             </InnerCard>
 
 

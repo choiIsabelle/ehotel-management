@@ -20,12 +20,19 @@ const Wrapper = styled.div`
 function App() {
 
   const [currentPage, setCurrentPage] = useState('clientW')
+  const [showBooking, setShowBooking] = useState(false)
 
   const handleNavigate=(page)=>{
     setCurrentPage(page);
     console.log(page)
 
   }
+
+  const handleShowBooking=()=>{
+    setShowBooking(true)
+    setCurrentPage('client')
+  }
+
 
   return (
       <AppProvider i18n={enTranslations}>
@@ -36,8 +43,8 @@ function App() {
       </Wrapper>
       </header>
       <main>
-        {currentPage === 'client' && <ClientTabContainer></ClientTabContainer>}
-        {currentPage === 'clientW' && <ClientWelcome></ClientWelcome>}
+        {currentPage === 'clientW' && <ClientWelcome handleOnClick={handleShowBooking}></ClientWelcome>}
+        {(currentPage === 'client') && <ClientTabContainer></ClientTabContainer>}
 
         </main>
       </AppProvider>
