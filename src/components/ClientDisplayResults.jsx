@@ -16,6 +16,7 @@ border-radius: 10px;
 export const ClientDisplayResults=()=>{
     return(
         <Card>
+            <h1>Review the results of your search!</h1>
 
 
         </Card>

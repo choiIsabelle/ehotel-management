@@ -33,11 +33,23 @@ color: blue;
 `
 
 const SubButton = styled.button`
-background-color: blue;
-font-weight:bold;
-font-size: 12px;
-color:white;
-margin-bottom: 0.5rem;
+background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA  51%, #77A1D3  100%);
+margin: 10px;
+padding: 15px 45px;
+text-align: center;
+text-transform: uppercase;
+transition: 0.5s;
+background-size: 200% auto;
+color: white;            
+box-shadow: 0 0 20px #eee;
+border-radius: 10px;
+display: block;
+text-decoration: none;
+background-position: right center;
+
+&:hover {
+    background-position: left center; /* change the direction of the change here */
+  }
 `
 
 const SwitchTabContainer = styled.div`
@@ -54,7 +66,7 @@ margin-bottom: 1rem;
 `
 const ButtonContainer = styled.div`
 display: flex;
-margin-top: 3rem;
+margin-top: 1rem;
 align-items: center;
 margin-bottom: 1rem;
 flex-start: right;

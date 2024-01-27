@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { ClientTabContainer } from './components/ClientTabContainer';
 import { SwitchTab } from './components/SwitchTab';
 import styled from 'styled-components'
+import { ClientWelcome } from './components/ClientWelcome';
 
 
 const Wrapper = styled.div`
@@ -18,7 +19,7 @@ const Wrapper = styled.div`
 
 function App() {
 
-  const [currentPage, setCurrentPage] = useState('')
+  const [currentPage, setCurrentPage] = useState('clientW')
 
   const handleNavigate=(page)=>{
     setCurrentPage(page);
@@ -35,7 +36,8 @@ function App() {
       </Wrapper>
       </header>
       <main>
-        <ClientTabContainer></ClientTabContainer>
+        {currentPage === 'client' && <ClientTabContainer></ClientTabContainer>}
+        {currentPage === 'clientW' && <ClientWelcome></ClientWelcome>}
 
         </main>
       </AppProvider>

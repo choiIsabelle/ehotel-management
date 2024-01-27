@@ -22,6 +22,11 @@ const Navbar=({ onNavigate })=>{
               </NavItem>
             </li>
             <li className="nav-item">
+              <NavItem className="nav-link" aria-current="page" href="#" onClick={()=>onNavigate('clientW')}>
+                Client Welcome
+              </NavItem>
+            </li>
+            <li className="nav-item">
               <NavItem className="nav-link" aria-current="page" href="#" onClick={()=>onNavigate('employee')}>
                 Employee View
               </NavItem>
