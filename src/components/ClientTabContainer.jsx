@@ -4,6 +4,7 @@ import { ArrivalDatePicker } from './ArrivalDatePicker';
 import { DepartureDatePicker } from './DepartureDatePicker';
 import { ClientGetInfoSection } from './ClientGetInfoSection';
 import styled from 'styled-components';
+import { ClientDisplayResults } from './ClientDisplayResults';
 
 const Container = styled.div`
 display: flex;
@@ -26,6 +27,7 @@ export const ClientTabContainer = () => {
       {activeTab === 1 &&       <ArrivalDatePicker message={"Select an Arrival Date"}/>}
       {activeTab === 2 && <DepartureDatePicker message={"Select a Departure Date"} />}
       {activeTab ===3 && <ClientGetInfoSection/>}
+      {activeTab ===4 && <ClientDisplayResults/>}
     </Container>
   );
 };
