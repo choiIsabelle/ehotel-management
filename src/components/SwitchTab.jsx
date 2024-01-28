@@ -9,7 +9,7 @@ flex-direction: row;
 gap: 10px;
 `
 export const SwitchTab=({activeTab, onTabChange})=> {
-  const validTabValues = [1, 2, 3]
+  const validTabValues = [1, 2]
     const displayPrev=()=>{
         onTabChange(activeTab - 1)
     }

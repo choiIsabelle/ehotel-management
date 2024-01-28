@@ -43,6 +43,9 @@ function App() {
       </Wrapper>
       </header>
       <main>
+
+        {/* entry page for the user */}
+
         {currentPage === 'clientW' &&
          <ClientWelcome 
          title="Welcome, Customer"
@@ -51,10 +54,31 @@ function App() {
          subMsg="Go to hotels"
          role='client'
          handleOnClick={handleShowBooking}
-         
-         >
-          </ClientWelcome>}
+         > </ClientWelcome>}
+
         {(currentPage === 'client') && <ClientTabContainer></ClientTabContainer>}
+
+        {currentPage === 'employee' &&
+         <ClientWelcome 
+         title="Welcome, Employee"
+         subTitle="To use the eHotel Management System, access the Booking portal"
+         innermsg="Ready to start managing bookings?"
+         subMsg="Go to Bookings"
+         role='employee'
+        //  handleOnClick={handleShowBooking}
+         > </ClientWelcome>}
+
+        {currentPage === 'hotelOwner' &&
+         <ClientWelcome 
+         title="Welcome, Hotel Owner"
+         subTitle="To use the eHotel Management System, access the Booking portal"
+         innermsg="Ready to start managing hotel offerings?"
+         subMsg="Go to hotel offerings"
+         role='hotelOwner'
+        //  handleOnClick={handleShowBooking}
+         > </ClientWelcome>}
+
+
 
         </main>
       </AppProvider>

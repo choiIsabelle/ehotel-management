@@ -4,6 +4,7 @@ import { SelectDropdown } from './SelectDropdown'
 import { SpinnerOnSubmit } from './SpinnerOnSubmit'
 import { useState } from 'react'
 import { ConfirmationModel } from './ConfirmationModel'
+import {ClientDisplayResults} from './ClientDisplayResults'
 
 const Card = styled.div`
 box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -41,6 +42,7 @@ background-position: right center;
 export const ClientGetInfoSection=()=>{
 
   const [showModal, setShowModal] = useState(false);
+  const [showResults, setShowResults] = useState(false);
 
   const handleOpenModal = () => {
     console.log(showModal)
@@ -49,6 +51,7 @@ export const ClientGetInfoSection=()=>{
 
   const handleCloseModal = () => {
     setShowModal(false);
+    setShowResults(true)
   };
 
     const [hasSubmitted, setHasSubmitted] = useState(false)
@@ -64,7 +67,7 @@ export const ClientGetInfoSection=()=>{
 
 
     return(
-      <>
+      !showResults ? (
         <Card>
         <CondensedInput 
         title="Get Customer Preferences" 
@@ -100,7 +103,8 @@ export const ClientGetInfoSection=()=>{
         message="Hotels found!"
         subMessage="View results on the next page" />
         </Card>
-        </>
+      ) :
+      <ClientDisplayResults></ClientDisplayResults>
 
     )
 }

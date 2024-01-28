@@ -4,7 +4,6 @@ import { ArrivalDatePicker } from './ArrivalDatePicker';
 import { DepartureDatePicker } from './DepartureDatePicker';
 import { ClientGetInfoSection } from './ClientGetInfoSection';
 import styled from 'styled-components';
-import { ClientDisplayResults } from './ClientDisplayResults';
 
 const Container = styled.div`
 display: flex;
@@ -15,6 +14,10 @@ flex-direction: column;
 `
 
 export const ClientTabContainer = () => {
+  // Initial active state is '1'
+  // (2) Max value of the active state is '3' since each onNext and onPrev increments/decrements this value
+  // 3 tabs are shown: 3 is not a valid number to have a 'next tab' but it is accounted for
+
   const [activeTab, setActiveTab] = useState(1);
 
   const handleTabChange = (newTab) => {
@@ -27,7 +30,6 @@ export const ClientTabContainer = () => {
       {activeTab === 1 &&       <ArrivalDatePicker message={"Select an Arrival Date"}/>}
       {activeTab === 2 && <DepartureDatePicker message={"Select a Departure Date"} />}
       {activeTab ===3 && <ClientGetInfoSection/>}
-      {activeTab ===4 && <ClientDisplayResults/>}
     </Container>
   );
 };

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { PersonIcon } from './icons/PersonIcon';
-import { useState } from 'react';
+import { EmployeeIcon } from './icons/EmployeeIcon';
+import { HotelOwnerIcon } from './icons/HotelOwnerIcon';
 
 const Text = styled.span`
 margin-top: 1rem;
@@ -69,8 +70,8 @@ export const ClientWelcome=({title, subTitle, innermsg, subMsg, role, handleOnCl
         <Container>
             <IconContainer>
             {role==='client' && <PersonIcon/>}
-            {role==='employee' && <PersonIcon/>}
-            {role==='hotelOwner' && <PersonIcon/>}
+            {role==='employee' && <EmployeeIcon/>}
+            {role==='hotelOwner' && <HotelOwnerIcon/>}
             </IconContainer>
             <Text>{title}</Text>
             <SubText>{subTitle}</SubText>
