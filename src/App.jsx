@@ -1,15 +1,13 @@
 import './App.css'
-import {Datepicker} from './components/Datepicker'
 import { AppProvider } from '@shopify/polaris';
 import '@shopify/polaris/build/esm/styles.css';
 import enTranslations from '@shopify/polaris/locales/en.json';
-import { CheckboxForm } from './components/CheckboxForm';
 import Navbar from './components/Navbar';
 import { useState } from 'react';
 import { ClientTabContainer } from './components/ClientTabContainer';
-import { SwitchTab } from './components/SwitchTab';
 import styled from 'styled-components'
 import { ClientWelcome } from './components/ClientWelcome';
+import { EmployeeTabContainer } from './components/EmployeeTabContainer';
 
 
 const Wrapper = styled.div`
@@ -20,7 +18,6 @@ const Wrapper = styled.div`
 function App() {
 
   const [currentPage, setCurrentPage] = useState('clientW')
-  const [showBooking, setShowBooking] = useState(false)
 
   const handleNavigate=(page)=>{
     setCurrentPage(page);
@@ -29,9 +26,13 @@ function App() {
   }
 
   const handleShowBooking=()=>{
-    setShowBooking(true)
     setCurrentPage('client')
   }
+
+  const handleShowManageBookings=()=>{
+    setCurrentPage('employee')
+  }
+
 
 
   return (
@@ -58,16 +59,19 @@ function App() {
 
         {(currentPage === 'client') && <ClientTabContainer></ClientTabContainer>}
 
-        {currentPage === 'employee' &&
+        {currentPage === 'employeeW' &&
          <ClientWelcome 
          title="Welcome, Employee"
          subTitle="To use the eHotel Management System, access the Booking portal"
          innermsg="Ready to start managing bookings?"
          subMsg="Go to Bookings"
          role='employee'
-        //  handleOnClick={handleShowBooking}
+         handleOnClick={handleShowManageBookings}
          > </ClientWelcome>}
 
+         {(currentPage ==="employee" ) && <EmployeeTabContainer></EmployeeTabContainer>}
+
+{/* TODO: Implement specific way of handling onclicks to navigate to the respective pages for each role */}
         {currentPage === 'hotelOwner' &&
          <ClientWelcome 
          title="Welcome, Hotel Owner"

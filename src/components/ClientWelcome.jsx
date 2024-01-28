@@ -49,8 +49,18 @@ display: block;
 text-decoration: none;
 background-position: right center;
 
+&.grow {
+    transition: all .2s ease-in-out;
+
+    &:hover {
+
+    }
+  }
+
+
 &:hover {
-    background-position: left center; /* change the direction of the change here */
+    background-position: left center;
+    transform: scale(1.1);
   }
 `
 

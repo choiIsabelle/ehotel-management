@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import './Navbar.css';
+//TODO: I think I want a generic landing page
 
 const Navbar=({ onNavigate })=>{
     const NavItem=styled.a`
     color: white;
     padding: 0.9rem;
     text-decoration: none;
+    font-weight: bold;
 
     :hover {
       color: #7393B3;
@@ -21,13 +23,18 @@ const Navbar=({ onNavigate })=>{
                 Client View
               </NavItem>
             </li> */}
+                        <li className="nav-item">
+              <NavItem className="nav-link" aria-current="page" href="#" onClick={()=>onNavigate('clientW')}>
+               Gen Welcome
+              </NavItem>
+            </li>
             <li className="nav-item">
               <NavItem className="nav-link" aria-current="page" href="#" onClick={()=>onNavigate('clientW')}>
                 Client Welcome
               </NavItem>
             </li>
             <li className="nav-item">
-              <NavItem className="nav-link" aria-current="page" href="#" onClick={()=>onNavigate('employee')}>
+              <NavItem className="nav-link" aria-current="page" href="#" onClick={()=>onNavigate('employeeW')}>
                 Employee View
               </NavItem>
             </li>
