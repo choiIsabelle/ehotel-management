@@ -1,4 +1,9 @@
+import { useState } from 'react'
 import styled from 'styled-components'
+import { EmplyoeeRemoveBooking } from './EmployeeRemoveBooking'
+import { EmployeeAddBooking } from './EmployeeAddBooking'
+import { EmployeeUpdateBooking } from './EmployeeUpdateBooking'
+
 const Text = styled.h1`
 padding: 1rem;
 font-weight: bold;
@@ -94,8 +99,25 @@ flex-direction: column;
 
 export const EmployeeTabContainer=()=>{
 
+  const [remove, setRemove] = useState(false);
+  const [add, setAdd] = useState(false);
+  const [update, setUpdate] = useState(false);
+
+  const handleGoToRemoveBookings=()=>{
+    setRemove(true)
+  }
+  const handleGoToAddBookings=()=>{
+    setAdd(true)
+  }
+
+  const handleUpdateBookings=()=>{
+    setUpdate(true)
+  }
+
     return(
       <div>
+      {!remove && !add && !update && (
+        <div>
       <Text>What would you want to do today?</Text>
       <Grid>
         <Container>
@@ -103,7 +125,9 @@ export const EmployeeTabContainer=()=>{
           <SubText>Search and remove bookings for a client</SubText>
           <InnerCard>
           <InnerText>Delete an existing booking for a client</InnerText>
-          <SubmitButton>Remove a booking</SubmitButton>
+          <SubmitButton
+          onClick={handleGoToRemoveBookings}
+          >Remove a booking</SubmitButton>
           </InnerCard>
 
         </Container>
@@ -113,7 +137,9 @@ export const EmployeeTabContainer=()=>{
           <SubText>Add bookings</SubText>
           <InnerCard>
             <InnerText>Add a new booking for a client</InnerText>
-          <SubmitButton>Add a booking</SubmitButton>
+          <SubmitButton
+          onClick={handleGoToAddBookings}
+          >Add a booking</SubmitButton>
           </InnerCard>
         </Container>
 
@@ -122,12 +148,18 @@ export const EmployeeTabContainer=()=>{
         <SubText>Update arrival/departure date, location, hotel chain, booking type, etc.</SubText>
         <InnerCard>
         <InnerText>Update the reservation details for a client</InnerText>
-        <SubmitButton>Update a booking</SubmitButton>
+        <SubmitButton
+        onClick={handleUpdateBookings}
+        >Update a booking</SubmitButton>
         </InnerCard>
         </Container>
 
         </Grid>
         </div>
-
+      ) }
+      {remove && <EmplyoeeRemoveBooking/>}
+      {add && <EmployeeAddBooking/>}
+      {update && <EmployeeUpdateBooking/>}
+        </div>
     )
 }
