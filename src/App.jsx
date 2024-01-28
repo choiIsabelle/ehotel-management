@@ -43,7 +43,17 @@ function App() {
       </Wrapper>
       </header>
       <main>
-        {currentPage === 'clientW' && <ClientWelcome handleOnClick={handleShowBooking}></ClientWelcome>}
+        {currentPage === 'clientW' &&
+         <ClientWelcome 
+         title="Welcome, Customer"
+         subTitle="To use the eHotel Management System, access the Booking portal"
+         innermsg="Ready to start a booking?"
+         subMsg="Go to hotels"
+         role='client'
+         handleOnClick={handleShowBooking}
+         
+         >
+          </ClientWelcome>}
         {(currentPage === 'client') && <ClientTabContainer></ClientTabContainer>}
 
         </main>

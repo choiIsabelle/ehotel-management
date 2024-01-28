@@ -16,11 +16,11 @@ const Navbar=({ onNavigate })=>{
         <header>
         <nav className="navbar">
               <ul className="navbar-nav">
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <NavItem className="nav-link" aria-current="page" href="#" onClick={()=>onNavigate('client')}>
                 Client View
               </NavItem>
-            </li>
+            </li> */}
             <li className="nav-item">
               <NavItem className="nav-link" aria-current="page" href="#" onClick={()=>onNavigate('clientW')}>
                 Client Welcome

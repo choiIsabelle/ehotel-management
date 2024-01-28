@@ -13,10 +13,16 @@ margin-left: 2rem;
 border-radius: 10px;
 `
 
+const Title = styled.h1`
+margin-top: 1rem;
+font-weight: bold;
+font-size: 19px;
+`
+
 export const ClientDisplayResults=()=>{
     return(
         <Card>
-            <h1>Review the results of your search!</h1>
+            <Title>Review the results of your search!</Title>
 
 
         </Card>

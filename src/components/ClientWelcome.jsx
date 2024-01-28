@@ -63,18 +63,20 @@ display: flex;
 flex-direction: column;
 `
 
-export const ClientWelcome=({handleOnClick})=>{
+export const ClientWelcome=({title, subTitle, innermsg, subMsg, role, handleOnClick})=>{
 
     return(
         <Container>
             <IconContainer>
-            <PersonIcon/>
+            {role==='client' && <PersonIcon/>}
+            {role==='employee' && <PersonIcon/>}
+            {role==='hotelOwner' && <PersonIcon/>}
             </IconContainer>
-            <Text>Welcome, Customer</Text>
-            <SubText>To use the eHotel Management System, access the Booking portal</SubText>
+            <Text>{title}</Text>
+            <SubText>{subTitle}</SubText>
             <InnerCard>
-                <InnerText>Ready to start a booking?</InnerText>
-            <SubmitButton onClick={handleOnClick}>Go to Hotels</SubmitButton>
+                <InnerText>{innermsg}</InnerText>
+            <SubmitButton onClick={handleOnClick}>{subMsg}</SubmitButton>
             </InnerCard>
 
 
