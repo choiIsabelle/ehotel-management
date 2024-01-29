@@ -8,6 +8,8 @@ import { ClientTabContainer } from './components/ClientTabContainer';
 import styled from 'styled-components'
 import { ClientWelcome } from './components/ClientWelcome';
 import { EmployeeTabContainer } from './components/EmployeeTabContainer';
+import {HotelOwnerTabContainer } from './components/HotelOwnerTabContainer'
+import { GeneralWelcomePage } from './components/GeneralWelcomePage';
 
 
 const Wrapper = styled.div`
@@ -17,7 +19,7 @@ const Wrapper = styled.div`
 
 function App() {
 
-  const [currentPage, setCurrentPage] = useState('clientW')
+  const [currentPage, setCurrentPage] = useState('genWelcome')
 
   const handleNavigate=(page)=>{
     setCurrentPage(page);
@@ -33,6 +35,10 @@ function App() {
     setCurrentPage('employee')
   }
 
+  const handleShowManageHotels=()=>{
+    setCurrentPage('hotelOwner')
+  }
+
 
 
   return (
@@ -44,6 +50,8 @@ function App() {
       </Wrapper>
       </header>
       <main>
+
+        { currentPage === 'genWelcome' && <GeneralWelcomePage/>}
 
         {/* entry page for the user */}
 
@@ -72,15 +80,19 @@ function App() {
          {(currentPage ==="employee" ) && <EmployeeTabContainer></EmployeeTabContainer>}
 
 {/* TODO: Implement specific way of handling onclicks to navigate to the respective pages for each role */}
-        {currentPage === 'hotelOwner' &&
+        {currentPage === 'hotelOwnerW' &&
          <ClientWelcome 
          title="Welcome, Hotel Owner"
          subTitle="To use the eHotel Management System, access the Booking portal"
          innermsg="Ready to start managing hotel offerings?"
          subMsg="Go to hotel offerings"
          role='hotelOwner'
-        //  handleOnClick={handleShowBooking}
+         handleOnClick={handleShowManageHotels}
          > </ClientWelcome>}
+
+         {currentPage ==="hotelOwner" && 
+         <HotelOwnerTabContainer></HotelOwnerTabContainer>
+         }
 
 
 

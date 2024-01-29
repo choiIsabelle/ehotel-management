@@ -18,29 +18,24 @@ const Navbar=({ onNavigate })=>{
         <header>
         <nav className="navbar">
               <ul className="navbar-nav">
-            {/* <li className="nav-item">
-              <NavItem className="nav-link" aria-current="page" href="#" onClick={()=>onNavigate('client')}>
-                Client View
-              </NavItem>
-            </li> */}
                         <li className="nav-item">
-              <NavItem className="nav-link" aria-current="page" href="#" onClick={()=>onNavigate('clientW')}>
+              <NavItem className="nav-link" aria-current="page" href="#" onClick={()=>onNavigate('genWelcome')}>
                Gen Welcome
               </NavItem>
             </li>
             <li className="nav-item">
               <NavItem className="nav-link" aria-current="page" href="#" onClick={()=>onNavigate('clientW')}>
-                Client Welcome
+                Client
               </NavItem>
             </li>
             <li className="nav-item">
               <NavItem className="nav-link" aria-current="page" href="#" onClick={()=>onNavigate('employeeW')}>
-                Employee View
+                Employee
               </NavItem>
             </li>
             <li className="nav-item">
-              <NavItem className="nav-link" aria-current="page" href="#" onClick={()=>onNavigate('hotelOwner')}>
-                  Hotel Owner View
+              <NavItem className="nav-link" aria-current="page" href="#" onClick={()=>onNavigate('hotelOwnerW')}>
+                  Hotel Owner
                 </NavItem>
             </li>
           </ul>
