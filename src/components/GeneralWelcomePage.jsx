@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { PersonIcon } from './icons/PersonIcon';
 import { EmployeeIcon } from './icons/EmployeeIcon';
 import { HotelOwnerIcon } from './icons/HotelOwnerIcon';
+import { resource } from './localizedStrings';
 
 const TitleText = styled.h1`
 font-size: 30px;
@@ -19,10 +20,19 @@ font-size: 13px;
 font-weight: 400;
 `
 
-const EmphText = styled.h1`
+const EmphText = styled.div`
 font-size: 30px;
 font-weight: bold;
-color: #8D59E8;
+background: linear-gradient(90deg, rgba(84, 36, 132, 1) 0%, rgba(43, 164, 170, 1) 100%);
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;
+display: inline-block;
+-webkit-mask-image: linear-gradient(90deg, #000 0%, #000 100%);
+mask-image: linear-gradient(90deg, #000 0%, #000 100%);
+background-color: white; 
+display: block;
+line-height: 1.25;
 `
 
 const UpperContainer = styled.div`
@@ -57,6 +67,7 @@ flex-direction: row;
 
 const ItemCard = styled.div`
 flex-direction: column;
+box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 padding: 1rem;
 max-width: 250px;
 display: flex;
@@ -78,9 +89,9 @@ transition: 0.5s;
   }
 `
 const SubmitButton = styled.button`
-background-color: black;
+background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA  51%, #77A1D3  100%);
 margin: 10px;
-padding: 15px 45px;
+padding: 15px ;
 text-align: center;
 text-transform: uppercase;
 background-size: 200% auto;
@@ -112,12 +123,12 @@ const Typewriter = ({ text, delay }) => {
   };
 
 export const GeneralWelcomePage=()=>{
-      
+    const [ { genWelcomeTitle: genWelcomeTitleText } ] = resource;
 
     return(
         <TotalContainer>
             <UpperContainer>
-                <TitleText>Welcome to the</TitleText>
+                <TitleText>{genWelcomeTitleText}</TitleText>
                  <EmphText>
                     <Typewriter text='eHotel Management System' delay={100}></Typewriter>
                     </EmphText>
@@ -140,7 +151,7 @@ export const GeneralWelcomePage=()=>{
                 </IconContainer>
                 <InnerTitle>Employee</InnerTitle>
                 <InnerSubText>I am an Employee looking to manage bookings</InnerSubText>
-                    <SubmitButton>Go to Client</SubmitButton>
+                    <SubmitButton>Go to Employee</SubmitButton>
                 </ItemCard>
 
 
@@ -150,7 +161,7 @@ export const GeneralWelcomePage=()=>{
                 </IconContainer>
                 <InnerTitle>Hotel Owner</InnerTitle>
                 <InnerSubText>I am a Hotel Owner looking to manage my hotel offerings</InnerSubText>
-                    <SubmitButton>Go to Client</SubmitButton>
+                    <SubmitButton>Go to Hotel Owner</SubmitButton>
                 </ItemCard>
                 
 
