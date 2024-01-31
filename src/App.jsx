@@ -51,7 +51,7 @@ function App() {
       </header>
       <main>
 
-        { currentPage === 'genWelcome' && <GeneralWelcomePage/>}
+        { currentPage === 'genWelcome' && <GeneralWelcomePage onNavigate={handleNavigate}/>}
 
         {/* entry page for the user */}
 

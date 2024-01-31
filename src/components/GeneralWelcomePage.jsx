@@ -122,7 +122,7 @@ const Typewriter = ({ text, delay }) => {
     return <span>{currentText}</span>;
   };
 
-export const GeneralWelcomePage=()=>{
+export const GeneralWelcomePage=({onNavigate})=>{
     const [ { genWelcomeTitle: genWelcomeTitleText } ] = resource;
 
     return(
@@ -142,7 +142,7 @@ export const GeneralWelcomePage=()=>{
                 </IconContainer>
                 <InnerTitle>Client</InnerTitle>
                 <InnerSubText>I am a Client looking to book a hotel</InnerSubText>
-                    <SubmitButton>Go to Client</SubmitButton>
+                    <SubmitButton onClick={()=>onNavigate('clientW')}>Go to Client</SubmitButton>
                 </ItemCard>
 
                 <ItemCard>
@@ -151,7 +151,7 @@ export const GeneralWelcomePage=()=>{
                 </IconContainer>
                 <InnerTitle>Employee</InnerTitle>
                 <InnerSubText>I am an Employee looking to manage bookings</InnerSubText>
-                    <SubmitButton>Go to Employee</SubmitButton>
+                    <SubmitButton onClick={()=>onNavigate('employeeW')}>Go to Employee</SubmitButton>
                 </ItemCard>
 
 
@@ -161,7 +161,7 @@ export const GeneralWelcomePage=()=>{
                 </IconContainer>
                 <InnerTitle>Hotel Owner</InnerTitle>
                 <InnerSubText>I am a Hotel Owner looking to manage my hotel offerings</InnerSubText>
-                    <SubmitButton>Go to Hotel Owner</SubmitButton>
+                    <SubmitButton onClick={()=>onNavigate('hotelOwnerW')}>Go to Hotel Owner</SubmitButton>
                 </ItemCard>
                 
 
