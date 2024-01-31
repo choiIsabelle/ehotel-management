@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-import { EmplyoeeRemoveBooking } from './EmployeeRemoveBooking'
-import { EmployeeAddBooking } from './EmployeeAddBooking'
-import { EmployeeUpdateBooking } from './EmployeeUpdateBooking'
+import { HotelOwnerModifyChain } from './HotelOwnerModifyChain'
+import {HotelOwnerAddChain} from './HotelOwnerAddChain'
 
 const Text = styled.h1`
 padding: 1rem;
@@ -99,24 +98,20 @@ flex-direction: column;
 
 export const HotelOwnerTabContainer=()=>{
 
-  const [remove, setRemove] = useState(false);
+  const [modify, setModify] = useState(false);
   const [add, setAdd] = useState(false);
-  const [update, setUpdate] = useState(false);
 
   const handleGoToRemoveBookings=()=>{
-    setRemove(true)
+    setModify(true)
   }
   const handleGoToAddBookings=()=>{
     setAdd(true)
   }
 
-  const handleUpdateBookings=()=>{
-    setUpdate(true)
-  }
 
     return(
       <div>
-      {!remove && !add && !update && (
+      {!modify && !add && (
         <div>
       <Text>What would you want to do today?</Text>
       <Grid>
@@ -146,9 +141,8 @@ export const HotelOwnerTabContainer=()=>{
         </Grid>
         </div>
       ) }
-      {remove && <EmplyoeeRemoveBooking/>}
-      {add && <EmployeeAddBooking/>}
-      {update && <EmployeeUpdateBooking/>}
+      {modify && <HotelOwnerModifyChain/>}
+      {add && <HotelOwnerAddChain/>}
         </div>
     )
 }
