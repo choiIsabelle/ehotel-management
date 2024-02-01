@@ -21,12 +21,6 @@ gap: 1rem
 const SubText = styled.p`
 `
 
-const IconContainer=styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
-`
-
 const InnerText = styled.p`
 font-weight: bold;
 font-size: 14px;
@@ -102,6 +96,7 @@ export const EmployeeTabContainer=()=>{
   const [remove, setRemove] = useState(false);
   const [add, setAdd] = useState(false);
   const [update, setUpdate] = useState(false);
+  console.log(update)
 
   const handleGoToRemoveBookings=()=>{
     setRemove(true)
@@ -112,6 +107,35 @@ export const EmployeeTabContainer=()=>{
 
   const handleUpdateBookings=()=>{
     setUpdate(true)
+  }
+
+  const handleGoBack=()=>{
+    (setUpdate(false));
+    (setRemove(false));
+    (setAdd(false));
+  }
+
+  const handleGoManage=()=>{
+    if(!update){
+      // Order matters. I need to render the view I want and unrender the current view
+      setRemove(false);
+      handleUpdateBookings()
+      setAdd(false)}
+  }
+  const handleGoAdd=()=>{
+    if(!add){
+      (setUpdate(false))
+      handleGoToAddBookings()
+      setRemove(false)
+  }
+  }
+
+  const handleGoRemove=()=>{
+    if(!remove){
+      (setUpdate(false))
+      handleGoToRemoveBookings()
+      setAdd(false)
+  }
   }
 
     return(
@@ -157,9 +181,24 @@ export const EmployeeTabContainer=()=>{
         </Grid>
         </div>
       ) }
-      {remove && <EmplyoeeRemoveBooking/>}
-      {add && <EmployeeAddBooking/>}
-      {update && <EmployeeUpdateBooking/>}
+      {remove && 
+      <EmplyoeeRemoveBooking
+      goAdd={handleGoAdd}
+      goRemove={handleGoRemove}
+      goManage ={handleGoManage} 
+      goBack={handleGoBack}/>}
+      {add && 
+      <EmployeeAddBooking
+        goAdd={handleGoAdd}
+        goRemove={handleGoRemove}
+        goManage ={handleGoManage} 
+        goBack={handleGoBack}/>}
+      {update && 
+      <EmployeeUpdateBooking 
+      goAdd={handleGoAdd}
+      goRemove={handleGoRemove}
+      goManage ={handleGoManage} 
+      goBack={handleGoBack}/>}
         </div>
     )
 }

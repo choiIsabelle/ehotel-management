@@ -1,26 +1,34 @@
 import styled from "styled-components";
 import './Navbar.css';
-//TODO: I think I want a generic landing page
+import { HomeFilledIcon } from "./icons/HomeFilledIcon";
 
 const Navbar=({ onNavigate })=>{
     const NavItem=styled.a`
     color: white;
     padding: 0.9rem;
-    text-decoration: none;
     font-weight: bold;
 
     :hover {
-      color: #7393B3;
+      color: #cfe2f3;
+      fill: #cfe2f3;
       ;
     }
     `
+    const StyledHomeFilledIcon = styled(HomeFilledIcon)`
+    fill: white;
+    transition: fill 0.3s ease;
+  `;
+
+    const iconStyling={
+      marginRight: '1rem'
+    }
     return(
         <header>
         <nav className="navbar">
               <ul className="navbar-nav">
                         <li className="nav-item">
               <NavItem className="nav-link" aria-current="page" href="#" onClick={()=>onNavigate('genWelcome')}>
-               Gen Welcome
+               <StyledHomeFilledIcon style={iconStyling} />
               </NavItem>
             </li>
             <li className="nav-item">
