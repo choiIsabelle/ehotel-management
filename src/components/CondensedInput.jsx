@@ -24,12 +24,16 @@ display: flex;
 flex-direction: column;
 `
 
-export const CondensedInput=({title ,msg, subMsg})=>{
+export const CondensedInput=({title ,msg, subMsg, valueLabel, handleChange, handleClick})=>{
     return(
         <Container>
             <Title>{title}</Title>
             <Text>{msg}</Text>
-        <StyledInput></StyledInput>
+        <StyledInput
+        value={valueLabel}
+        onClick={handleClick}
+        onChange={handleChange}
+        ></StyledInput>
         <SubText>{subMsg}</SubText>
         </Container>
 
