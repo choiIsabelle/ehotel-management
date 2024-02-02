@@ -51,10 +51,12 @@ export const ClientUpdateDetails=()=>{
             <IconContainer>
             {foundAccount && <PersonIcon></PersonIcon>}
             </IconContainer>
-            Update payment details
-
-
             </CustomComponents.Card>
+            <CustomComponents.Card>
+            Update payment details
+            </CustomComponents.Card>
+
+
             <CustomComponents.Card>
             Update user details
 
