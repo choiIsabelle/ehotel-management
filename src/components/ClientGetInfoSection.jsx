@@ -35,7 +35,7 @@ text-decoration: none;
 background-position: right center;
 
 &:hover {
-    background-position: left center; /* change the direction of the change here */
+    background-position: left center;
   }
 `
 

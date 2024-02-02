@@ -10,6 +10,7 @@ import { ClientWelcome } from './components/ClientWelcome';
 import { EmployeeTabContainer } from './components/EmployeeTabContainer';
 import {HotelOwnerTabContainer } from './components/HotelOwnerTabContainer'
 import { GeneralWelcomePage } from './components/GeneralWelcomePage';
+import ClientOptionsContainer from './components/ClientOptionsContainer';
 
 
 const Wrapper = styled.div`
@@ -65,7 +66,7 @@ function App() {
          handleOnClick={handleShowBooking}
          > </ClientWelcome>}
 
-        {(currentPage === 'client') && <ClientTabContainer></ClientTabContainer>}
+        {(currentPage === 'client') && <ClientOptionsContainer></ClientOptionsContainer>}
 
         {currentPage === 'employeeW' &&
          <ClientWelcome 
