@@ -5,6 +5,8 @@ import {LockIcon} from './icons/LockIcon'
 import {PersonIcon} from './icons/PersonIcon'
 import { useState } from 'react';
 import { SpinnerOnSubmit } from './SpinnerOnSubmit';
+import { ClientUpdatePaymentDetails } from './ClientUpdatePaymentDetails';
+import { ClientUpdateUserDetails } from './ClientUpdateUserDetails';
 
 //TODO: finish this for the client view of updating their personal information or payment information
 
@@ -13,7 +15,14 @@ justify-content: center;
 display: flex;
 `
 
+const Container = styled.div`
+justify-content: center;
+display: flex;
+flex-direction: column;
+`
+
 export const ClientUpdateDetails=()=>{
+    const [currentUser, setCurrentUser] = useState('Temp user');
     const [foundAccount, setFoundAccount] = useState(false);
     const [showDetails, setShowDetails] = useState(false);
     const [isSearching, setIsSearching] = useState(false);
@@ -29,7 +38,7 @@ export const ClientUpdateDetails=()=>{
     }
 
     return(
-        <CustomComponents.Grid>
+        <Container>
            {!showDetails &&  <CustomComponents.Card>
                 <IconContainer>
                 {!foundAccount && <LockIcon></LockIcon>}
@@ -46,25 +55,25 @@ export const ClientUpdateDetails=()=>{
         </CustomComponents.SearchButton>
         {isSearching && <SpinnerOnSubmit></SpinnerOnSubmit>}
             </CustomComponents.Card> }
-           { foundAccount && <div><CustomComponents.Card>
-            Welcome, User
+           { foundAccount && 
+           <div>
+           <Container>
+            <CustomComponents.Card>
             <IconContainer>
-            {foundAccount && <PersonIcon></PersonIcon>}
+            <PersonIcon></PersonIcon>
             </IconContainer>
+            <CustomComponents.Title>    
+                Welcome, {currentUser}
+            </CustomComponents.Title>
             </CustomComponents.Card>
-            <CustomComponents.Card>
-            Update payment details
-            </CustomComponents.Card>
-
-
-            <CustomComponents.Card>
-            Update user details
-
-
-            </CustomComponents.Card>
+            </Container>
+            <CustomComponents.Grid>
+            <ClientUpdateUserDetails/>
+            <ClientUpdatePaymentDetails/>
+            </CustomComponents.Grid>
             </div>
             }
             
-        </CustomComponents.Grid>
+        </Container>
     )
 }

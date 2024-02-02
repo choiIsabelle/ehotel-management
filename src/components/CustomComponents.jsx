@@ -42,3 +42,9 @@ background-position: right center;
   }
 `
 
+export const Title = styled.h1`
+font-weight: bold;
+font-size: 19px;
+oadding: 0.5rem;
+margin-bottom: 0.5rem;
+`
