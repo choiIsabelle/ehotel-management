@@ -172,10 +172,16 @@ export const HotelOwnerTabContainer=()=>{
       </div>
       }
       
-      {(add) && 
+      {(add) && <div>
       <HotelOwnerAddChain
       onGoBack={handleGoBack}
-      />}
+      />
+      <HotelOwnerNavigationButtons
+      handleGoBack={handleGoBack}
+      handleClick={handleCurrentPage}
+      ></HotelOwnerNavigationButtons>
+      </div> 
+      }
         </div>
     )
 }
