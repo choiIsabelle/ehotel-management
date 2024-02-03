@@ -21,6 +21,21 @@ display: flex;
 flex-direction: column;
 `
 
+export const Card = styled.div`
+box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+transition: 0.3s;
+display: flex;
+flex-direction: column;
+width: 850px;
+height: fit-content;
+padding: 1rem;
+margin-top: 2rem;
+margin-left: 2rem;
+border-radius: 10px;
+`
+
+
+
 export const ClientUpdateDetails=()=>{
     const [currentUser, setCurrentUser] = useState('Temp user');
     const [foundAccount, setFoundAccount] = useState(false);
@@ -57,16 +72,14 @@ export const ClientUpdateDetails=()=>{
             </CustomComponents.Card> }
            { foundAccount && 
            <div>
-           <Container>
-            <CustomComponents.Card>
+           <Card>
             <IconContainer>
             <PersonIcon></PersonIcon>
             </IconContainer>
             <CustomComponents.Title>    
                 Welcome, {currentUser}
             </CustomComponents.Title>
-            </CustomComponents.Card>
-            </Container>
+            </Card>
             <CustomComponents.Grid>
             <ClientUpdateUserDetails/>
             <ClientUpdatePaymentDetails/>
