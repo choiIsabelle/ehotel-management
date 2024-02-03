@@ -2,6 +2,7 @@ import { useState } from 'react'
 import * as c from './CustomComponents'
 import HotelOwnerNavigationButtons from './HotelOwnerNavigationButtons'
 import {CondensedInput} from './CondensedInput'
+import {HotelOwnerModifyChain} from './HotelOwnerModifyChain'
 
 export const HotelOwnerAddChain=({onGoBack})=>{
     const [page, setPage]=useState('add')
@@ -9,10 +10,6 @@ export const HotelOwnerAddChain=({onGoBack})=>{
     const handleNavigation=(currentPage)=>{
         console.log(page)
         setPage(currentPage)
-    }
-
-    const goBack=()=>{
-
     }
 
     return(
@@ -29,7 +26,11 @@ export const HotelOwnerAddChain=({onGoBack})=>{
         </c.Card>
         </div>
             }
-TODO: MANAGE HERE
+
+            { (page === 'manage') && <div>
+                <HotelOwnerModifyChain/>
+        </div>
+            }
 
             <HotelOwnerNavigationButtons
             handleGoBack={onGoBack}

@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-import { HotelOwnerModifyChain } from './HotelOwnerModifyChain'
+import  {HotelOwnerModifyChain}  from './HotelOwnerModifyChain'
 import {HotelOwnerAddChain} from './HotelOwnerAddChain'
+import HotelOwnerNavigationButtons from './HotelOwnerNavigationButtons'
 
 const Text = styled.h1`
 padding: 1rem;
@@ -98,6 +99,8 @@ flex-direction: column;
 
 export const HotelOwnerTabContainer=()=>{
 
+  const [currentPage, setCurrentPage] =useState('')
+
   const [modify, setModify] = useState(false);
   const [add, setAdd] = useState(false);
 
@@ -111,6 +114,17 @@ export const HotelOwnerTabContainer=()=>{
   const handleGoBack=()=>{
     setModify(false)
     setAdd(false)
+  }
+
+  const handleCurrentPage=(page)=>{
+    if(page === 'add'){
+      handleGoToAddBookings()
+      setModify(false)
+    }
+    if(page === 'manage'){
+      handleGoToRemoveBookings()
+      setAdd(false)
+    }
   }
 
 
@@ -146,8 +160,19 @@ export const HotelOwnerTabContainer=()=>{
         </Grid>
         </div>
       ) }
-      {modify && <HotelOwnerModifyChain/>}
-      {add && 
+      {(modify) && 
+     <div> 
+      <HotelOwnerModifyChain
+      onGoBack={handleGoBack}
+      />
+      <HotelOwnerNavigationButtons
+      handleGoBack={handleGoBack}
+      handleClick={handleCurrentPage}
+      ></HotelOwnerNavigationButtons>
+      </div>
+      }
+      
+      {(add) && 
       <HotelOwnerAddChain
       onGoBack={handleGoBack}
       />}
