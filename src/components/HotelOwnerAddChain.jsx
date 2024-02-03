@@ -7,7 +7,6 @@ export const HotelOwnerAddChain=()=>{
         <c.Title>Add a Hotel Chain</c.Title>
         <c.Card>
             <CondensedInput
-            
             >
 
             </CondensedInput>

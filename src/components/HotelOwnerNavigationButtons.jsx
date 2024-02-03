@@ -12,6 +12,7 @@ const GoBackButton = styled.button`
 
 const NavigationContainer = styled.div`
 display: flex;
+margin-top: 1rem;
 flex-direction: column;
 `
 
