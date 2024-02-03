@@ -15,10 +15,12 @@ display: flex;
 flex-direction: column;
 `
 
-const HotelOwnerNavigationButtons = ({handleClick}) => {
+const HotelOwnerNavigationButtons = ({handleClick, handleGoBack}) => {
   return (
     <NavigationContainer>
-        <GoBackButton>Go Back</GoBackButton>
+        <GoBackButton
+        onClick={()=> handleGoBack()}
+        >Go Back</GoBackButton>
     <ButtonContainer>
         <c.NavigationButton
         onClick={()=>handleClick('add')}

@@ -3,12 +3,16 @@ import * as c from './CustomComponents'
 import HotelOwnerNavigationButtons from './HotelOwnerNavigationButtons'
 import {CondensedInput} from './CondensedInput'
 
-export const HotelOwnerAddChain=()=>{
+export const HotelOwnerAddChain=({onGoBack})=>{
     const [page, setPage]=useState('add')
 
     const handleNavigation=(currentPage)=>{
         console.log(page)
         setPage(currentPage)
+    }
+
+    const goBack=()=>{
+
     }
 
     return(
@@ -28,6 +32,7 @@ export const HotelOwnerAddChain=()=>{
 TODO: MANAGE HERE
 
             <HotelOwnerNavigationButtons
+            handleGoBack={onGoBack}
             handleClick={handleNavigation}
             ></HotelOwnerNavigationButtons>
         </div>

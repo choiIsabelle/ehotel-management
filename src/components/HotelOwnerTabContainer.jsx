@@ -108,6 +108,11 @@ export const HotelOwnerTabContainer=()=>{
     setAdd(true)
   }
 
+  const handleGoBack=()=>{
+    setModify(false)
+    setAdd(false)
+  }
+
 
     return(
       <div>
@@ -142,7 +147,10 @@ export const HotelOwnerTabContainer=()=>{
         </div>
       ) }
       {modify && <HotelOwnerModifyChain/>}
-      {add && <HotelOwnerAddChain/>}
+      {add && 
+      <HotelOwnerAddChain
+      onGoBack={handleGoBack}
+      />}
         </div>
     )
 }
