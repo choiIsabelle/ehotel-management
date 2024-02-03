@@ -17,7 +17,6 @@ width: 400px;
 height: fit-content;
 padding: 1rem;
 margin-top: 2rem;
-margin-left: 2rem;
 border-radius: 10px;
 `
 
@@ -47,4 +46,23 @@ font-weight: bold;
 font-size: 19px;
 oadding: 0.5rem;
 margin-bottom: 0.5rem;
+`
+
+export const NavigationButton = styled.button`
+font-size: 13px;
+width:100%;
+box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+&.grow {
+    transition: all .2s ease-in-out;
+
+    &:hover {
+
+    }
+  }
+&:hover {
+    background-position: left center;
+    transform: scale(1.1);
+    background-color: #f3f6f4;
+  }
+
 `
