@@ -24,7 +24,7 @@ function App() {
 
   const handleNavigate=(page)=>{
     setCurrentPage(page);
-    console.log(page)
+    // console.log(page)
 
   }
 

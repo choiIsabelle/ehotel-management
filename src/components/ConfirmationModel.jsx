@@ -3,8 +3,8 @@ import styled from 'styled-components'
 
 const customModalStyles = {
     content: {
-      width: '15%', 
-      height: '13%',
+      width: 'fit-content',
+      height: 'fit-content',
       overflow: 'hidden',
       margin: 'auto',
       marginTop: '15%',

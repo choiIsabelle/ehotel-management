@@ -50,19 +50,14 @@ margin-bottom: 0.5rem;
 
 export const NavigationButton = styled.button`
 font-size: 13px;
+border-color: black;
+color: black;
 width:100%;
-box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-&.grow {
-    transition: all .2s ease-in-out;
-
-    &:hover {
-
-    }
-  }
 &:hover {
-    background-position: left center;
-    transform: scale(1.1);
-    background-color: #f3f6f4;
+    transform: scale(1.05);
+    &.grow {
+      transition: all .5s ease-in-out;
+    }
   }
 
 `

@@ -45,7 +45,6 @@ export const ClientGetInfoSection=()=>{
   const [showResults, setShowResults] = useState(false);
 
   const handleOpenModal = () => {
-    console.log(showModal)
     setShowModal(true)
   };
 

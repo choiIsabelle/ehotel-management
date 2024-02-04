@@ -5,9 +5,13 @@ const ButtonContainer = styled.div`
 display: flex;
 flex-direction: row;
 margin-top: 1rem;
+gap: 0.5rem;
 `
 
 const GoBackButton = styled.button`
+margin-top:1rem;
+border-color: black;
+
 `
 
 const NavigationContainer = styled.div`
@@ -19,9 +23,6 @@ flex-direction: column;
 const HotelOwnerNavigationButtons = ({handleClick, handleGoBack}) => {
   return (
     <NavigationContainer>
-        <GoBackButton
-        onClick={()=> handleGoBack()}
-        >Go Back</GoBackButton>
     <ButtonContainer>
         <c.NavigationButton
         onClick={()=>handleClick('add')}
@@ -35,6 +36,9 @@ const HotelOwnerNavigationButtons = ({handleClick, handleGoBack}) => {
         Manage
         </c.NavigationButton>
     </ButtonContainer>
+        <GoBackButton
+        onClick={()=> handleGoBack()}
+        >Go Back</GoBackButton>
     </NavigationContainer>
   )
 }
