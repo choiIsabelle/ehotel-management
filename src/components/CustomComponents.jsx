@@ -16,7 +16,7 @@ flex-direction: column;
 width: 400px;
 height: fit-content;
 padding: 1rem;
-margin-top: 2rem;
+margin-top: 1rem;
 border-radius: 10px;
 `
 

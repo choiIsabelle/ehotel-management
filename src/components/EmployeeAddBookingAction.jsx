@@ -46,13 +46,25 @@ export const EmployeeAddBookingAction=()=>{
             handleClick={()=>setCustomerName('')}
             handleChange={(e)=>setCustomerName(e.target.value)}
             ></CondensedInput>
-                        <CondensedInput
+
+            <CondensedInput
             msg={"What is the check-in date?"}
             valueLabel={date}
             subMsg="Enter an 8-digit number"
             handleClick={()=>setDate('')}
             handleChange={(e)=>setDate(e.target.value)}
             ></CondensedInput>
+
+            <CondensedInput
+            msg={"What is the Employee name?"}
+            subMsg="Enter the employee name to be associated with this booking"
+            ></CondensedInput>
+    
+            <CondensedInput
+            msg={"What is the Employee SSN?"}
+            subMsg="Enter the employee SSN to be associated with this booking"
+            ></CondensedInput>
+
             <SubmitButton>Submit</SubmitButton>
         </Container>
         </form>

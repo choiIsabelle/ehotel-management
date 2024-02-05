@@ -30,7 +30,7 @@ export const HotelOwnerModifyChain=()=>{
     }
     return(
         <div>
-        <c.Title>Manage a Hotel Chain</c.Title>
+        <c.Title style={{marginTop:'3rem'}}>Manage a Hotel Chain</c.Title>
         <c.Card>
             <form onSubmit={handleSubmit}>
             <CondensedInput
