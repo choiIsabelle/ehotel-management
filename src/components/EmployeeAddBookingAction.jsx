@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { CondensedInput } from './CondensedInput'
-import { useState, useCallback } from 'react'
+import { useState, useRef } from 'react'
 import { RadioButton } from './RadioButton'
 const Container = styled.div`
 flex-direction: column;
@@ -31,16 +31,16 @@ background-position: right center;
 `
 
 export const EmployeeAddBookingAction=()=>{
+    const radioButtonRef = useRef(null); 
 
     const [customerName, setCustomerName] = useState("SSN")
     const [date, setDate] = useState("yyyy-mm-dd")
-    const [radioIsChecked, setRadioIsChecked] = useState(false)
+    const [selectedValue, setSelectedValue] = useState(null);
 
-    const radioHandleCheck=()=>{
-        radioIsChecked ? setRadioIsChecked(false) : setRadioIsChecked(true)
-        console.log(radioIsChecked)
-
-    }
+    const radioHandleCheck = (value) => {
+        console.log(value); // Access the selected value here
+        setSelectedValue(value);
+      };
 
     return(
         <form>
@@ -78,7 +78,7 @@ export const EmployeeAddBookingAction=()=>{
                 "Rental"
             ]}
             radioCheck={radioHandleCheck}
-            checked={radioIsChecked}
+            radioButtonRef={radioButtonRef}
             radioTitle={"What type of reservation is this?"}
             ></RadioButton>
 

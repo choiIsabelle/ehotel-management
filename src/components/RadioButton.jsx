@@ -1,25 +1,49 @@
-import * as c from './CustomComponents'
+import * as c from './CustomComponents';
+import { useRef, useState } from 'react';
 
-export function RadioButton({radioTitle, options, radioCheck}){
-    const radioChoices =[];
-    options.forEach((o) => {
-        radioChoices.push(
-            <label key={o} htmlFor={o}>
-                <input
-                onClick={()=>radioCheck()}
-                    type="radio"
-                    value={o}
-                    id={o}
-                />
-                {o}
-            </label>
-        );
-    });
+const labelStyle = {
+  marginTop: '0.5rem',
+  textAlign: 'left',
+};
 
-    return(
-        <c.BasicContainer>
-            <c.SubText>{radioTitle}</c.SubText>
-        {radioChoices}
-        </c.BasicContainer>
-    )
-} 
+export function RadioButton({ radioTitle, options, radioCheck }) {
+  const radioButtonRefs = options.map(() => useRef(null));
+  const [selectedValue, setSelectedValue] = useState(null);
+
+  const handleRadioClick = (index) => {
+    const value = radioButtonRefs[index].current.value;
+    setSelectedValue(value);
+    radioCheck(value);
+  };
+
+  return (
+    <c.BasicContainer>
+      <c.SubTitle>{radioTitle}</c.SubTitle>
+      {options.map((o, index) => (
+        <RadioButtonOption
+          key={o}
+          option={o}
+          radioTitle={radioTitle}
+          onClick={() => handleRadioClick(index)}
+          radioButtonRef={radioButtonRefs[index]}
+        />
+      ))}
+    </c.BasicContainer>
+  );
+}
+
+const RadioButtonOption = ({ option, radioTitle, onClick, radioButtonRef }) => {
+  return (
+    <label style={labelStyle} htmlFor={option}>
+      <input
+        onClick={onClick}
+        type="radio"
+        value={option}
+        name={radioTitle}
+        data-id={option}
+        ref={radioButtonRef}
+      />
+      {option}
+    </label>
+  );
+};

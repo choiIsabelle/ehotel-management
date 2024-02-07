@@ -67,6 +67,12 @@ font-size: var(--p-font-size-325);
 font-weight: 200;
 `
 
+export const SubTitle = styled.p`
+text-align: left;
+font-size: var(--p-font-size-325);
+font-weight: 400;
+`
+
 export const  BasicContainer = styled.div`
 display: flex;
 flex-direction: column;
