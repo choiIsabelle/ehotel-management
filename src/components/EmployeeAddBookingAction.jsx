@@ -2,7 +2,9 @@ import styled from 'styled-components'
 import { CondensedInput } from './CondensedInput'
 import { useState, useRef } from 'react'
 import { RadioButton } from './RadioButton'
+
 const Container = styled.div`
+margin-top: 2rem;
 flex-direction: column;
 display: flex;
 gap: 0.1rem;
@@ -43,7 +45,6 @@ export const EmployeeAddBookingAction=()=>{
       };
 
     return(
-        <form>
         <Container>
             <CondensedInput
             title="Enter new booking details"
@@ -84,6 +85,5 @@ export const EmployeeAddBookingAction=()=>{
 
             <SubmitButton>Submit</SubmitButton>
         </Container>
-        </form>
     )
 }

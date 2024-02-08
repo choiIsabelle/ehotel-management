@@ -7,6 +7,7 @@ const labelStyle = {
 };
 
 export function RadioButton({ radioTitle, options, radioCheck }) {
+  // save array of null references
   const radioButtonRefs = options.map(() => useRef(null));
   const [selectedValue, setSelectedValue] = useState(null);
 
