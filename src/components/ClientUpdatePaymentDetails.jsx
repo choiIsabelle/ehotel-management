@@ -6,7 +6,7 @@ export const ClientUpdatePaymentDetails=()=>{
     const [creditCard, setCreditCard] = useState('Credit card number')
 
         return(
-            <Custom.Card>
+            <Custom.Card className='updatePaymentDetails-container' style={{width:'fit-content'}}>
                 <form>
                 <CondensedInput
                 title={"Update payment details"}

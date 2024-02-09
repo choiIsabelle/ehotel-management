@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { SpinnerOnSubmit } from './SpinnerOnSubmit';
 import { ClientUpdatePaymentDetails } from './ClientUpdatePaymentDetails';
 import { ClientUpdateUserDetails } from './ClientUpdateUserDetails';
+import ClientNavigationButtons from './ClientNavigationButtons';
 
 //TODO: finish this for the client view of updating their personal information or payment information
 
@@ -26,11 +27,10 @@ box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 transition: 0.3s;
 display: flex;
 flex-direction: column;
-width: 850px;
+width: 842px;
 height: fit-content;
 padding: 1rem;
 margin-top: 2rem;
-margin-left: 2rem;
 border-radius: 10px;
 `
 
@@ -41,6 +41,7 @@ export const ClientUpdateDetails=()=>{
     const [foundAccount, setFoundAccount] = useState(false);
     const [showDetails, setShowDetails] = useState(false);
     const [isSearching, setIsSearching] = useState(false);
+
     const handleFoundAccount=()=>{
         setIsSearching(true)
         setTimeout(()=>{
@@ -48,8 +49,6 @@ export const ClientUpdateDetails=()=>{
             setShowDetails(true)
             setFoundAccount(true)
           }, 1500)
-        
-
     }
 
     return(
@@ -72,7 +71,7 @@ export const ClientUpdateDetails=()=>{
             </CustomComponents.Card> }
            { foundAccount && 
            <div>
-           <Card>
+           <Card className="welcomeUser-Container">
             <IconContainer>
             <PersonIcon></PersonIcon>
             </IconContainer>
@@ -85,8 +84,23 @@ export const ClientUpdateDetails=()=>{
             <ClientUpdatePaymentDetails/>
             </CustomComponents.Grid>
             </div>
-            }
-            
+        }
+        <NavigationButtons></NavigationButtons>
         </Container>
+    )
+}
+
+const NavigationButtons=()=>{
+    const handleClick=(page)=>{
+
+    }
+    const handleGoBack=()=>{
+
+    }
+    return(
+        <ClientNavigationButtons
+        handleClick={handleClick}
+        handleGoBack={handleGoBack}
+        />
     )
 }
