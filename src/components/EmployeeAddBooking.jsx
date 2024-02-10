@@ -13,7 +13,7 @@ export const EmployeeAddBooking=({goBack, goManage, goAdd, goRemove})=>{
     return(
         <Container>
             <EmployeeAddBookingAction></EmployeeAddBookingAction>
-                    <button onClick={()=>goBack()}>Go back</button>
+                    <button className='EmployeeAddBooking-btn-back' style={{borderColor: 'black'}} onClick={()=>goBack()}>Go back</button>
             <EmployeeNavigationButtons
                         handleUpdate={goManage}
                         handleAdd={goAdd}

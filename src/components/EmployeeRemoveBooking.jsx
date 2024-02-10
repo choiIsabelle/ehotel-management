@@ -12,7 +12,7 @@ gap: 1rem;
 function NavigationButtons({goBack, goManage, goAdd, goRemove}){
     return(
     <>
-    <button onClick={()=>goBack()}>Go back</button>
+    <button style={{borderColor: 'black'}} onClick={()=>goBack()}>Go back</button>
     <EmployeeNavigationButtons
                 handleUpdate={goManage}
                 handleAdd={goAdd}

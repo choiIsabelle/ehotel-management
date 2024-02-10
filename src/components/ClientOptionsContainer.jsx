@@ -99,9 +99,11 @@ class ClientOptionsContainer extends React.Component {
             booking: false,
             update: false   
         };
-        // binding occurs here
+        // bind to the current instance of ClientOptionsContainer;
         this.handleBooking = this.handleBooking.bind(this);
         this.handleUpdate = this.handleUpdate.bind(this);
+        this.handleNavigate = this.handleNavigate.bind(this);
+        this.handleGoBack = this.handleGoBack.bind(this);
     }
     handleBooking() {
         this.setState({ booking: true });
@@ -109,6 +111,23 @@ class ClientOptionsContainer extends React.Component {
     
       handleUpdate() {
         this.setState({ update: true });
+      }
+
+      handleNavigate(page){
+        console.log('current value of the page is', page)
+        if(page === 'add'){
+          this.setState({booking: true})
+          this.setState({ update: false });
+        }
+        if(page=== 'update'){
+          this.setState({booking: false})
+          this.setState({ update: true });
+        }
+
+      }
+      handleGoBack(){
+        console.log('triggered at go back')
+        this.setState({booking: false,  update: false})
       }
 
 
@@ -149,10 +168,16 @@ class ClientOptionsContainer extends React.Component {
                 }
                 {this.state.update && 
                 <ClientUpdateDetails
+                handleNavigate={(page)=> this.handleNavigate(page)}
+                handleGoBack={ this.handleGoBack}
+
                 >
                 </ClientUpdateDetails>}
                 {this.state.booking && 
                 <ClientTabContainer
+                handleClick={(page)=> this.handleNavigate(page)}
+                handleGoBack={ this.handleGoBack}
+
                 ></ClientTabContainer>}
               </div>
         )

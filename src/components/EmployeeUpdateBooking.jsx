@@ -17,7 +17,8 @@ export const EmployeeUpdateBooking=({goBack, goManage, goAdd, goRemove})=>{
         <div>Update booking</div>
         <CondensedInput/>
         </form>
-        <button onClick={()=>goBack()}>Go back</button>
+        {/* TODO: make the back button reusable */}
+        <button style={{borderColor: 'black'}} onClick={()=>goBack()}>Go back</button>
             <EmployeeNavigationButtons
             handleManage={goManage}
             handleAdd={goAdd}

@@ -36,7 +36,7 @@ border-radius: 10px;
 
 
 
-export const ClientUpdateDetails=()=>{
+export const ClientUpdateDetails=({handleNavigate, handleGoBack })=>{
     const [currentUser, setCurrentUser] = useState('Temp user');
     const [foundAccount, setFoundAccount] = useState(false);
     const [showDetails, setShowDetails] = useState(false);
@@ -85,18 +85,15 @@ export const ClientUpdateDetails=()=>{
             </CustomComponents.Grid>
             </div>
         }
-        <NavigationButtons></NavigationButtons>
+        <NavigationButtons
+        handleClick={handleNavigate}
+        handleGoBack={handleGoBack}
+        ></NavigationButtons>
         </Container>
     )
 }
 
-const NavigationButtons=()=>{
-    const handleClick=(page)=>{
-
-    }
-    const handleGoBack=()=>{
-
-    }
+const NavigationButtons=({handleClick, handleGoBack })=>{
     return(
         <ClientNavigationButtons
         handleClick={handleClick}
