@@ -4,6 +4,7 @@ import { PersonIcon } from './icons/PersonIcon';
 import { EmployeeIcon } from './icons/EmployeeIcon';
 import { HotelOwnerIcon } from './icons/HotelOwnerIcon';
 import { resource } from './localizedStrings';
+import WelcomeAlternatingText from './GeneralWelcomeAlternatingText';
 
 const TitleText = styled.h1`
 font-size: 30px;
@@ -133,6 +134,7 @@ export const GeneralWelcomePage=({onNavigate})=>{
                     <Typewriter text='eHotel Management System' delay={100}></Typewriter>
                     </EmphText>
                     <InnerTitle>A responsive tool to manage hotel bookings and offerings</InnerTitle>
+                    <WelcomeAlternatingText/>
             </UpperContainer>
             <ActionsContainer>
             {/* <InnerTitle>What are you looking to do today?</InnerTitle> */}
