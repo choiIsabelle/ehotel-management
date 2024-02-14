@@ -77,3 +77,18 @@ export const  BasicContainer = styled.div`
 display: flex;
 flex-direction: column;
 `
+
+export const GradientTitleText = styled.h1`
+font-size: 30px;
+font-weight: bold;
+background: linear-gradient(90deg, rgba(84, 36, 132, 1) 0%, rgba(43, 164, 170, 1) 100%);
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;
+display: inline-block;
+-webkit-mask-image: linear-gradient(90deg, #000 0%, #000 100%);
+mask-image: linear-gradient(90deg, #000 0%, #000 100%);
+background-color: white; 
+display: block;
+line-height: 1.25;
+`
