@@ -40,6 +40,7 @@ background-position: right center;
 `
 
 export const ClientGetInfoSection=()=>{
+  const cn = 'ClientGetInfoSection';
 
   const [showModal, setShowModal] = useState(false);
   const [showResults, setShowResults] = useState(false);
@@ -67,8 +68,9 @@ export const ClientGetInfoSection=()=>{
 
     return(
       !showResults ? (
-        <Card>
+        <Card className={cn}>
         <CondensedInput 
+        id={`${cn}.customerPref`}
         title="Get Customer Preferences" 
         msg="How many rooms do you want?" 
         subMsg="Enter an integer"/>
