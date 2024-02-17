@@ -53,7 +53,7 @@ align-items: center;
 `
 
 const ActionsContainer = styled.div`
-margin-top: 4rem;
+margin-top: 2rem;
 box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 background-color: #F1F1F2;
 padding: 1rem;
@@ -134,9 +134,9 @@ export const GeneralWelcomePage=({onNavigate})=>{
                     <Typewriter text='eHotel Management System' delay={100}></Typewriter>
                     </EmphText>
                     <InnerTitle>A responsive tool to manage hotel bookings and offerings</InnerTitle>
-                    <WelcomeAlternatingText/>
+            <WelcomeAlternatingText/>
             </UpperContainer>
-            <ActionsContainer>
+            <ActionsContainer className='GemeraWelcomePage-ActionsContainer'>
             {/* <InnerTitle>What are you looking to do today?</InnerTitle> */}
                 <ItemCard>
                     <IconContainer>
