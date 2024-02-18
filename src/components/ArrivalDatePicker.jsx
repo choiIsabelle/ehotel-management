@@ -25,13 +25,6 @@ margin-top: 2rem;
 font-size: 22px;
 `
 
-const EmphTitle = styled.h3`
-font-weight: bold;
-font-size: 18px;
-padding: 0.5rem;
-color: blue;
-`
-
 const SubButton = styled.button`
 background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA  51%, #77A1D3  100%);
 margin: 10px;
@@ -52,12 +45,6 @@ background-position: right center;
   }
 `
 
-const SwitchTabContainer = styled.div`
-display: flex;
-flex-direction row;
-align-items: baseline;
-gap:6rem;
-`
 const CurrentDateText = styled.p`
 font-size: 13px;
 font-weight: bold;
@@ -74,8 +61,7 @@ gap: 1rem;
 flex-direction row;
 `
 
-export const ArrivalDatePicker=(props)=> {
-    const {message} = props;
+export const ArrivalDatePicker=({message, handleDate})=> {
     const [arrivalSubmit, setArrivalSubmit] = useState(false)
     const subMsg = "Submit arrival"
 
@@ -97,14 +83,14 @@ export const ArrivalDatePicker=(props)=> {
   const dateParts = formattedDate.split('/');
   const [monthPart, dayPart, yearPart] = dateParts;
 
-  const handleSubmit=()=>{
+  const handleSubmit=(dateParts)=>{
+        handleDate(dateParts)
         setArrivalSubmit(true)
     }
 
   return (
     <>
       <DatepickerContainer>
-      {/* <EmphTitle> {formattedDate}</EmphTitle> */}
       <Title>{message} </Title>
         <DatePicker
           month={month}
@@ -114,7 +100,7 @@ export const ArrivalDatePicker=(props)=> {
           selected={selectedDates}
         />
         <ButtonContainer>
-        <SubButton onClick={()=>handleSubmit()}>{subMsg}</SubButton>
+        <SubButton onClick={()=>handleSubmit(dateParts)}>{subMsg}</SubButton>
         {arrivalSubmit && <CurrentDateText>Your chosen date of arrival is: {formattedDate}</CurrentDateText>}
         </ButtonContainer>
       </DatepickerContainer>
