@@ -89,8 +89,6 @@ export const ClientWelcome=({title, subTitle, innermsg, subMsg, role, handleOnCl
                 <InnerText>{innermsg}</InnerText>
             <SubmitButton onClick={handleOnClick}>{subMsg}</SubmitButton>
             </InnerCard>
-
-
         </Container>
 
     )
