@@ -39,7 +39,7 @@ text-decoration: none;
 background-position: right center;
 
 &:hover {
-    background-position: left center; /* change the direction of the change here */
+    background-position: left center;
   }
 `
 
@@ -53,7 +53,6 @@ export const ButtonContainer = styled.div`
 display: flex;
 margin-top: 1rem;
 align-items: center;
-margin-bottom: 1rem;
 flex-start: right;
 gap: 1rem;
 flex-direction row;
