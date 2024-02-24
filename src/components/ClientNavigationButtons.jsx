@@ -18,6 +18,8 @@ const NavigationContainer = styled.div`
 display: flex;
 margin-top: 1rem;
 flex-direction: column;
+height: 100%;
+padding-bottom: 1rem;
 `
 
 const ClientNavigationButtons = ({handleClick, handleGoBack}) => {
