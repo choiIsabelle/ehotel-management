@@ -15,7 +15,7 @@ width: 400px;
 height: 600px;
 padding: 1rem;
 margin-top: 2rem;
-margin-left: 2rem;
+margin: auto;
 border-radius: 10px;
 `
 
