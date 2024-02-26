@@ -9,6 +9,7 @@
     top: 0;
     left: 0;
     width: 100%;
+    height: fit-content;
     z-index: 1000;
 }
 .header{
@@ -18,10 +19,12 @@
     list-style-type: none;
     overflow:hidden;
     display: flex;
-    gap: 0.5rem;
+    gap: 1.5rem;
+    justify-content:flex-start;
+    align-items: left;
 }
 .nav-link{
-    font-size: 19px;
+    padding-bottom: 1rem;
+    font-size: 17px;
     font-weight: 400 !important;
-
 }
