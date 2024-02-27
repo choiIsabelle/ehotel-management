@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const customModalStyles = {
     content: {
-      width: 'fit-content',
+      width: '300px',
       height: 'fit-content',
       overflow: 'hidden',
       margin: 'auto',
