@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import {ClientUpdateDetails} from './ClientUpdateDetails'
 import {ClientTabContainer} from './ClientTabContainer'
+import { BuildingIcon } from './icons/BuildingIcon'
+import { PersonIcon } from './icons/PersonIcon'
 const Text = styled.h1`
 padding: 1rem;
 font-weight: bold;
 font-size: 19px;
+margin-bottom: 1rem;
 `
 
 const Grid = styled.div`
@@ -30,8 +33,9 @@ box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 transition: 0.3s;
 display: flex;
 flex-direction: column;
-width: 350px;
-height: 250;
+width: 320px;
+height: 450px;
+align-items: center;
 padding: 2rem;
 border-radius: 10px;
 &.grow {
@@ -133,12 +137,13 @@ class ClientOptionsContainer extends React.Component {
 
     render(){
         return(
-            <div>
+            <div id='ClientOptionsContainer'>
                 {!this.state.booking && !this.state.update &&
                 <div>
             <Text>{h1}</Text>
             <Grid>
-              <Container>
+              <Container id="ClientOptionsContainer-AddBooking">
+                <BuildingIcon id='BuildingIcon'/>
                 <Text>Add a booking</Text>
                 <SubText>Search for a hotel based on your date, location, and room preferences</SubText>
                 <InnerCard>
@@ -151,7 +156,8 @@ class ClientOptionsContainer extends React.Component {
                 </InnerCard>
               </Container>
 
-              <Container>
+              <Container id="ClientOptionsContainer-ManageUserDetails">
+                <PersonIcon/>
                 <Text> Manage User Details</Text>
                 <SubText>Update your booking details or add a payment detail</SubText>
                 <InnerCard>
