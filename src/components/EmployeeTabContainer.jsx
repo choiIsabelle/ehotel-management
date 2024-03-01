@@ -3,6 +3,9 @@ import styled from 'styled-components'
 import { EmplyoeeRemoveBooking } from './EmployeeRemoveBooking'
 import { EmployeeAddBooking } from './EmployeeAddBooking'
 import { EmployeeUpdateBooking } from './EmployeeUpdateBooking'
+import { BookBookMarkIcon } from './icons/BookBookmarkIcon'
+import { BuildingCircleCheckIcon } from './icons/BuildingCircleCheckIcon'
+import { BuildingCircleArrowRightIcon } from './icons/BuildingCircleArrowRightIcon'
 
 const Text = styled.h1`
 padding: 1rem;
@@ -27,6 +30,7 @@ font-size: 14px;
 `
 
 const Container = styled.div`
+align-items: center;
 gap: 0.5rem;
 box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 transition: 0.3s;
@@ -146,6 +150,7 @@ export const EmployeeTabContainer=()=>{
       <Grid>
         <Container>
           <Text> Manage Bookings</Text>
+          <BuildingCircleArrowRightIcon/>
           <SubText>Search and remove bookings for a client</SubText>
           <InnerCard>
           <InnerText>Delete an existing booking for a client</InnerText>
@@ -158,6 +163,7 @@ export const EmployeeTabContainer=()=>{
 
         <Container>
           <Text> Add Bookings</Text>
+          <BuildingCircleCheckIcon/>
           <SubText>Add bookings</SubText>
           <InnerCard>
             <InnerText>Add a new booking for a client</InnerText>
@@ -169,6 +175,7 @@ export const EmployeeTabContainer=()=>{
 
         <Container>
         <Text> Update Bookings</Text>
+        <BookBookMarkIcon/>
         <SubText>Update arrival/departure date, location, hotel chain, booking type, etc.</SubText>
         <InnerCard>
         <InnerText>Update the reservation details for a client</InnerText>
