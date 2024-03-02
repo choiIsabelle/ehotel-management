@@ -2,6 +2,8 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import  {HotelOwnerModifyChain}  from './HotelOwnerModifyChain'
 import {HotelOwnerAddChain} from './HotelOwnerAddChain'
+import {BuildingCircleCheckIcon} from './icons/BuildingCircleCheckIcon'
+import {BuildingCircleXMarkIcon} from './icons/BuildingCircleXMarkIcon'
 import HotelOwnerNavigationButtons from './HotelOwnerNavigationButtons'
 
 const Text = styled.h1`
@@ -21,11 +23,6 @@ gap: 1rem
 const SubText = styled.p`
 `
 
-const IconContainer=styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
-`
 
 const InnerText = styled.p`
 font-weight: bold;
@@ -39,6 +36,7 @@ transition: 0.3s;
 display: flex;
 flex-direction: column;
 width: 350px;
+align-items: center;
 height: 250;
 padding: 2rem;
 border-radius: 10px;
@@ -136,6 +134,7 @@ export const HotelOwnerTabContainer=()=>{
       <Grid>
         <Container>
           <Text> Manage Hotels</Text>
+          <BuildingCircleXMarkIcon/>
           <SubText>Remove, update, and view current hotel offerings</SubText>
           <InnerCard>
           <InnerText>View hotel offerings and modify them</InnerText>
@@ -148,6 +147,7 @@ export const HotelOwnerTabContainer=()=>{
 
         <Container>
           <Text> Add Offerings</Text>
+          <BuildingCircleCheckIcon/>
           <SubText>Add new offerings for clients using this view</SubText>
           <InnerCard>
             <InnerText>Add a new hotel offering</InnerText>
