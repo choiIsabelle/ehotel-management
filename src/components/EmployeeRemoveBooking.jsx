@@ -32,15 +32,17 @@ export const EmplyoeeRemoveBooking=({goBack, goManage, goAdd, goRemove})=>{
             msg="Search for an existing booking"
             subMsg='Input the reservation id'
             >
+                <c.SearchButton>Search for a reservation</c.SearchButton>
             </CondensedInput>
             </c.Card>
+
+
             <NavigationButtons
            goBack={goBack}
            goManage={goManage}
            goAdd={goAdd}
            goRemove={goRemove}
             />
-
         </Container>
     )
 }
