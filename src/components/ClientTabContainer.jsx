@@ -1,17 +1,15 @@
 import { useState } from 'react';
 import {SwitchTab} from './SwitchTab';
-import { ArrivalDatePicker } from './ArrivalDatePicker';
-import { DepartureDatePicker } from './DepartureDatePicker';
 import { ClientGetInfoSection } from './ClientGetInfoSection';
 import styled from 'styled-components';
 import ClientNavigationButtons from './ClientNavigationButtons';
+import { ClientDatePicker } from './ClientDatePicker';
 
 const Container = styled.div`
 display: flex;
-width: 500px;
-height: 500px;
+width: 800px;; // keep the positioning of the switch tabs consitent
+height:500px;
 flex-direction: column;
-
 `
 
 export const ClientTabContainer = ({handleClick, handleGoBack }) => {
@@ -25,12 +23,12 @@ export const ClientTabContainer = ({handleClick, handleGoBack }) => {
     setActiveTab(newTab);
   };
 
+
   return (
     <Container>
       <SwitchTab activeTab={activeTab} onTabChange={handleTabChange} />
-      {activeTab === 1 &&       <ArrivalDatePicker message={"Select an Arrival Date"}/>}
-      {activeTab === 2 && <DepartureDatePicker message={"Select a Departure Date"} />}
-      {activeTab ===3 && <ClientGetInfoSection/>}
+      {activeTab === 1 && <ClientDatePicker></ClientDatePicker>}
+      {activeTab ===2 && <ClientGetInfoSection/>}
       <ClientNavigationButtons
       handleClick={handleClick}
         handleGoBack={handleGoBack}
