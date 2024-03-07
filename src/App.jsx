@@ -4,13 +4,13 @@ import '@shopify/polaris/build/esm/styles.css';
 import enTranslations from '@shopify/polaris/locales/en.json';
 import Navbar from './components/Navbar';
 import { useState } from 'react';
-import { ClientTabContainer } from './components/ClientTabContainer';
 import styled from 'styled-components'
 import { ClientWelcome } from './components/ClientWelcome';
 import { EmployeeTabContainer } from './components/EmployeeTabContainer';
 import {HotelOwnerTabContainer } from './components/HotelOwnerTabContainer'
 import { GeneralWelcomePage } from './components/GeneralWelcomePage';
 import ClientOptionsContainer from './components/ClientOptionsContainer';
+import { ClientDatePicker } from './components/ClientDatePicker';
 
 
 const Wrapper = styled.div`
@@ -24,8 +24,6 @@ function App() {
 
   const handleNavigate=(page)=>{
     setCurrentPage(page);
-    // console.log(page)
-
   }
 
   const handleShowBooking=()=>{
@@ -94,8 +92,12 @@ function App() {
          {currentPage ==="hotelOwner" && 
          <HotelOwnerTabContainer></HotelOwnerTabContainer>
          }
-
-
+         {/* TODO: just for testing purposes */}
+         {/* {currentPage === 'test' &&
+         <ClientDatePicker
+         message="test"
+         >
+          </ClientDatePicker>} */}
 
         </main>
       </AppProvider>
