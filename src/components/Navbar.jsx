@@ -5,9 +5,6 @@ import { HomeFilledIcon } from "./icons/HomeFilledIcon";
 const Navbar=({ onNavigate })=>{
     const NavItem=styled.a`
     color: white;
-    padding: 0.9rem;
-    font-weight: bold;
-
     :hover {
       color: #cfe2f3;
       fill: #cfe2f3;
@@ -20,32 +17,50 @@ const Navbar=({ onNavigate })=>{
   `;
 
     const iconStyling={
-      marginRight: '1rem'
+      marginRight: '1rem',
     }
+
+    const IconTextContainer= styled.div`
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+    gap: 0.5rem;
+    flex-direction: row;
+    font-weight: bold;
+    `
     return(
         <header>
         <nav className="navbar">
               <ul className="navbar-nav">
                         <li className="nav-item">
-              <NavItem className="nav-link" aria-current="page" href="#" onClick={()=>onNavigate('genWelcome')}>
+              <NavItem className="nav-link" aria-current="page" href="#genWelcome" onClick={()=>onNavigate('genWelcome')}>
+                <IconTextContainer>
                <StyledHomeFilledIcon style={iconStyling} />
+               eHotel Management System
+               </IconTextContainer>
               </NavItem>
             </li>
             <li className="nav-item">
-              <NavItem className="nav-link" aria-current="page" href="#" onClick={()=>onNavigate('clientW')}>
+              <NavItem className="nav-link" aria-current="page" href="#Client" onClick={()=>onNavigate('clientW')}>
                 Client
               </NavItem>
             </li>
             <li className="nav-item">
-              <NavItem className="nav-link" aria-current="page" href="#" onClick={()=>onNavigate('employeeW')}>
+              <NavItem className="nav-link" aria-current="page" href="#Employee" onClick={()=>onNavigate('employeeW')}>
                 Employee
               </NavItem>
             </li>
             <li className="nav-item">
-              <NavItem className="nav-link" aria-current="page" href="#" onClick={()=>onNavigate('hotelOwnerW')}>
+              <NavItem className="nav-link" aria-current="page" href="#HotelOwner" onClick={()=>onNavigate('hotelOwnerW')}>
                   Hotel Owner
                 </NavItem>
             </li>
+            {/* TODO: JUST FOR TESTING PURPOSES
+            <li className="nav-item">
+              <NavItem className="nav-link" aria-current="page" href="#" onClick={()=>onNavigate('test')}>
+                  test page
+                </NavItem>
+            </li> */}
           </ul>
 
         </nav>
