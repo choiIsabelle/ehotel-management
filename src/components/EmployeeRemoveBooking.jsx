@@ -25,19 +25,20 @@ function NavigationButtons({goBack, goManage, goAdd, goRemove}){
 
 export const EmplyoeeRemoveBooking=({goBack, goManage, goAdd, goRemove})=>{
     return(
-        <Container>
+        <Container id="EmployeeRemoveBooking-Container">
             <c.Card>
             <CondensedInput
             title="Remove a booking by name"
             msg="Search for an existing booking"
             subMsg='Input the reservation id'
             >
-                <c.SearchButton>Search for a reservation</c.SearchButton>
             </CondensedInput>
+            <c.SearchButton>Search for a reservation</c.SearchButton>
             </c.Card>
 
 
             <NavigationButtons
+            id="EmployeeRemoveBooking-NavigationButtons"
            goBack={goBack}
            goManage={goManage}
            goAdd={goAdd}
