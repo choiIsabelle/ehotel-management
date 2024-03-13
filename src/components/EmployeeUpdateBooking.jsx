@@ -12,7 +12,7 @@ gap: 1rem;
 
 export const EmployeeUpdateBooking=({goBack, goManage, goAdd, goRemove})=>{
     return(
-        <Container>
+        <Container id="EmployeeUpdateBooking-Container">
             <form>
         <div>Update booking</div>
         <CondensedInput/>
