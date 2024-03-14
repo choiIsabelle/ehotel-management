@@ -28,3 +28,6 @@
     font-size: 17px;
     font-weight: 400 !important;
 }
+.nav-link:hover{
+    color: #98ecf3;
+}
