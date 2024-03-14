@@ -4,11 +4,13 @@ import {ClientUpdateDetails} from './ClientUpdateDetails'
 import {ClientTabContainer} from './ClientTabContainer'
 import { BuildingIcon } from './icons/BuildingIcon'
 import { PersonIcon } from './icons/PersonIcon'
+import CalendarCheckIcon from './icons/CalendarCheckIcon'
+import ClientViewAll from './ClientViewAll'
+
 const Text = styled.h1`
-padding: 1rem;
+padding: 0.5rem;
 font-weight: bold;
 font-size: 19px;
-margin-bottom: 1rem;
 `
 
 const Grid = styled.div`
@@ -34,7 +36,8 @@ transition: 0.3s;
 display: flex;
 flex-direction: column;
 width: 320px;
-height: 450px;
+height: 420px;
+margin-top:1rem;
 align-items: center;
 padding: 2rem;
 border-radius: 10px;
@@ -101,11 +104,13 @@ class ClientOptionsContainer extends React.Component {
         super(props)
         this.state={
             booking: false,
-            update: false   
+            update: false,
+            viewAll: false   
         };
         // bind to the current instance of ClientOptionsContainer;
         this.handleBooking = this.handleBooking.bind(this);
         this.handleUpdate = this.handleUpdate.bind(this);
+        this.handleViewAll = this.handleViewAll.bind(this);
         this.handleNavigate = this.handleNavigate.bind(this);
         this.handleGoBack = this.handleGoBack.bind(this);
     }
@@ -115,6 +120,10 @@ class ClientOptionsContainer extends React.Component {
     
       handleUpdate() {
         this.setState({ update: true });
+      }
+
+      handleViewAll(){
+        this.setState({viewAll: true})
       }
 
       handleNavigate(page){
@@ -131,19 +140,32 @@ class ClientOptionsContainer extends React.Component {
       }
       handleGoBack(){
         console.log('triggered at go back')
-        this.setState({booking: false,  update: false})
+        this.setState({booking: false,  update: false, viewAll: false})
       }
 
 
     render(){
         return(
             <div id='ClientOptionsContainer'>
-                {!this.state.booking && !this.state.update &&
+                {!this.state.booking && !this.state.update && !this.state.viewAll &&
                 <div>
             <Text>{h1}</Text>
             <Grid>
-              <Container id="ClientOptionsContainer-AddBooking">
+            <Container id="ClientOptionsContainer-ViewAllHotels">
                 <BuildingIcon id='BuildingIcon'/>
+                <Text>Look at all available rooms</Text>
+                <SubText>View all room postings offered by participating hotel chains.</SubText>
+                <InnerCard>
+                <InnerText>View all</InnerText>
+                <SubmitButton
+                onClick={this.handleViewAll}
+                >
+                  View Rooms
+                    </SubmitButton>
+                </InnerCard>
+              </Container>
+              <Container id="ClientOptionsContainer-AddBooking">
+                <CalendarCheckIcon id='CalendarIcon'/>
                 <Text>Add a booking</Text>
                 <SubText>Search for a hotel based on your date, location, and room preferences</SubText>
                 <InnerCard>
@@ -179,12 +201,16 @@ class ClientOptionsContainer extends React.Component {
 
                 >
                 </ClientUpdateDetails>}
+
                 {this.state.booking && 
                 <ClientTabContainer
                 handleClick={(page)=> this.handleNavigate(page)}
                 handleGoBack={ this.handleGoBack}
-
                 ></ClientTabContainer>}
+
+                {this.state.viewAll && 
+                <ClientViewAll
+                />}
               </div>
         )
     }
