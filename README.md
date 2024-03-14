@@ -4,3 +4,5 @@
 - Constraints
 
 # Deliverable 2
+
+Node dependencies include: concurrently, express, axios, pg, cors, Eslint
