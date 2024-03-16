@@ -3,7 +3,7 @@ import * as CustomComponents from './CustomComponents';
 import { CondensedInput } from './CondensedInput';
 import {LockIcon} from './icons/LockIcon'
 import {PersonIcon} from './icons/PersonIcon'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SpinnerOnSubmit } from './SpinnerOnSubmit';
 import { ClientUpdatePaymentDetails } from './ClientUpdatePaymentDetails';
 import { ClientUpdateUserDetails } from './ClientUpdateUserDetails';
@@ -34,10 +34,8 @@ margin-top: 2rem;
 border-radius: 10px;
 `
 
-
-
 export const ClientUpdateDetails=({handleNavigate, handleGoBack })=>{
-    const [currentUser, setCurrentUser] = useState('Temp user');
+    const [currentUserId, setCurrentUserId] = useState('')
     const [foundAccount, setFoundAccount] = useState(false);
     const [showDetails, setShowDetails] = useState(false);
     const [isSearching, setIsSearching] = useState(false);
@@ -58,32 +56,22 @@ export const ClientUpdateDetails=({handleNavigate, handleGoBack })=>{
                 {!foundAccount && <LockIcon></LockIcon>}
                 </IconContainer>
         <CondensedInput
+        id="ClientUpdateDetails-getCustomerSSN"
         msg={"Search for your account using your SSN"}
         title={"Locate your account using your SSN"}
         subMsg={"Enter your 8-digit SSN"}
+        handleChange={(e)=>setCurrentUserId(e.target.value)}
         >
         </CondensedInput>
         <CustomComponents.SearchButton
-        onClick={handleFoundAccount}
+        onClick={()=>handleFoundAccount()}
         >Search
         </CustomComponents.SearchButton>
         {isSearching && <SpinnerOnSubmit></SpinnerOnSubmit>}
             </CustomComponents.Card> }
            { foundAccount && 
-           <div>
-           <Card className="welcomeUser-Container">
-            <IconContainer>
-            <PersonIcon></PersonIcon>
-            </IconContainer>
-            <CustomComponents.Title>    
-                Welcome, {currentUser}
-            </CustomComponents.Title>
-            </Card>
-            <CustomComponents.Grid>
-            <ClientUpdateUserDetails/>
-            <ClientUpdatePaymentDetails/>
-            </CustomComponents.Grid>
-            </div>
+           <WelcomeUserContainer
+           id={currentUserId}/>
         }
         <NavigationButtons
         handleClick={handleNavigate}
@@ -99,5 +87,28 @@ const NavigationButtons=({handleClick, handleGoBack })=>{
         handleClick={handleClick}
         handleGoBack={handleGoBack}
         />
+    )
+}
+
+const WelcomeUserContainer=({id})=>{
+    return(
+    <div>
+    <Card className="welcomeUser-Container">
+     <IconContainer>
+     <PersonIcon></PersonIcon>
+     </IconContainer>
+     <CustomComponents.Title>    
+         Welcome
+     </CustomComponents.Title>
+     </Card>
+     <CustomComponents.Grid>
+     <ClientUpdateUserDetails
+     id={id}
+     />
+     <ClientUpdatePaymentDetails
+     id={id}
+     />
+     </CustomComponents.Grid>
+     </div>
     )
 }
