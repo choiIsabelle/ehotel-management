@@ -79,19 +79,21 @@ app.get("/customer/:id", async(req, res)=>{
 })
 
 // add new hotel chain
-app.post("./Hotel_chain", async(req, res)=>{
+app.post("/Hotel_chain", async (req, res) => {
   try {
-    const {description} = req.body;
-    console.log(description);
-    const newHotelChain = await pool.query("INSERT INTO Hotel_chain (description) VALUES($1) RETURNING*", [description])
-    await pool.query('COMMIT')
-    res.json(newHotelChain);
-    
+    const { manager, chain_phone_number, num_rooms, hotel_address, hotel_chain_name, hotelChainId } = req.body;
+    console.log( manager, chain_phone_number, num_rooms, hotel_address, hotel_chain_name, hotelChainId);
+
+    const newHotelChain = await pool.query(
+      "INSERT INTO Hotel_chain (manager, chain_phone_number, num_rooms, hotel_address, hotel_chain_name, hotelChainId ) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+      [manager, chain_phone_number, num_rooms, hotel_address, hotel_chain_name, hotelChainId ]
+    );
+    await pool.query('COMMIT');
+    res.json(newHotelChain.rows[0]);
   } catch (error) {
-    console.error("Error occurred when adding to table Hotel_chain", error.message)
-    
+    console.error(error.message);
   }
-})
+});
 
 // update a hotel chain
 
