@@ -27,13 +27,18 @@ const HotelOwnerNavigationButtons = ({handleClick, handleGoBack}) => {
         <c.NavigationButton
         onClick={()=>handleClick('add')}
         >
-        Add
+        Add new Chain
         </c.NavigationButton>
 
         <c.NavigationButton
         onClick={()=>handleClick('manage')}
         >
         Manage
+        </c.NavigationButton>
+        <c.NavigationButton
+        onClick={()=>handleClick('addNewHotel')}
+        >
+        Add new Hotel
         </c.NavigationButton>
     </ButtonContainer>
         <GoBackButton
