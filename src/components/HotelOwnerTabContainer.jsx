@@ -3,8 +3,10 @@ import styled from 'styled-components'
 import  {HotelOwnerModifyChain}  from './HotelOwnerModifyChain'
 import {HotelOwnerAddChain} from './HotelOwnerAddChain'
 import {BuildingCircleCheckIcon} from './icons/BuildingCircleCheckIcon'
+import {ArchwayIcon} from './icons/ArchwayIcon'
 import {BuildingCircleXMarkIcon} from './icons/BuildingCircleXMarkIcon'
 import HotelOwnerNavigationButtons from './HotelOwnerNavigationButtons'
+import { HotelOwnerAddNewHotel } from './HotelOwnerAddNewHotel'
 
 const Text = styled.h1`
 padding: 1rem;
@@ -96,11 +98,9 @@ flex-direction: column;
 `
 
 export const HotelOwnerTabContainer=()=>{
-
-  const [currentPage, setCurrentPage] =useState('')
-
   const [modify, setModify] = useState(false);
   const [add, setAdd] = useState(false);
+  const [addNewHotelView, setAddNewHotelView] = useState(false);
 
   const handleGoToRemoveBookings=()=>{
     setModify(true)
@@ -109,18 +109,30 @@ export const HotelOwnerTabContainer=()=>{
     setAdd(true)
   }
 
+  const handleGoToAddNewHotel=()=>{
+    setAddNewHotelView(true)
+  }
+
   const handleGoBack=()=>{
     setModify(false)
     setAdd(false)
+    setAddNewHotelView(false)
   }
 
   const handleCurrentPage=(page)=>{
     if(page === 'add'){
       handleGoToAddBookings()
       setModify(false)
+      setAddNewHotelView(false)
     }
     if(page === 'manage'){
       handleGoToRemoveBookings()
+      setAdd(false)
+      setAddNewHotelView(false)
+    }
+    if(page === 'addNewHotel'){
+      handleGoToAddNewHotel()
+      setModify(false)
       setAdd(false)
     }
   }
@@ -128,11 +140,11 @@ export const HotelOwnerTabContainer=()=>{
 
     return(
       <div>
-      {!modify && !add && (
+      {!modify && !add && !addNewHotelView && (
         <div>
       <Text>What would you want to do today?</Text>
       <Grid>
-        <Container>
+        <Container id="HotelOwnerTabContainer-ManageHotels">
           <Text> Manage Hotels</Text>
           <BuildingCircleXMarkIcon/>
           <SubText>Remove, update, and view current hotel offerings</SubText>
@@ -140,7 +152,7 @@ export const HotelOwnerTabContainer=()=>{
           <InnerText>View hotel offerings and modify them</InnerText>
           <SubmitButton
           onClick={handleGoToRemoveBookings}
-          >Manage hotel offerings</SubmitButton>
+          >Manage Offerings</SubmitButton>
           </InnerCard>
 
         </Container>
@@ -154,6 +166,18 @@ export const HotelOwnerTabContainer=()=>{
           <SubmitButton
           onClick={handleGoToAddBookings}
           >Add an Offering</SubmitButton>
+          </InnerCard>
+        </Container>
+
+        <Container>
+          <Text> Add a New Hotel</Text>
+          <ArchwayIcon/>
+          <SubText>Add a new Hotel to associate hotel chains with</SubText>
+          <InnerCard>
+            <InnerText>Create a new Hotel</InnerText>
+          <SubmitButton
+          onClick={handleGoToAddNewHotel}
+          >Add Hotel</SubmitButton>
           </InnerCard>
         </Container>
 
@@ -181,6 +205,16 @@ export const HotelOwnerTabContainer=()=>{
       handleClick={handleCurrentPage}
       ></HotelOwnerNavigationButtons>
       </div> 
+      }
+      {addNewHotelView &&
+      <>
+      <HotelOwnerAddNewHotel
+      />
+      <HotelOwnerNavigationButtons
+      handleGoBack={handleGoBack}
+      handleClick={handleCurrentPage}
+      ></HotelOwnerNavigationButtons>
+      </>
       }
         </div>
     )
