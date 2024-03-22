@@ -23,7 +23,7 @@ function NavigationButtons({goBack, goManage, goAdd, goRemove}){
 }
 
 
-export const EmplyoeeRemoveBooking=({goBack, goManage, goAdd, goRemove})=>{
+export const EmployeeRemoveBooking=({goBack, goManage, goAdd, goRemove})=>{
     return(
         <Container id="EmployeeRemoveBooking-Container">
             <c.Card>

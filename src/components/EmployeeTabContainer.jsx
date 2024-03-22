@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-import { EmplyoeeRemoveBooking } from './EmployeeRemoveBooking'
+import { EmployeeRemoveBooking } from './EmployeeRemoveBooking'
 import { EmployeeAddBooking } from './EmployeeAddBooking'
 import { EmployeeUpdateBooking } from './EmployeeUpdateBooking'
 import { BookBookMarkIcon } from './icons/BookBookmarkIcon'
@@ -36,7 +36,7 @@ box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 transition: 0.3s;
 display: flex;
 flex-direction: column;
-width: 350px;
+width: 300px;
 height: 250;
 padding: 2rem;
 border-radius: 10px;
@@ -94,8 +94,9 @@ gap: 0.5rem;
 display: flex;
 flex-direction: column;
 `
-
 export const EmployeeTabContainer=()=>{
+
+  const id = "EmployeeTabContainer"
 
   const [remove, setRemove] = useState(false);
   const [add, setAdd] = useState(false);
@@ -112,6 +113,10 @@ export const EmployeeTabContainer=()=>{
   const handleUpdateBookings=()=>{
     setUpdate(true)
   }
+
+  const handleAddNewRoom=()=>[
+
+  ]
 
   const handleGoBack=()=>{
     (setUpdate(false));
@@ -161,7 +166,7 @@ export const EmployeeTabContainer=()=>{
 
         </Container>
 
-        <Container>
+        <Container  id={`${id}-addBookings-Container`}>
           <Text> Add Bookings</Text>
           <BuildingCircleCheckIcon/>
           <SubText>Add bookings</SubText>
@@ -173,15 +178,29 @@ export const EmployeeTabContainer=()=>{
           </InnerCard>
         </Container>
 
-        <Container>
+        <Container id={`${id}-updateBookings-Container`}>
         <Text> Update Bookings</Text>
         <BookBookMarkIcon/>
         <SubText>Update arrival/departure date, location, hotel chain, booking type, etc.</SubText>
         <InnerCard>
         <InnerText>Update the reservation details for a client</InnerText>
         <SubmitButton
-        onClick={handleUpdateBookings}
-        >Update a booking</SubmitButton>
+        onClick={handleUpdateBookings}>
+          Update a booking
+        </SubmitButton>
+        </InnerCard>
+        </Container>
+
+        <Container id={`${id}-addRoom-Container`}>
+        <Text>Add a Room</Text>
+        <BookBookMarkIcon/>
+        <SubText>Create a new Room for a Hotel Chain</SubText>
+        <InnerCard>
+        <InnerText>Add a new Room Availability for a client</InnerText>
+        <SubmitButton
+        onClick={handleAddNewRoom}>
+          Create a New Room
+        </SubmitButton>
         </InnerCard>
         </Container>
 
@@ -189,7 +208,7 @@ export const EmployeeTabContainer=()=>{
         </div>
       ) }
       {remove && 
-      <EmplyoeeRemoveBooking
+      <EmployeeRemoveBooking
       goAdd={handleGoAdd}
       goRemove={handleGoRemove}
       goManage ={handleGoManage} 
