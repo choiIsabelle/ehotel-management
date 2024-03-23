@@ -19,15 +19,20 @@ export const HotelOwnerAddNewHotel=()=>{
     const [hotelPhoneNumber, setHotelPhoneNumber] = useState(`${hotelPhoneNumMsg}`)
 
 
-    const handleSubmit= async (e)=>{
-        alert("submitted!")
+    const handleSubmit= async(e)=>{
+        e.preventDefault();
         try {
-            
+            const resonse = await fetch(`http://localhost:5000/Hotel`,{
+                method:"POST",
+                headers:{"Content-Type": "application/json"},
+                body: JSON.stringify({hotelId: hotelId, email_address: hotelEmailAddress, num_associated_hotels: numHotelAssociations, central_office_street_address: hotelStreetAddress, central_office_address: hotelAddress, phone_number: hotelPhoneNumber})
+            })
+            alert(`Hotel ${hotelId} added!`)
         } catch (error) {
             console.error("New hotel could not be added ", error.message)
+            alert("Error in submission")
             
         }
-        const resonse = await fetch(`http://localhost:5000/Hotel`)
     }
 
 
