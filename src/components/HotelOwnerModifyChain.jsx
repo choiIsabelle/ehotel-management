@@ -29,8 +29,7 @@ export const HotelOwnerModifyChain=()=>{
         console.log('submitted')
     }
     return(
-        <div>
-        <c.Title style={{marginTop:'3rem'}}>Manage a Hotel Chain</c.Title>
+        <div style={{marginTop:'3rem'}}>
         <c.Card>
             <form onSubmit={handleSubmit}>
             <CondensedInput
