@@ -100,6 +100,21 @@ app.post("/Hotel_chain", async (req, res) => {
 // delete a hotel chain
 
 // add a hotel
+app.post("/Hotel", async(req,res)=>{
+  try {
+    const{ hotelId, email_address, num_associated_hotels, central_office_street_address, central_office_address, phone_number} = req.body;
+    const newHotel = await pool.query(
+      "INSERT INTO Hotel(hotelId, email_address, num_associated_hotels, central_office_street_address, central_office_address, phone_number) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+      [hotelId, email_address, num_associated_hotels, central_office_street_address, central_office_address, phone_number]
+    )
+    await pool.query("COMMIT");
+    res.json(newHotel.rows[0]);
+    
+  } catch (error) {
+    console.log(error.message, "Could not add new Hotel to Hotel database")
+    
+  }
+})
 
 // update a hotel 
 
