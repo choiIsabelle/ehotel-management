@@ -93,14 +93,6 @@ const NavigationButtons=({handleClick, handleGoBack })=>{
 const WelcomeUserContainer=({id})=>{
     return(
     <div>
-    <Card className="welcomeUser-Container">
-     <IconContainer>
-     <PersonIcon></PersonIcon>
-     </IconContainer>
-     <CustomComponents.Title>    
-         Welcome
-     </CustomComponents.Title>
-     </Card>
      <CustomComponents.Grid>
      <ClientUpdateUserDetails
      id={id}
