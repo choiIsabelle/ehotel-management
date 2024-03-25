@@ -6,9 +6,7 @@ const Navbar=({ onNavigate })=>{
     const NavItem=styled.a`
     color: white;
     :hover {
-      color: #cfe2f3;
-      fill: #cfe2f3;
-      ;
+      color: #98ecf3;
     }
     `
     const StyledHomeFilledIcon = styled(HomeFilledIcon)`
