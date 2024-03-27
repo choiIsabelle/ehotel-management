@@ -52,8 +52,6 @@ return(
           onMonthChange={handleMonthChange}
           selected={selectedDates}
         />
-        {/* TODO: add a tooltip here? */}
-        {/* <button onClick={()=>handleDate(dateParts)}>Confirm</button> */}
       </c.DatepickerContainer>
 )
 }
@@ -63,20 +61,15 @@ export const ClientDatePicker=()=> {
   const [arrivalDate, setArrivalDate] = useState(null);
   const [departureDate, setDepartureDate] = useState(null);
 
-  // useEffect(() => {
-  //   validateDateSubmission();
-  //   setMessage(validSubmission ? "Date submitted" : "Error: hotel arrival date cannot be later than the departure date!");
-  // }, [arrivalDate, departureDate, validSubmission]);
 
   const validateDateSubmission=()=>{
-    console.log('the arrival date at the time of submission is ', arrivalDate[0], departureDate[0])
-    const validDateCheck = ((arrivalDate[0] > departureDate[0]) || ((arrivalDate[1] > departureDate[1]) && (arrivalDate[0] ===  (departureDate[0]))));
+    let validDateCheck = ((parseInt(arrivalDate[0]) > parseInt(departureDate[0])) || (( parseInt(arrivalDate[1]) < parseInt(departureDate[1])) && ( parseInt(arrivalDate[0]) ===  parseInt(departureDate[0]))));
     if(validDateCheck){
       setIsModelOpen(true);
       return;
     }
     else if (!validDateCheck){
-    setIsModelOpen(true);
+    alert("Error in selected arrival and departure dates")
     return;
   }
 }
