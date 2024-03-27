@@ -78,6 +78,20 @@ app.get("/customer/:id", async(req, res)=>{
   }
 })
 
+// update customer credit card number
+app.post("/customer/credit_card_number/:id", async(req,res)=>{
+  try {
+    const { id } = req.params;
+    const { credit_card_number } = req.body;
+    const updateCustomerPaymentDetails = await pool.query("UPDATE customer SET credit_card_number = $1 WHERE SSN = $2 RETURNING*", [id, credit_card_number])
+    const result = res.json(updateCustomerPaymentDetails) 
+    console.log(result)
+  } catch (error) {
+    console.error("An error has occurred when attempting to update the customer credit card number", error)
+    
+  }
+})
+
 // add new hotel chain
 app.post("/Hotel_chain", async (req, res) => {
   try {
@@ -121,6 +135,21 @@ app.post("/Hotel", async(req,res)=>{
 // delete a hotel
 
 // add a room
+app.post("/room", async(req,res)=>{
+  try {
+    const{ extendable, room_capacity, room_type, daily_rate, amenities, damages, room_hotel_chain_id} = req.body;
+    const newRoom = await pool.query(
+      "INSERT INTO room (extendable, room_capacity, room_type, daily_rate, amenities, damages, room_hotel_chain_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+      [extendable, room_capacity, room_type, daily_rate, amenities, damages, room_hotel_chain_id]
+    )
+    await pool.query("COMMIT");
+    res.json(newRoom.rows[0]);
+    
+  } catch (error) {
+    console.log(error.message, "Could not add new Room to Room database")
+    
+  }
+})
 
 // update a room
 
