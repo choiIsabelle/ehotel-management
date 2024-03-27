@@ -33,6 +33,7 @@ export const ClientUpdateUserDetails=({id})=>{
                 body: JSON.stringify({full_name: customerName, address: customerAddress})
             });
             console.log(response)
+            alert("Client name successfully updated!")
             
         } catch (error) {
             console.error(`Could not update customer with SSN ${id} `, error.message)   
@@ -46,6 +47,7 @@ export const ClientUpdateUserDetails=({id})=>{
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({address: customerAddress, full_name: customerName})
             });
+            alert("Client address successfully updated!")
             
         } catch (error) {
             console.error(`Could not update customer with SSN ${id} `, error.message)   
