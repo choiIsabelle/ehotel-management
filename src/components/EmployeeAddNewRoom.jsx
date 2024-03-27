@@ -1,8 +1,9 @@
 import * as c from './CustomComponents'
 import { CondensedInput } from './CondensedInput'
 import { useState } from 'react'
+import { EmployeeNavigationButtons } from './EmployeeNavigationButtons'
 
-export const EmployeeAddNewRoom=()=>{
+export const EmployeeAddNewRoom=({goBack, goManage, goAdd, goRemove})=>{
     const exmsg = "Enter room extendability"
     const rcmsg = "Enter room capacity"
     const rtmsg = "Enter room type"
@@ -102,6 +103,12 @@ export const EmployeeAddNewRoom=()=>{
                    </c.SearchButton>
 
                    </form>
+               <button className='EmployeeAddNewRoom-btn-back' style={{borderColor: 'black', marginTop: '1rem', marginBottom: '1rem'}} onClick={()=>goBack()}>Go back</button>
+               <EmployeeNavigationButtons
+                        handleUpdate={goManage}
+                        handleAdd={goAdd}
+                        handleRemove={goRemove}
+            ></EmployeeNavigationButtons>
                </c.Card>
                </div>
 
