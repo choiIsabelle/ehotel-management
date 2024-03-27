@@ -16,11 +16,28 @@ export const ClientUpdatePaymentDetails=({id})=>{
 
             }
             catch(error){
-                console.error(error.message);
+                console.error('Could not fetch customer credit card details', error.message);
             }
         }
         getCustomerCreditCardDetails(id)
     }, [])
+
+    const updatePaymentDetails= async (e, id)=>{
+        e.preventDefault();
+        try {
+            const response = await fetch(`http://localhost:5000/customer/${id}`, {
+                method: "PUT",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({credit_card_number: creditCard})
+            })
+            const jsonData = await response.json();
+            console.log(jsonData)
+            alert("Credit card information successfully updated")
+        } catch (error) {
+            console.error(error.message)
+            
+        }
+    }
 
         return(
             <Custom.Card className='updatePaymentDetails-container' style={{width:'fit-content'}}>
@@ -28,12 +45,15 @@ export const ClientUpdatePaymentDetails=({id})=>{
                 title={"Update payment details"}
                 msg='Enter credit card'
                 subMsg={'Enter the credit card number that you want associated with your account'}
-                onChange={(e)=>setCreditCard(e.target.value)}
+                handleChange={(e)=>setCreditCard(e.target.value)}
                 handleClick={()=>setCreditCard('')}
                 valueLabel={creditCard}
                 >
                 </CondensedInput>
-                <Custom.SearchButton>Update payment details</Custom.SearchButton>
+                <Custom.SearchButton 
+                onClick={ e=> updatePaymentDetails(e)}>
+                    Update payment details
+                    </Custom.SearchButton>
                 
             </Custom.Card>
         )
