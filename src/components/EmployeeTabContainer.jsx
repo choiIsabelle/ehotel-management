@@ -231,6 +231,10 @@ export const EmployeeTabContainer=()=>{
       goManage ={handleGoManage} 
       goBack={handleGoBack}/>}
       {addNewRoom && <EmployeeAddNewRoom
+            goAdd={handleGoAdd}
+            goRemove={handleGoRemove}
+            goManage ={handleGoManage} 
+            goBack={handleGoBack}
       
       />}
         </div>
