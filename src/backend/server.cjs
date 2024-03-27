@@ -151,6 +151,19 @@ app.post("/room", async(req,res)=>{
   }
 })
 
+// get all rooms, and also their location
+app.get("/room", async(req, res)=>{
+  try{
+    const getRoom = await pool.query(
+      "SELECT room.*, hotel.hotel_address FROM room INNER JOIN hotel ON room.associated_hotel_name = hotel.hotel_name"
+    );
+    res.json(getRoom)
+  }catch(error){
+    console.error(error.message);
+  }
+})
+
+
 // update a room
 
 // delete a room
