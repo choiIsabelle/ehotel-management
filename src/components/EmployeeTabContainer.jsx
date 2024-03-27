@@ -6,6 +6,7 @@ import { EmployeeUpdateBooking } from './EmployeeUpdateBooking'
 import { BookBookMarkIcon } from './icons/BookBookmarkIcon'
 import { BuildingCircleCheckIcon } from './icons/BuildingCircleCheckIcon'
 import { BuildingCircleArrowRightIcon } from './icons/BuildingCircleArrowRightIcon'
+import { EmployeeAddNewRoom } from './EmployeeAddNewRoom'
 
 const Text = styled.h1`
 padding: 1rem;
@@ -101,7 +102,7 @@ export const EmployeeTabContainer=()=>{
   const [remove, setRemove] = useState(false);
   const [add, setAdd] = useState(false);
   const [update, setUpdate] = useState(false);
-  console.log(update)
+  const [addNewRoom, setAddNewRoom] = useState(false);
 
   const handleGoToRemoveBookings=()=>{
     setRemove(true)
@@ -115,13 +116,14 @@ export const EmployeeTabContainer=()=>{
   }
 
   const handleAddNewRoom=()=>[
-
+    setAddNewRoom(true)
   ]
 
   const handleGoBack=()=>{
     (setUpdate(false));
     (setRemove(false));
     (setAdd(false));
+    setAddNewRoom(false)
   }
 
   const handleGoManage=()=>{
@@ -130,12 +132,14 @@ export const EmployeeTabContainer=()=>{
       setRemove(false);
       handleUpdateBookings()
       setAdd(false)}
+      setAddNewRoom(false)
   }
   const handleGoAdd=()=>{
     if(!add){
       (setUpdate(false))
       handleGoToAddBookings()
       setRemove(false)
+      setAddNewRoom(false)
   }
   }
 
@@ -144,12 +148,13 @@ export const EmployeeTabContainer=()=>{
       (setUpdate(false))
       handleGoToRemoveBookings()
       setAdd(false)
+      setAddNewRoom(false)
   }
   }
 
     return(
       <div>
-      {!remove && !add && !update && (
+      {!remove && !add && !update && !addNewRoom &&(
         <div>
       <Text>What would you want to do today?</Text>
       <Grid>
@@ -225,6 +230,9 @@ export const EmployeeTabContainer=()=>{
       goRemove={handleGoRemove}
       goManage ={handleGoManage} 
       goBack={handleGoBack}/>}
+      {addNewRoom && <EmployeeAddNewRoom
+      
+      />}
         </div>
     )
 }
