@@ -1,9 +1,7 @@
 import * as c from './CustomComponents'
 import {CondensedInput} from './CondensedInput'
 import {Tooltip} from '@shopify/polaris'
-import {useState, useEffect} from 'react';
-
-
+import {useState} from 'react';
 
 export const HotelOwnerAddChain=()=>{
     const [hotelName, setHotelName] = useState('Hotel chain name');
@@ -16,10 +14,20 @@ export const HotelOwnerAddChain=()=>{
     const handleSubmit=async(e)=>{
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:5000/Hotel_chain',{
+            const response = await fetch('http://localhost:5000/Hotel',{
                 method: "POST",
                 headers:{"Content-Type": "application/json"},
-                body: JSON.stringify({manager: managerName, chain_phone_number: phoneNumber, num_rooms: roomAmount, hotel_address: hotelAddress, hotel_chain_name: hotelName, hotelChainId: hotelAssociated})
+                body: JSON.stringify(
+                    {
+                        "hotel_name": hotelName,
+                        "manager": managerName,
+                        "chain_phone_number": phoneNumber,
+                        "num_rooms": roomAmount,
+                        "hotel_address": hotelAddress,
+                        "hotel_related_chain": hotelAssociated
+                    }
+                    
+                )
             })
             alert("New Hotel Chain Submitted Successfully!")
             
