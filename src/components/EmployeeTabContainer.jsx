@@ -184,7 +184,7 @@ export const EmployeeTabContainer=()=>{
         </Container>
 
         <Container id={`${id}-updateBookings-Container`}>
-        <Text> Update Bookings</Text>
+        <Text> Check A Customer In</Text>
         <BookBookMarkIcon/>
         <SubText>Update arrival/departure date, location, hotel chain, booking type, etc.</SubText>
         <InnerCard>
