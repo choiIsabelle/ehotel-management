@@ -73,6 +73,13 @@ font-size: var(--p-font-size-325);
 font-weight: 400;
 `
 
+export const MedTitle = styled.h2`
+font-weight: bold;
+font-size: 14px;
+oadding: 0.5rem;
+margin-bottom: 0.5rem;
+`
+
 export const  BasicContainer = styled.div`
 display: flex;
 flex-direction: column;
