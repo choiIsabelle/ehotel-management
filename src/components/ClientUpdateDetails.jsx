@@ -8,6 +8,7 @@ import { SpinnerOnSubmit } from './SpinnerOnSubmit';
 import { ClientUpdatePaymentDetails } from './ClientUpdatePaymentDetails';
 import { ClientUpdateUserDetails } from './ClientUpdateUserDetails';
 import ClientNavigationButtons from './ClientNavigationButtons';
+import ClientDeleteUserAccount from './ClientDeleteUserAccount';
 
 //TODO: finish this for the client view of updating their personal information or payment information
 
@@ -98,8 +99,10 @@ const WelcomeUserContainer=({id})=>{
      id={id}
      />
      <ClientUpdatePaymentDetails
-     id={id}
-     />
+     id={id}/>
+     <div>
+     <ClientDeleteUserAccount/>
+     </div>
      </CustomComponents.Grid>
      </div>
     )
