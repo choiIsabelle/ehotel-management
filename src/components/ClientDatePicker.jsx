@@ -69,19 +69,16 @@ export const ClientDatePicker=()=> {
       return;
     }
     else if (!validDateCheck){
-    alert("Error in selected arrival and departure dates")
+    alert("Error! arrival date: " + arrivalDate[1] + " is later than given departure date: "+ departureDate[1])
     return;
   }
 }
-  
 
   const handleArrivalSubmit=(dateParts)=>{
-    console.log(dateParts[0], dateParts[1] );
     setArrivalDate(dateParts)
 }
 
 const handleDepartureSubmit=(dateParts)=>{
-  console.log(dateParts[0], dateParts[1] );
   setDepartureDate(dateParts)
 }
 
@@ -89,10 +86,9 @@ const handleCloseModal=()=>{
   setIsModelOpen(false);
 }
 
-
   return (
     <div style={{ display:'flex', flexDirection:'column', justifyContent:'center'}}>
-      <Test1>Here</Test1>
+      {/* <Test1>Here</Test1> */}
       <c.Title>Select Your Booking Dates</c.Title>
     <div style={{display:'flex', flexDirection:'row', gap:'0.5rem'}}>
     <DateSelector
