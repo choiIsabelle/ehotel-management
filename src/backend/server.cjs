@@ -92,6 +92,8 @@ app.post("/customer/credit_card_number/:id", async(req,res)=>{
   }
 })
 
+// delete a customer
+
 // add new hotel chain
 app.post("/Hotel_chain", async (req, res) => {
   try {
@@ -110,6 +112,19 @@ app.post("/Hotel_chain", async (req, res) => {
 });
 
 // update a hotel chain
+app.post("/hotel_chain/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { email_address, num_associated_hotels, central_office_street_address, hotel_location, phone_number } = req.body;
+    const updateHotelChainById = await pool.query("UPDATE hotel SET email_address=$1, num_associated_hotels=$2, central_office_street_address=$3, hotel_location=$4, phone_number=$5 WHERE hotel_chain_id=$7 RETURNING *", 
+    [ email_address, num_associated_hotels, central_office_street_address, hotel_location, phone_number, id]);
+    await pool.query('COMMIT');
+    res.json(updateHotelChainById.rows[0]);
+  } catch (error) {
+    console.error("An error has occurred when attempting to update the hotel details:", error);
+    res.status(500).send("An error occurred while updating the hotel details.");
+  }
+});
 
 // delete a hotel chain
 
@@ -131,8 +146,36 @@ app.post("/Hotel", async(req,res)=>{
 })
 
 // update a hotel 
+app.post("/hotel/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { hotel_name, manager, chain_phone_number, num_rooms, hotel_address, hotel_related_chain } = req.body;
+    const updateHotelById = await pool.query("UPDATE hotel SET hotel_name=$1, manager=$2, chain_phone_number=$3, num_rooms=$4, hotel_address=$5, hotel_related_chain=$6 WHERE hotel_id=$7 RETURNING *", 
+    [hotel_name, manager, chain_phone_number, num_rooms, hotel_address, hotel_related_chain, id]);
+    await pool.query('COMMIT');
+    res.json(updateHotelById.rows[0]);
+  } catch (error) {
+    console.error("An error has occurred when attempting to update the hotel details:", error);
+    res.status(500).send("An error occurred while updating the hotel details.");
+  }
+});
 
 // delete a hotel
+app.delete("/hotel/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleteHotelById = await pool.query("DELETE FROM hotel WHERE hotel_id=$1 RETURNING *", [id]);
+    await pool.query('COMMIT');
+    if (deleteHotelById.rows.length === 0) {
+      return res.status(404).json({ message: "Hotel not found." });
+    }
+    res.json({ message: "Hotel deleted successfully.", deletedHotel: deleteHotelById.rows[0] });
+  } catch (error) {
+    console.error("An error has occurred when attempting to delete the hotel:", error);
+    res.status(500).send("An error occurred while deleting the hotel.");
+  }
+});
+
 
 // add a room
 app.post("/room", async(req,res)=>{
@@ -164,9 +207,63 @@ app.get("/room", async(req, res)=>{
 })
 
 
+// get room information based on room_number (primary key)
+app.get("/room/:id", async(req, res)=>{
+  try{
+    const { id } = req.params;
+    const getRoomById = await pool.query("SELECT * FROM room WHERE room_number = $1", [id]);
+    res.json(getRoomById)
+    console.log(getRoomById);
+  }catch(error){
+    console.error(error.message);
+  }
+})
+
 // update a room
+app.post("/room:id", async(req,res)=>{
+  try {
+    const { id } = req.params;
+    const { extendable, room_capacity, room_type, daily_rate, amenities, damages, associated_hotel_name, room_hotel_chain_id } = req.body;
+    const updateRoomById = await pool.query("UPDATE room SET extendable, room_capacity, room_type, daily_rate, amenities, damages, associated_hotel_name, room_hotel_chain_id = $1,$2,$3,$4,$5,$6,$7,$8 WHERE room_id = $9 RETURNING*", 
+    [id, extendable, room_capacity, room_type, daily_rate, amenities, damages, associated_hotel_name, room_hotel_chain_id])
+    const result = res.json(updateRoomById) 
+    console.log(result)
+  } catch (error) {
+    console.error("An error has occurred when attempting to update the customer credit card number", error)
+  }
+})
 
 // delete a room
+
+
+// add a booking
+app.post("/booking", async(req, res)=>{
+  try {
+    const {
+      customer_SSN,
+      employee_SSN,
+      is_a_rental,
+      departure_date,
+      arrival_date,
+      room_of_booking
+  } = req.body;
+
+    const addBooking = await pool.query(
+      "INSERT INTO Booking(customer_SSN, employee_SSN, is_a_rental, departure_date, arrival_date, room_of_booking) VALUES ($1, $2, $3, $4, $5, $6) RETURNING*",
+      [customer_SSN, employee_SSN, is_a_rental, departure_date, arrival_date, room_of_booking]
+    )
+    await pool.query("COMMIT");
+    res.json(addBooking.rows[0]);
+  } catch (error) {
+    console.error(error.message);
+  }
+})
+
+
+// add to booking archive
+
+
+// delete from booking archive
 
 
 app.listen(5000, ()=>{

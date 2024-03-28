@@ -9,12 +9,12 @@ CREATE TABLE Hotel_chain (
 
 CREATE TABLE Hotel (
     hotel_id SERIAL PRIMARY KEY,
-    hotel_name VARCHAR(255),
+    hotel_name VARCHAR(255) UNIQUE,
     manager VARCHAR(255),
     chain_phone_number VARCHAR(20),
     num_rooms INTEGER,
     hotel_address VARCHAR(255),
-    hotel_related_chain VARCHAR(255) REFERENCES Hotel_chain(hotel_chain_id)
+    hotel_related_chain VARCHAR(255) REFERENCES Hotel_chain(hotel_chain_id) ON DELETE CASCADE
 );
 
 
@@ -26,7 +26,8 @@ CREATE TABLE Room (
     daily_rate DECIMAL(10, 2),
     amenities VARCHAR(255),
     damages TEXT,
-room_hotel_chain_id INTEGER REFERENCES Hotel_chain(hotel_chain_id)
+    associated_hotel_name VARCHAR(255) REFERENCES Hotel(hotel_name),
+room_hotel_chain_id INTEGER REFERENCES Hotel(hotel_id) ON DELETE CASCADE
 );
 
 CREATE TABLE Booking (
@@ -36,8 +37,7 @@ CREATE TABLE Booking (
     is_a_rental BOOLEAN,
     departure_date DATE,
     arrival_date DATE,
-    room_of_booking VARCHAR(255) REFERENCES Room(room_number),
-    booking_hotel_chain_id VARCHAR(255) REFERENCES Hotel_chain(hotel_chain_id )
+    room_of_booking INTEGER REFERENCES Room(room_number)
 );
 
 CREATE TABLE Rental (
@@ -56,7 +56,20 @@ CREATE TABLE Customer (
     full_name VARCHAR(255),
     age INTEGER,
     date_of_registration DATE NOT NULL DEFAULT current_timestamp,
-    address VARCHAR(255)
+    address VARCHAR(255),
+    credit_card_number VARCHAR(255),
+    CONSTRAINT customer_age CHECK (age >= 18)
+);
+
+CREATE TABLE Phone_numbers (
+    primary_phone_number VARCHAR(16),
+    SSN VARCHAR(255) REFERENCES Person(personSSN)
+);
+
+CREATE TABLE Person(
+    personSSN VARCHAR(255) PRIMARY KEY,
+    customerSSN VARCHAR(255) REFERENCES customer(SSN),
+    employeeSSN VARCHAR(255) REFERENCES employee(SNN)
 );
 
 CREATE TABLE Employee (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import {ClientUpdateDetails} from './ClientUpdateDetails'
 import {ClientTabContainer} from './ClientTabContainer'
@@ -6,6 +6,8 @@ import { BuildingIcon } from './icons/BuildingIcon'
 import { PersonIcon } from './icons/PersonIcon'
 import CalendarCheckIcon from './icons/CalendarCheckIcon'
 import ClientViewAll from './ClientViewAll'
+import { ClientCreateUserProfile } from './ClientCreateUserProfile'
+import {UserPlusIcon} from './icons/UserPlusIcon'
 
 const Text = styled.h1`
 padding: 0.5rem;
@@ -35,7 +37,7 @@ box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 transition: 0.3s;
 display: flex;
 flex-direction: column;
-width: 320px;
+width: 290px;
 height: 420px;
 margin-top:1rem;
 align-items: center;
@@ -105,12 +107,14 @@ class ClientOptionsContainer extends React.Component {
         this.state={
             booking: false,
             update: false,
-            viewAll: false   
+            viewAll: false,
+            createUserProfile: false
         };
         // bind to the current instance of ClientOptionsContainer;
         this.handleBooking = this.handleBooking.bind(this);
         this.handleUpdate = this.handleUpdate.bind(this);
         this.handleViewAll = this.handleViewAll.bind(this);
+        this.handleCreateUserProfile = this.handleCreateUserProfile.bind(this);
         this.handleNavigate = this.handleNavigate.bind(this);
         this.handleGoBack = this.handleGoBack.bind(this);
     }
@@ -126,28 +130,32 @@ class ClientOptionsContainer extends React.Component {
         this.setState({viewAll: true})
       }
 
+      handleCreateUserProfile(){
+        this.setState({createUserProfile: true})
+      }
+
       handleNavigate(page){
         console.log('current value of the page is', page)
         if(page === 'add'){
           this.setState({booking: true})
-          this.setState({ update: false });
+          this.setState({ update: false, viewAll: false, createUserProfile: false });
         }
         if(page=== 'update'){
-          this.setState({booking: false})
+          this.setState({booking: false, viewAll: false, createUserProfile: false})
           this.setState({ update: true });
         }
 
       }
       handleGoBack(){
         console.log('triggered at go back')
-        this.setState({booking: false,  update: false, viewAll: false})
+        this.setState({booking: false,  update: false, viewAll: false, createUserProfile: false})
       }
 
 
     render(){
         return(
             <div id='ClientOptionsContainer'>
-                {!this.state.booking && !this.state.update && !this.state.viewAll &&
+                {!this.state.booking && !this.state.update && !this.state.viewAll && !this.state.createUserProfile &&
                 <div>
             <Text>{h1}</Text>
             <Grid>
@@ -166,7 +174,7 @@ class ClientOptionsContainer extends React.Component {
               </Container>
               <Container id="ClientOptionsContainer-AddBooking">
                 <CalendarCheckIcon id='CalendarIcon'/>
-                <Text>Add a booking</Text>
+                <Text>Book a Hotel Room</Text>
                 <SubText>Search for a hotel based on your date, location, and room preferences</SubText>
                 <InnerCard>
                 <InnerText>Start looking for hotels</InnerText>
@@ -187,10 +195,23 @@ class ClientOptionsContainer extends React.Component {
                 <SubmitButton
                 onClick={this.handleUpdate}
                 >Change details
-                
                 </SubmitButton>
                 </InnerCard>
               </Container>
+
+              <Container id="ClientOptionsContainer-ClientCreateUserProfile">
+                <UserPlusIcon/>
+                <Text> Add a User</Text>
+                <SubText>Create a User to Access Bookings</SubText>
+                <InnerCard>
+                <InnerText>Save your personal information for bookings</InnerText>
+                <SubmitButton
+                onClick={this.handleCreateUserProfile}
+                >Create New User
+                </SubmitButton>
+                </InnerCard>
+              </Container>
+
               </Grid>
               </div>
                 }
@@ -210,6 +231,12 @@ class ClientOptionsContainer extends React.Component {
 
                 {this.state.viewAll && 
                 <ClientViewAll
+                handleGoBack={ this.handleGoBack}
+                />}
+
+                {this.state.createUserProfile && 
+                <ClientCreateUserProfile
+                handleGoBack={ this.handleGoBack}
                 />}
               </div>
         )

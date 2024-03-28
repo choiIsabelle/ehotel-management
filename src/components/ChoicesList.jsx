@@ -1,5 +1,5 @@
 import { ChoiceList } from '@shopify/polaris';
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 function ChoicesList() {
   const [selected, setSelected] = useState(['hidden']);

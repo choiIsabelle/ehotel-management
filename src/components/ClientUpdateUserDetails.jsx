@@ -83,6 +83,10 @@ export const ClientUpdateUserDetails=({id})=>{
         id="ClientUpdateUserDetails-update-address-btn"
         onClick={()=>handleUpdateClientAddress(customerAddress)}
         >Update Address</Custom.SearchButton>
+        <CondensedInput
+        msg={"Enter a Phone Number to Associate With Your Account"}
+        />
+        <Custom.SearchButton>Update Phone Number</Custom.SearchButton>
     </Custom.Card>
     )
 }
