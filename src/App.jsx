@@ -5,13 +5,10 @@ import enTranslations from '@shopify/polaris/locales/en.json';
 import Navbar from './components/Navbar';
 import { useState } from 'react';
 import styled from 'styled-components'
-import { ClientWelcome } from './components/ClientWelcome';
 import { EmployeeTabContainer } from './components/EmployeeTabContainer';
 import {HotelOwnerTabContainer } from './components/HotelOwnerTabContainer'
 import { GeneralWelcomePage } from './components/GeneralWelcomePage';
 import ClientOptionsContainer from './components/ClientOptionsContainer';
-import { ClientDatePicker } from './components/ClientDatePicker';
-
 
 const Wrapper = styled.div`
   display: flex;
@@ -39,7 +36,6 @@ function App() {
   }
 
 
-
   return (
       <AppProvider i18n={enTranslations}>
       <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
@@ -55,39 +51,20 @@ function App() {
         {/* entry page for the user */}
 
         {currentPage === 'clientW' &&
-         <ClientWelcome 
-         title="Welcome, Customer"
-         subTitle="To use the eHotel Management System, access the Booking portal"
-         innermsg="Ready to start a booking?"
-         subMsg="Go to hotels"
-         role='client'
-         handleOnClick={handleShowBooking}
-         > </ClientWelcome>}
+        <ClientOptionsContainer/>
+      }
 
         {(currentPage === 'client') && <ClientOptionsContainer></ClientOptionsContainer>}
 
         {currentPage === 'employeeW' &&
-         <ClientWelcome 
-         title="Welcome, Employee"
-         subTitle="To use the eHotel Management System, access the Booking portal"
-         innermsg="Ready to start managing bookings?"
-         subMsg="Go to Bookings"
-         role='employee'
-         handleOnClick={handleShowManageBookings}
-         > </ClientWelcome>}
+        <EmployeeTabContainer/>
+           }
 
-         {(currentPage ==="employee" ) && <EmployeeTabContainer></EmployeeTabContainer>}
+         {(currentPage ==="employee" ) && <EmployeeTabContainer/>}
 
 {/* TODO: Implement specific way of handling onclicks to navigate to the respective pages for each role */}
         {currentPage === 'hotelOwnerW' &&
-         <ClientWelcome 
-         title="Welcome, Hotel Owner"
-         subTitle="To use the eHotel Management System, access the Booking portal"
-         innermsg="Ready to start managing hotel offerings?"
-         subMsg="Go to hotel offerings"
-         role='hotelOwner'
-         handleOnClick={handleShowManageHotels}
-         > </ClientWelcome>}
+         <HotelOwnerTabContainer/>}
 
          {currentPage ==="hotelOwner" && 
          <HotelOwnerTabContainer></HotelOwnerTabContainer>
