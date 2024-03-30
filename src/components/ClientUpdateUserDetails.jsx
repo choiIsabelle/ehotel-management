@@ -56,7 +56,6 @@ export const ClientUpdateUserDetails=({id})=>{
 
     return(
         <Custom.Card>
-            <Custom.Title>Welcome, {customerName}!</Custom.Title>
         <CondensedInput
         title={"Update User Details"}
         msg={"Update Name"}

@@ -87,12 +87,21 @@ app.post("/customer/credit_card_number/:id", async(req,res)=>{
     const result = res.json(updateCustomerPaymentDetails) 
     console.log(result)
   } catch (error) {
-    console.error("An error has occurred when attempting to update the customer credit card number", error)
+    console.error("An error has occurred when attempting to update the customer credit card number", error.message)
     
   }
 })
 
 // delete a customer
+app.delete("/customer/:id", async(req,res)=>{
+  try {
+    const {id} = req.params;
+    const deleteCustomerById= await pool.query("DELETE FROM customer WHERE SSN =$1 RETURNING *", [id])
+    res.json(deleteCustomerById.rows)
+  } catch (error) {
+    console.error("An error has occurred when attempting to delete a customer", error.message)
+  }
+})
 
 // add new hotel chain
 app.post("/Hotel_chain", async (req, res) => {
