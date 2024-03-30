@@ -38,7 +38,7 @@ transition: 0.3s;
 display: flex;
 flex-direction: column;
 width: 290px;
-height: 420px;
+height: 440px;
 margin-top:1rem;
 align-items: center;
 padding: 2rem;

@@ -10,7 +10,7 @@ transition: 0.3s;
 display: flex;
 flex-direction: column;
 text-align: left;
-width: fit-content;
+width: 220px;
 height: fit-content;
 padding: 1rem;
 margin-top: 1rem;
@@ -47,6 +47,12 @@ background-position: right center;
   display: flex;
   gap: 0.5rem;
   `
+const Container = styled.div`
+flex-direction: row;
+display: flex;
+flex-wrap: wrap;
+gap: 0.5rem;
+`
 
 const customModalStyles = {
     content: {
@@ -138,6 +144,7 @@ const ClientViewAll = ({handleGoBack}) => {
             });
             const jsonData = await response.json();        
             setRooms(jsonData.rows);
+            console.log(jsonData.rows)
 
         } catch (error) {
             console.error(error.message);
@@ -193,7 +200,7 @@ const ClientViewAll = ({handleGoBack}) => {
     const allRooms = rooms.map(item=>(
         <p key={item.room_hotel_chain_id}>
             <Card>
-                <p><b>Hotel Name:</b> {item.associated_hotel_name}</p>
+                <SearchButton><b>{item.associated_hotel_name}</b></SearchButton>
                 <p><b>Room extendability: </b>{item.extendable? "Extendable" : "Not Extendable"}</p>
                 <p><b>Room capacity:</b> {item.room_capacity}</p>
                 <p><b>Room location:</b> {item.hotel_address}</p>
@@ -209,7 +216,9 @@ const ClientViewAll = ({handleGoBack}) => {
         <div>
             <ClientGoBackChevronButton 
             handleClick={handleGoBack}/>
+            <Container>
             {allRooms.length > 0 && allRooms}
+            </Container>
             <ClientConfirmationModal
           style={{height:'fit-content'}}       
           isOpen={isModalOpen} 

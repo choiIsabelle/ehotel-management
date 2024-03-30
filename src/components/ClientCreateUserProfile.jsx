@@ -29,8 +29,7 @@ export const ClientCreateUserProfile = ({handleGoBack}) => {
                 console.log(response)
                 if(response.ok){
                     alert("User succesfully created!")
-                }
-
+                } 
         } catch (error) {
             console.error("Could not add new user" , error.message)
         }
