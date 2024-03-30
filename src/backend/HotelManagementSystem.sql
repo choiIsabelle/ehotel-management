@@ -32,13 +32,14 @@ room_hotel_chain_id INTEGER REFERENCES Hotel(hotel_id) ON DELETE CASCADE
 
 CREATE TABLE Booking (
     booking_id SERIAL PRIMARY KEY,
-    customer_SSN VARCHAR(255) REFERENCES customer(SSN),
+    customer_SSN VARCHAR(255) REFERENCES customer(SSN) ON DELETE CASCADE,
     employee_SSN VARCHAR(255) REFERENCES employee(SSN),
     is_a_rental BOOLEAN,
     departure_date DATE,
     arrival_date DATE,
     room_of_booking INTEGER REFERENCES Room(room_number)
 );
+
 
 CREATE TABLE Rental (
     rental_id SERIAL PRIMARY KEY,

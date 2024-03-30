@@ -25,9 +25,21 @@ background-position: right center;
 `
 
 const ClientDeleteUserAccount = () => {
-    const [ssn, setSSN] = useState()
-    
-    const handleDeleteAccount=async()=>{
+    const [ssn, setSSN] = useState('')
+
+    const handleDeleteAccount=async(ssn)=>{
+        try {
+            const response = await fetch(`http://localhost:5000/customer/${ssn}`,{
+                method: 'DELETE'
+            })
+            console.log(response.text)
+            if(response.ok){
+                alert("User succesfully deleted!")
+            }
+
+        } catch (error) {
+            console.error("An error has occurred when attempting to delete a customer", error.message)
+        }
 
     }
     return(
@@ -42,7 +54,7 @@ const ClientDeleteUserAccount = () => {
             >
             </CondensedInput>
             <DeletionButton
-            onClick={ e=> handleDeleteAccount(e)}>
+            onClick={ ()=> handleDeleteAccount(ssn)}>
                 Delete Account
                 </DeletionButton>
             
