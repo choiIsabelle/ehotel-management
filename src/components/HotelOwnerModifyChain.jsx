@@ -30,7 +30,7 @@ export const HotelOwnerModifyChain=()=>{
     }
     return(
         <div style={{marginTop:'3rem'}}>
-        <c.Card>
+        <c.Card id="HotelOwnerModifyChain">
             <form onSubmit={handleSubmit}>
             <CondensedInput
                 title="Manage an existing hotel chain"

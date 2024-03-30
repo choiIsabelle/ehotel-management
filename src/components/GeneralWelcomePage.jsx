@@ -142,9 +142,9 @@ export const GeneralWelcomePage=({onNavigate})=>{
                     <IconContainer>
                 <PersonIcon/>
                 </IconContainer>
-                <InnerTitle>Client</InnerTitle>
-                <InnerSubText>I am a Client looking to book a hotel</InnerSubText>
-                    <SubmitButton onClick={()=>onNavigate('clientW')}>Go to Client</SubmitButton>
+                <InnerTitle>Customer</InnerTitle>
+                <InnerSubText>I am a Customer looking to book a hotel</InnerSubText>
+                    <SubmitButton onClick={()=>onNavigate('clientW')}>Go to Customer</SubmitButton>
                 </ItemCard>
 
                 <ItemCard>

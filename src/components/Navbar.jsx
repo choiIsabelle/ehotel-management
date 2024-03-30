@@ -40,7 +40,7 @@ const Navbar=({ onNavigate })=>{
             </li>
             <li className="nav-item">
               <NavItem className="nav-link" aria-current="page" href="#Client" onClick={()=>onNavigate('clientW')}>
-                Client
+                Customer
               </NavItem>
             </li>
             <li className="nav-item">
