@@ -1,5 +1,5 @@
 import {Select} from '@shopify/polaris';
-import {useState, useCallback, useEffect} from 'react';
+import {useState, useCallback} from 'react';
 import styled from 'styled-components'
 
 const SubText = styled.span`
@@ -11,7 +11,6 @@ font-weight: 400;
 const SelectDropdownContainer = styled.div`
 margin-top: 0.5rem;
 `
-
 
 export const SelectDropdown=({subMsg, vals, onChange})=> {
   const [selected, setSelected] = useState('');

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {SwitchTab} from './SwitchTab';
 import { ClientGetInfoSection } from './ClientGetInfoSection';
 import styled from 'styled-components';
@@ -18,18 +18,28 @@ export const ClientTabContainer = ({handleClick, handleGoBack }) => {
   // 3 tabs are shown: 3 is not a valid number to have a 'next tab' but it is accounted for
 
   const [activeTab, setActiveTab] = useState(1);
+  const [customerPreference, setCustomerPreference] = useState([])
 
   const handleTabChange = (newTab) => {
     setActiveTab(newTab);
   };
 
-  const handleDateData=(arrivalDate, departureDate)=>{
-    console.log(arrivalDate, departureDate)
-  }
+  useEffect(() => {
+    console.log('Customer preference updated:', customerPreference);
+  }, [customerPreference]);
 
-  const handleClientInformation=()=>{
-    console.log()
-  }
+
+  const handleDateData = (arrivalDate, departureDate) => {
+    setCustomerPreference((prevPreference) => [
+      ...prevPreference,
+      { arrivalDate, departureDate },
+    ]);
+  };
+
+  const handleClientInformation = (...props) => {
+    setCustomerPreference((prevPreference) => [...prevPreference, { props }]);
+  };
+
 
 
   return (

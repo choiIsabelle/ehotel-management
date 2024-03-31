@@ -120,7 +120,7 @@ const customModalStyles = {
                 setGetRoomByHotel(true);
                 setGetRoomByArea(false)
               try {
-                  const response = await fetch(`http://localhost:5000/Hotel/${hotel_name}`, {
+                  const response = await fetch(`http://localhost:5000/hotel/by_name/${hotel_name}`, {
                       method: 'GET'
                   });
                   const jsonData = await response.json();

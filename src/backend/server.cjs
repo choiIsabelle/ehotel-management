@@ -168,7 +168,7 @@ app.post("/Hotel", async(req,res)=>{
 })
 
 // get a hotel's aggregate room capacity by its name
-app.get("/hotel/:hotel_name", async (req, res) => {
+app.get("/hotel/by_name/:hotel_name", async (req, res) => {
   try {
     const { hotel_name } = req.params;
     const getHotelCapacityByName = await pool.query(`
@@ -178,12 +178,13 @@ app.get("/hotel/:hotel_name", async (req, res) => {
     WHERE hotel.hotel_name = $1 
     GROUP BY hotel.hotel_name
     `, [hotel_name]);
+    console.log("called get a hotel's aggregate room capacity by its name")
     res.json(getHotelCapacityByName.rows);
-    // console.log(getHotelCapacityByName.rows);
   } catch (error) {
-    console.error(error.message);
+    console.error( error.message);
   }
 });
+
 
 // get all rooms in a specific location
 app.get("/hotel/address/:hotel_address", async(req, res)=>{
@@ -199,6 +200,21 @@ app.get("/hotel/address/:hotel_address", async(req, res)=>{
   }
 })
 
+// get all hotels and their aggregated capacity
+app.get("/hotel/total_capacity", async (req, res) => {
+  try {
+    const getAllHotelCapacity = await pool.query(`
+    SELECT hotel.hotel_name, SUM(room.room_capacity) AS total_capacity 
+    FROM hotel 
+    JOIN room ON room.room_hotel_chain_id = hotel.hotel_id 
+    GROUP BY hotel.hotel_name
+    `,);
+    res.json(getAllHotelCapacity.rows);
+    console.log('here!!!', getAllHotelCapacity.rows);
+  } catch (error) {
+    console.error(error.message);
+  }
+});
 
 // update a hotel 
 app.post("/hotel/:id", async (req, res) => {

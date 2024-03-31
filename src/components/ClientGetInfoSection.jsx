@@ -39,7 +39,7 @@ background-position: right center;
   }
 `
 
-export const ClientGetInfoSection=()=>{
+export const ClientGetInfoSection=({sendClientInformation})=>{
   const cn = 'ClientGetInfoSection';
 
   const [showModal, setShowModal] = useState(false);
@@ -50,22 +50,26 @@ export const ClientGetInfoSection=()=>{
   const [customerHotelChain, setCustomerHotelChain] = useState('')
   const [customerHotelCategory, setCustomerHotelCatgory] = useState('')
   const [customerTotalRooms, setCustomerTotalRooms] = useState('')
-  const [customerRoomPrice, setCustomerRoomPrice] = useState('')
+  const [customerUpperRoomPrice, setCustomerUpperRoomPrice] = useState('')
+  const [customerLowerRoomPrice, setCustomerLowerRoomPrice] = useState('')
 
   const handleOpenModal = () => {
     setShowModal(true)
   };
-
+  
   const handleCloseModal = () => {
     setShowModal(false);
     setShowResults(true)
   };
-
-    const [hasSubmitted, setHasSubmitted] = useState(false)
-    const searchMsg = hasSubmitted ? "Searching" : "Search"
-
-    const handleOnSubmit=()=>{
-        setHasSubmitted(true);
+  
+  const [hasSubmitted, setHasSubmitted] = useState(false)
+  const searchMsg = hasSubmitted ? "Searching" : "Search"
+  
+  const handleOnSubmit=()=>{
+    setHasSubmitted(true);
+      // on submit, propagate data to parent component
+      console.log('customer for total rooms', customerTotalRooms)
+    sendClientInformation(customerRoomCapacity, customerArea, customerHotelChain, customerHotelCategory, customerTotalRooms)
         setTimeout(()=>{
           setHasSubmitted(false)
           handleOpenModal()
@@ -73,7 +77,9 @@ export const ClientGetInfoSection=()=>{
     }
 
     const [hotelChainNames, setHotelChainNames] = useState([]);
+    const [hotelTotalCapacity, setHotelTotalCapacity] = useState([]);
 
+    // get all hotel chain names
     useEffect(() => {
       const getAllHotelChains = async () => {
         const response = await fetch(`http://localhost:5000/hotel_chain`, {
@@ -93,9 +99,34 @@ export const ClientGetInfoSection=()=>{
 
     const handleOnHotelChainSelect=(value)=>{
       setCustomerHotelChain(value)
-      console.log(value)
     }
 
+    // get all hotels and their capacity
+    useEffect(()=>{
+      const getAllRoomsByAggregatedCapacity = async() => {
+      try {
+          const response = await fetch(`http://localhost:5000/hotel/total_capacity`, {
+              method: 'GET'
+          });
+          const jsonData = await response.json();
+          setHotelTotalCapacity(jsonData)
+
+      } catch (error) {
+          console.error(error.message);
+      }
+  };
+  getAllRoomsByAggregatedCapacity()
+    }, [])
+
+    const handleOnHotelAggregateCapacitySelect=(value)=>{
+      console.log("selected value was", value)
+      setCustomerTotalRooms(value)
+    }
+
+    const hotelsByTotalCapacity = hotelTotalCapacity.map((item) => ({
+      label: (item.hotel_name +" with total capacity: "+item.total_capacity),
+      value: item.hotel_name
+    }));
 
     return(
       !showResults ? (
@@ -121,28 +152,37 @@ export const ClientGetInfoSection=()=>{
   vals ={ results}
   onChange={(value)=>handleOnHotelChainSelect(value)}
   />
+<SelectDropdown
+subMsg="What category of hotel do you want?"
+vals ={ [
+  {label: '1 Star', value: '1'},
+  {label: '2 Star', value: '2'},
+  {label: '3 Star', value: '3'},
+  {label: '4 Star', value: '4'},
+  {label: '5 Star', value: '5'},
+]}
+onChange={(value)=>setCustomerHotelCatgory(value)}
+/>
+
+<SelectDropdown
+subMsg="Select a hotel by total capacity"
+vals ={hotelsByTotalCapacity }
+onChange={(value)=>handleOnHotelAggregateCapacitySelect(value)}
+/>
          <CondensedInput 
         msg="What is your price point?" 
         subMsg="Enter the upper bound"
-        valueLabel={customerArea}
-        handleChange={(e)=>setCustomerArea(e.target.value)}
+        valueLabel={customerUpperRoomPrice}
+        handleChange={(e)=>setCustomerUpperRoomPrice(e.target.value)}
         />
 
         <CondensedInput 
         msg="What is your price point?" 
         subMsg="Enter the lower bound"
-        valueLabel={customerArea}
-        handleChange={(e)=>setCustomerArea(e.target.value)}
+        valueLabel={customerLowerRoomPrice}
+        handleChange={(e)=>setCustomerLowerRoomPrice(e.target.value)}
         />
         
-          <SelectDropdown
-        subMsg="What category of hotel do you want?"
-        vals ={ [
-            {label: '1 Star', value: '1'},
-            {label: '2 Star', value: '2'},
-            {label: '3 Star', value: '3'},
-          ]}
-        />
         <SubBtn onClick={handleOnSubmit}>{searchMsg}</SubBtn>
         {hasSubmitted && <SpinnerOnSubmit/>}
         <ConfirmationModel 
