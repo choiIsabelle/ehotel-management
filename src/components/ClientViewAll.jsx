@@ -109,6 +109,12 @@ const customModalStyles = {
             setGetRoomByArea(false)
             setGetRoomByHotel(false)
         }
+        const handleViewAllHotelsByAddress =()=>{
+            setGetRoomByArea(true)
+            setGetAllRooms(false)
+            setGetRoomByHotel(false)
+        }
+  
   
           const getAllRoomsByAggregatedCapacity = async(hotel_name) => {
                 setGetRoomByHotel(true);
@@ -138,7 +144,7 @@ const customModalStyles = {
             
         return(
             <div>
-            <SearchCard>
+ { !getRoomByArea &&          <SearchCard>
                 <CondensedInput
                 title={"Search for Rooms By Specification"}
                 msg={"View the capacity of a certain hotel"}
@@ -146,10 +152,10 @@ const customModalStyles = {
                 valueLabel={specificHotel}
                 handleChange={e=> setSpecificHotel(e.target.value)}
                 />
-                <SearchButton onClick={()=>setGetRoomByArea(true)}>Search by Area</SearchButton>
+                <SearchButton onClick={()=>handleViewAllHotelsByAddress()}>Search by Area</SearchButton>
                 <SearchButton onClick={()=>getAllRoomsByAggregatedCapacity(specificHotel)}>View Capacity of Given Hotel</SearchButton>
                 <SearchButton onClick={()=>handleViewAllRooms()}>View all Rooms</SearchButton>
-            </SearchCard>
+            </SearchCard>}
                 {getRoomByHotel && <AggregateHotelCapacity/>}
                 {getRoomByArea && <ClientViewAllByArea/>}
             </div>
@@ -292,7 +298,7 @@ const customModalStyles = {
             handleClick={handleGoBack}/>
             <c.Title>View All Available Rooms</c.Title>
             <Container>
-            <MakeSelections/>
+                 <MakeSelections/>
             {getAllRooms && allRooms.length > 0 && allRooms}
             </Container>
             <ClientConfirmationModal

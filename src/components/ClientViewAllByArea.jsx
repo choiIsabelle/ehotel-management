@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import * as c from './CustomComponents'
 import { CondensedInput } from './CondensedInput'
 import styled from 'styled-components'
@@ -11,8 +11,15 @@ flex-direction: column;
 width: fit-content;
 height: fit-content;
 padding: 1rem;
-margin-top: 1rem;
+margin-top: 0.5rem;
 border-radius: 10px;
+`
+
+const Container = styled.div`
+flex-direction: row;
+display: flex;
+flex-wrap: wrap;
+gap: 0.5rem;
 `
 
 const ClientViewAllByArea = () => {
@@ -32,11 +39,23 @@ const ClientViewAllByArea = () => {
       }
       }
 
+      useEffect(()=>{
+        getAllRoomsByArea(hotelAddress)
+      }, [hotelAddress])
+
       const HotelsByAddress=()=>{
         return(
             hotelByAddressData.map(item=>(
                 <p key={item.room_number}>
-                    <Card>{item.room_number}</Card>
+                    <Card>
+                    <c.SearchButton><b>{item.associated_hotel_name}</b></c.SearchButton>
+                <p><b>Room extendability: </b>{item.extendable? "Extendable" : "Not Extendable"}</p>
+                <p><b>Room capacity:</b> {item.room_capacity}</p>
+                <p><b>Room location:</b> {item.hotel_address}</p>
+                <p><b>Room type:</b> {item.room_type}</p>
+                <p><b>Daily rate:</b> {item.daily_rate}</p>
+                <p><b>Damages:</b> {item.damages}</p>
+                </Card>
                 </p>
             ))
         )
@@ -44,16 +63,18 @@ const ClientViewAllByArea = () => {
 
   return (
     <div>
-        <c.Card>
+        <Card>
             <CondensedInput
             valueLabel={hotelAddress}
             handleChange={e=>setHotelAddress(e.target.value)}
             msg={"What is the location that you would like to view the available rooms for?"}
             />
             <c.SearchButton onClick={()=>getAllRoomsByArea(hotelAddress)}>Search by Location</c.SearchButton>
+        </Card>
+            <Container>
             {hotelByAddressData && <HotelsByAddress/>}
+            </Container>
 
-        </c.Card>
       
     </div>
   )
