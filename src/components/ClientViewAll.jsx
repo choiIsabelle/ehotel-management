@@ -3,6 +3,7 @@ import {useState, useEffect, useRef} from 'react';
 import { ClientGoBackChevronButton } from './ClientChevronLeftButton';
 import Modal from 'react-modal';
 import {CondensedInput} from './CondensedInput'
+import * as c from './CustomComponents'
 
 const Card = styled.div`
 box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -11,6 +12,19 @@ display: flex;
 flex-direction: column;
 text-align: left;
 width: 220px;
+height: fit-content;
+padding: 1rem;
+margin-top: 1rem;
+border-radius: 10px;
+`
+
+const SearchCard = styled.div`
+box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+transition: 0.3s;
+display: flex; 
+flex-direction: column;
+text-align: left;
+width: 440px;
 height: fit-content;
 padding: 1rem;
 margin-top: 1rem;
@@ -54,6 +68,13 @@ flex-wrap: wrap;
 gap: 0.5rem;
 `
 
+const Title = styled.h3`
+font-size: 16px;
+padding: 0.3rem;
+margin-bottom: 0.5rem;
+font-weight: 600;
+`
+
 const customModalStyles = {
     content: {
       width: '300px',
@@ -62,24 +83,89 @@ const customModalStyles = {
       margin: 'auto',
       marginTop: '15%',
       backgroundColor: 'white'
-    },
+    }
   };
   
+  const ClientViewAll = ({handleGoBack}) => {
+      
+      const [rooms, setRooms] = useState([]);
+      const [isModalOpen, setIsModalOpen] = useState(false);
+      const [roomData, setRoomData] = useState([])
+      const [selectedRoomId, setSelectedRoomId] = useState([])
+      const [customerSSN, setCustomerSSN] = useState();
+      const [employeeSSN, setEmployeeSSN] = useState();
+      const [arrivalDate, setArrivalDate] = useState();
+      const [departureDate, setDepartureDate] = useState();
+      
+      const [getAllRooms, setGetAllRooms] = useState(true)
+      const [getRoomByArea, setGetRoomByArea] = useState(false)
+      const [getRoomByHotel, setGetRoomByHotel] = useState(false)
+      
+      const customerSSNRef = useRef(null);
+      const employeeSSNRef = useRef(null);
+      const arrivalDateRef = useRef(null);
+      const departureDateRef = useRef(null);
+      
+    const MakeSelections=()=>{
+        const [specificArea, setSpecificArea]=useState('')
+        const [specificHotel, setSpecificHotel]=useState('')
+        const [specificHotelData, setSpecificHotelData] = useState([]);
 
-const ClientViewAll = ({handleGoBack}) => {
-    const [rooms, setRooms] = useState([]);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [roomData, setRoomData] = useState([])
-    const [selectedRoomId, setSelectedRoomId] = useState([])
-    const [customerSSN, setCustomerSSN] = useState();
-    const [employeeSSN, setEmployeeSSN] = useState();
-    const [arrivalDate, setArrivalDate] = useState();
-    const [departureDate, setDepartureDate] = useState();
+        const handleViewAllRooms =()=>{
+            setGetAllRooms(true)
+            setGetRoomByArea(false)
+            setGetRoomByHotel(false)
+        }
+  
+          const getAllRoomsByAggregatedCapacity = async(hotel_name) => {
+                setGetRoomByHotel(true);
+                setGetRoomByArea(false)
+              try {
+                  const response = await fetch(`http://localhost:5000/Hotel/${hotel_name}`, {
+                      method: 'GET'
+                  });
+                  const jsonData = await response.json();     
+                  setSpecificHotelData(jsonData.rows[0])
+      
+              } catch (error) {
+                  console.error(error.message);
+              }
+          };
 
-    const customerSSNRef = useRef(null);
-    const employeeSSNRef = useRef(null);
-    const arrivalDateRef = useRef(null);
-    const departureDateRef = useRef(null);
+          const AggregateHotelCapacity=()=>{
+            if (!specificHotelData) return null;    
+            return(
+            <SearchCard>
+                <c.Title>The Aggregated Capacity of Your Search for {specificHotelData.hotel_name}</c.Title>
+            <c.SubTitle><b>Hotel Name: </b>{specificHotelData.hotel_name}</c.SubTitle>
+            <c.SubTitle><b>Total Room Capacity: </b>{specificHotelData.total_capacity}</c.SubTitle>
+        </SearchCard>
+            )
+          }
+            
+        return(
+            <div>
+            <SearchCard>
+                <Title>Search for Rooms By Specification</Title>
+                <CondensedInput
+                msg={"What area are you interested in?"}
+                valueLabel={specificArea}
+                handleChange={e=> setSpecificArea(e.target.value)}
+                />
+                <CondensedInput
+                msg={"View the capacity of a certain hotel"}
+                subMsg={"Enter the name of the hotel whose aggregated total capacity you would like to view"}
+                valueLabel={specificHotel}
+                handleChange={e=> setSpecificHotel(e.target.value)}
+                />
+                <SearchButton onClick={()=>console.log("HERE")}>Search by Area</SearchButton>
+                <SearchButton onClick={()=>getAllRoomsByAggregatedCapacity(specificHotel)}>View Capacity of Given Hotel</SearchButton>
+                <SearchButton onClick={()=>handleViewAllRooms()}>View all Rooms</SearchButton>
+            </SearchCard>
+                {getRoomByHotel && <AggregateHotelCapacity/>}
+            </div>
+        )
+    }
 
     const ClientConfirmationModal=({ isOpen, onRequestClose, message, subMessage })=>{
         return (
@@ -196,7 +282,6 @@ const ClientViewAll = ({handleGoBack}) => {
         }
     }
 
-
     const allRooms = rooms.map(item=>(
         <p key={item.room_hotel_chain_id}>
             <Card>
@@ -216,8 +301,10 @@ const ClientViewAll = ({handleGoBack}) => {
         <div>
             <ClientGoBackChevronButton 
             handleClick={handleGoBack}/>
+            <c.Title>View All Available Rooms</c.Title>
             <Container>
-            {allRooms.length > 0 && allRooms}
+            <MakeSelections/>
+            {getAllRooms && allRooms.length > 0 && allRooms}
             </Container>
             <ClientConfirmationModal
           style={{height:'fit-content'}}       

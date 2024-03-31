@@ -77,6 +77,9 @@ export const ClientGetInfoSection=()=>{
         <CondensedInput 
         msg="What area are you interested in?" 
         subMsg="Enter city name"/>
+         <CondensedInput 
+        msg="What is your price point?" 
+        subMsg="Enter the upper bound"/>
            <CondensedInput 
         msg="What is your price point?" 
         subMsg="Enter the lower bound"/>
@@ -91,9 +94,9 @@ export const ClientGetInfoSection=()=>{
           <SelectDropdown
         subMsg="What category of hotel do you want?"
         vals ={ [
-            {label: 'Modern', value: 'modern'},
-            {label: 'Resort', value: 'resort'},
-            {label: 'Conference', value: 'conference'},
+            {label: '1 Star', value: '1'},
+            {label: '2 Star', value: '2'},
+            {label: '3 Star', value: '3'},
           ]}
         />
         <SubBtn onClick={handleOnSubmit}>{searchMsg}</SubBtn>

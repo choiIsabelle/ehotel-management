@@ -137,6 +137,7 @@ app.post("/hotel_chain/:id", async (req, res) => {
 
 // delete a hotel chain
 
+
 // add a hotel
 app.post("/Hotel", async(req,res)=>{
   try {
@@ -153,6 +154,26 @@ app.post("/Hotel", async(req,res)=>{
     
   }
 })
+
+// get a hotel's aggregate room capacity by its name
+app.get("/hotel/:hotel_name", async (req, res) => {
+  try {
+    const { hotel_name } = req.params;
+    const getHotelCapacityByName = await pool.query(`
+    SELECT hotel.hotel_name, SUM(room.room_capacity) AS total_capacity 
+    FROM hotel 
+    JOIN room ON room.room_hotel_chain_id = hotel.hotel_id 
+    WHERE hotel.hotel_name = $1 
+    GROUP BY hotel.hotel_name
+    `, [hotel_name]);
+    res.json(getHotelCapacityByName.rows);
+    console.log(getHotelCapacityByName.rows);
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+
 
 // update a hotel 
 app.post("/hotel/:id", async (req, res) => {
