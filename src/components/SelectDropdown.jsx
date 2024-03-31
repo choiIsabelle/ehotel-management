@@ -1,5 +1,5 @@
 import {Select} from '@shopify/polaris';
-import {useState, useCallback} from 'react';
+import {useState, useCallback, useEffect} from 'react';
 import styled from 'styled-components'
 
 const SubText = styled.span`
@@ -13,19 +13,18 @@ margin-top: 0.5rem;
 `
 
 
-export const SelectDropdown=({subMsg, vals})=> {
-  const [selected, setSelected] = useState('today');
-
+export const SelectDropdown=({subMsg, vals, onChange})=> {
+  const [selected, setSelected] = useState('');
+  const handleDropDownChange=(value)=>{
+    onChange(value)
+    setSelected(value)
+  }
   const handleSelectChange = useCallback(
-    (value) => setSelected(value),
+    (value) =>  handleDropDownChange(value),
     [],
-  );
+    );
+  
 
-//   const options = [
-//     {label: 'Hyatt', value: 'hyatt'},
-//     {label: 'Hilton', value: 'hilton'},
-//     {label: 'Four Seasons', value: 'four seasons'},
-//   ];
 
   return (
     <SelectDropdownContainer>

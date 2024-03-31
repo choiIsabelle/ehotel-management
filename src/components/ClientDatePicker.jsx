@@ -3,7 +3,7 @@ import { useState, useCallback } from 'react';
 import * as c from './CustomClientComponents';
 import { ConfirmationModel } from './ConfirmationModel';
 import styled from 'styled-components'
-import Test1 from './Test1';
+// import Test1 from './Test1';
 
 const Test = styled.div`
   text-indent: 0;
@@ -56,7 +56,7 @@ return(
 )
 }
 
-export const ClientDatePicker=()=> {
+export const ClientDatePicker=({sendDateInformation})=> {
   const [isModalOpen, setIsModelOpen] = useState(false);
   const [arrivalDate, setArrivalDate] = useState(null);
   const [departureDate, setDepartureDate] = useState(null);
@@ -66,6 +66,7 @@ export const ClientDatePicker=()=> {
     let validDateCheck = ((parseInt(arrivalDate[0]) > parseInt(departureDate[0])) || (( parseInt(arrivalDate[1]) < parseInt(departureDate[1])) && ( parseInt(arrivalDate[0]) ===  parseInt(departureDate[0]))));
     if(validDateCheck){
       setIsModelOpen(true);
+      sendDateInformation( arrivalDate, departureDate)
       return;
     }
     else if (!validDateCheck){

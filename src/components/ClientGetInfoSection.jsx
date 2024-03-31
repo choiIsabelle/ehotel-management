@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { CondensedInput } from './CondensedInput'
 import { SelectDropdown } from './SelectDropdown'
 import { SpinnerOnSubmit } from './SpinnerOnSubmit'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ConfirmationModel } from './ConfirmationModel'
 import {ClientDisplayResults} from './ClientDisplayResults'
 
@@ -45,6 +45,13 @@ export const ClientGetInfoSection=()=>{
   const [showModal, setShowModal] = useState(false);
   const [showResults, setShowResults] = useState(false);
 
+  const [customerRoomCapacity, setCustomerRoomCapacity] = useState('')
+  const [customerArea, setCustomerArea ] = useState('')
+  const [customerHotelChain, setCustomerHotelChain] = useState('')
+  const [customerHotelCategory, setCustomerHotelCatgory] = useState('')
+  const [customerTotalRooms, setCustomerTotalRooms] = useState('')
+  const [customerRoomPrice, setCustomerRoomPrice] = useState('')
+
   const handleOpenModal = () => {
     setShowModal(true)
   };
@@ -65,6 +72,30 @@ export const ClientGetInfoSection=()=>{
         }, 1500)
     }
 
+    const [hotelChainNames, setHotelChainNames] = useState([]);
+
+    useEffect(() => {
+      const getAllHotelChains = async () => {
+        const response = await fetch(`http://localhost:5000/hotel_chain`, {
+          method: 'GET'
+        });
+        const jsonData = await response.json();
+        setHotelChainNames(jsonData);
+      };
+  
+      getAllHotelChains();
+    }, []);
+  
+    const results = hotelChainNames.map((item) => ({
+      label: item.hotel_chain_id,
+      value: item.hotel_chain_id
+    }));
+
+    const handleOnHotelChainSelect=(value)=>{
+      setCustomerHotelChain(value)
+      console.log(value)
+    }
+
 
     return(
       !showResults ? (
@@ -73,24 +104,37 @@ export const ClientGetInfoSection=()=>{
         id={`${cn}.customerPref`}
         title="Get Customer Preferences" 
         msg="How many rooms do you want?" 
-        subMsg="Enter an integer"/>
+        subMsg="Enter an integer"
+        valueLabel={customerRoomCapacity}
+        handleChange={(e)=>setCustomerRoomCapacity(e.target.value)}
+        />
+
         <CondensedInput 
         msg="What area are you interested in?" 
-        subMsg="Enter city name"/>
+        subMsg="Enter city name"
+        valueLabel={customerArea}
+        handleChange={(e)=>setCustomerArea(e.target.value)}
+        />
+
+  <SelectDropdown
+  subMsg="What hotel chain are you interested in?"
+  vals ={ results}
+  onChange={(value)=>handleOnHotelChainSelect(value)}
+  />
          <CondensedInput 
         msg="What is your price point?" 
-        subMsg="Enter the upper bound"/>
-           <CondensedInput 
-        msg="What is your price point?" 
-        subMsg="Enter the lower bound"/>
-        <SelectDropdown
-        subMsg="What hotel chain are you interested in?"
-        vals ={ [
-            {label: 'Hyatt', value: 'hyatt'},
-            {label: 'Hilton', value: 'hilton'},
-            {label: 'Four Seasons', value: 'four seasons'},
-          ]}
+        subMsg="Enter the upper bound"
+        valueLabel={customerArea}
+        handleChange={(e)=>setCustomerArea(e.target.value)}
         />
+
+        <CondensedInput 
+        msg="What is your price point?" 
+        subMsg="Enter the lower bound"
+        valueLabel={customerArea}
+        handleChange={(e)=>setCustomerArea(e.target.value)}
+        />
+        
           <SelectDropdown
         subMsg="What category of hotel do you want?"
         vals ={ [

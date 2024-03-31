@@ -23,12 +23,20 @@ export const ClientTabContainer = ({handleClick, handleGoBack }) => {
     setActiveTab(newTab);
   };
 
+  const handleDateData=(arrivalDate, departureDate)=>{
+    console.log(arrivalDate, departureDate)
+  }
+
+  const handleClientInformation=()=>{
+    console.log()
+  }
+
 
   return (
     <Container>
       <SwitchTab activeTab={activeTab} onTabChange={handleTabChange} />
-      {activeTab === 1 && <ClientDatePicker></ClientDatePicker>}
-      {activeTab ===2 && <ClientGetInfoSection/>}
+      {activeTab === 1 && <ClientDatePicker sendDateInformation={handleDateData}></ClientDatePicker>}
+      {activeTab ===2 && <ClientGetInfoSection sendClientInformation={handleClientInformation}/>}
       <ClientNavigationButtons
       handleClick={handleClick}
         handleGoBack={handleGoBack}

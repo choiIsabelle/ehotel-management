@@ -137,6 +137,18 @@ app.post("/hotel_chain/:id", async (req, res) => {
 
 // delete a hotel chain
 
+// get all hotel chains
+app.get('/hotel_chain', async(req,res)=>{
+  try{
+    const getHotelChains = await pool.query(
+      "SELECT hotel_chain_id from hotel_chain"
+    );
+    res.json(getHotelChains.rows)
+  }catch(error){
+    console.error(error.message);
+  }
+})
+
 
 // add a hotel
 app.post("/Hotel", async(req,res)=>{
