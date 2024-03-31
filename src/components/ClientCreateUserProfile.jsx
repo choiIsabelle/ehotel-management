@@ -5,7 +5,8 @@ import { ClientGoBackChevronButton } from './ClientChevronLeftButton';
 
 export const ClientCreateUserProfile = ({handleGoBack}) => {
     const [ssn, setSNN] = useState()
-    const [name, setName] = useState()
+    const [firstName, setFirstName] = useState()
+    const [lastName, setLastName] = useState()
     const [address, setAddress] = useState()
     const [age, setAge] = useState()
     const [phoneNumber, setPhoneNumber] = useState()
@@ -19,11 +20,11 @@ export const ClientCreateUserProfile = ({handleGoBack}) => {
                 headers:{"Content-Type": "application/json"},
                 body: JSON.stringify({
                     SSN: ssn, 
-                    full_name: name, 
+                    first_name: firstName, 
+                    last_name: lastName,
                     age: age, 
-                    address: address, 
+                    customer_address: address, 
                     date_of_registration: date,
-                    phoneNumber: phoneNumber, 
                     credit_card_number: creditCard
                 })})
                 console.log(response)
@@ -49,10 +50,16 @@ export const ClientCreateUserProfile = ({handleGoBack}) => {
         valueLabel={ssn}
         />
         <CondensedInput
-        msg="What is your Full Name?"
-        subMsg="Enter your name"
-        handleChange={(e)=>setName(e.target.value)}
-        valueLabel={name}
+        msg="What is your first name?"
+        subMsg="Enter your last name"
+        handleChange={(e)=>setFirstName(e.target.value)}
+        valueLabel={firstName}
+        />
+        <CondensedInput
+        msg="What is your last name?"
+        subMsg="Enter your last name"
+        handleChange={(e)=>setLastName(e.target.value)}
+        valueLabel={lastName}
         />
         <CondensedInput
         msg="How old are you?"

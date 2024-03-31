@@ -11,28 +11,29 @@ app.use(express.json());
 // add a new customer 
 app.post("/customer", async (req, res) => {
   try {
-    const { SSN, full_name, date_of_registration, address, credit_card_number } = req.body;
-    console.log(SSN, full_name, date_of_registration, address, credit_card_number);
+      const { SSN, first_name, last_name, age, customer_address, date_of_registration, credit_card_number } = req.body;
 
-    const newCustomer = await pool.query(
-      "INSERT INTO customer (ssn, full_name, date_of_registration, address, credit_card_number) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-      [SSN, full_name, date_of_registration, address, credit_card_number ]
-    );
-    await pool.query('COMMIT');
-    res.json(newCustomer.rows[0]);
+      const newCustomer = await pool.query(
+          "INSERT INTO customer (ssn, first_name, last_name, age, customer_address, date_of_registration, credit_card_number) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+          [SSN, first_name, last_name, age, customer_address, date_of_registration, credit_card_number]
+      );
+
+      res.json(newCustomer.rows[0]);
   } catch (error) {
-    console.error(error.message);
+      console.error(error.message);
+      res.status(500).json({ message: "Could not add new user" });
   }
 });
+
 
 // update customer name based on SSN
 app.put("/customer/:id", async (req, res)=>{
   try{
     const {id} = req.params;
-    const {full_name} = req.body;
+    const {first_name, last_name} = req.body;
     const updatedCustomer = await pool.query(
-      "UPDATE customer SET full_name = $1 WHERE SSN = $2 RETURNING*",
-      [full_name, id]
+      "UPDATE customer SET first_name = $1, last_name = $2 WHERE SSN = $3 RETURNING*",
+      [first_name, last_name, id]
     );
     await pool.query('COMMIT');
     if(updatedCustomer.rows.length ===0){
@@ -52,7 +53,7 @@ app.put("/customer/address/:id", async(req,res)=>{
     const {id} = req.params;
     const {address} = req.body;
     const updatedCustomer = await pool.query(
-      "UPDATE customer SET address = $1 WHERE SSN =$2 RETURNING*",
+      "UPDATE customer SET customer_address = $1 WHERE SSN =$2 RETURNING*",
       [address, id]
     );
     await pool.query('COMMIT');
@@ -70,7 +71,7 @@ app.put("/customer/address/:id", async(req,res)=>{
 app.get("/customer/:id", async(req, res)=>{
   try{
     const { id } = req.params;
-    const getCustomer = await pool.query("SELECT full_name, address, credit_card_number FROM customer WHERE SSN = $1", [id]);
+    const getCustomer = await pool.query("SELECT first_name, last_name, customer_address, credit_card_number FROM customer WHERE SSN = $1", [id]);
     res.json(getCustomer)
     console.log(getCustomer);
   }catch(error){
@@ -338,15 +339,20 @@ app.post("/booking", async(req, res)=>{
     const {
       customer_SSN,
       employee_SSN,
-      is_a_rental,
       departure_date,
       arrival_date,
       room_of_booking
   } = req.body;
 
     const addBooking = await pool.query(
-      "INSERT INTO Booking(customer_SSN, employee_SSN, is_a_rental, departure_date, arrival_date, room_of_booking) VALUES ($1, $2, $3, $4, $5, $6) RETURNING*",
-      [customer_SSN, employee_SSN, is_a_rental, departure_date, arrival_date, room_of_booking]
+      `INSERT INTO 
+      Booking(
+        customer_SSN, 
+        employee_SSN, 
+        departure_date, 
+        arrival_date, 
+        room_of_booking) VALUES ($1, $2, $3, $4, $5) RETURNING*`,
+      [customer_SSN, employee_SSN, departure_date, arrival_date, room_of_booking]
     )
     await pool.query("COMMIT");
     res.json(addBooking.rows[0]);
