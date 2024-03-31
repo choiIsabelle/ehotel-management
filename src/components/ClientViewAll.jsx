@@ -4,6 +4,7 @@ import { ClientGoBackChevronButton } from './ClientChevronLeftButton';
 import Modal from 'react-modal';
 import {CondensedInput} from './CondensedInput'
 import * as c from './CustomComponents'
+import ClientViewAllByArea from './ClientViewAllByArea';
 
 const Card = styled.div`
 box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -68,12 +69,6 @@ flex-wrap: wrap;
 gap: 0.5rem;
 `
 
-const Title = styled.h3`
-font-size: 16px;
-padding: 0.3rem;
-font-weight: 600;
-`
-
 const customModalStyles = {
     content: {
       width: '300px',
@@ -106,7 +101,6 @@ const customModalStyles = {
       const departureDateRef = useRef(null);
       
     const MakeSelections=()=>{
-        const [specificArea, setSpecificArea]=useState('')
         const [specificHotel, setSpecificHotel]=useState('')
         const [specificHotelData, setSpecificHotelData] = useState([]);
 
@@ -130,21 +124,6 @@ const customModalStyles = {
               }
           };
 
-          const getAllRoomsByArea=async(hotel_address)=>{
-            setGetRoomByArea(true);
-            setGetRoomByHotel(false)
-            setGetAllRooms(false)
-          try {
-              const response = await fetch(`http://localhost:5000/Hotel/${hotel_address}`, {
-                  method: 'GET'
-              });
-              const jsonData = await response.json();
-              console.log("here", jsonData)     
-  
-          } catch (error) {
-              console.error(error.message);
-          }
-          }
 
           const AggregateHotelCapacity=()=>{
             if (!specificHotelData || !specificHotelData.hotel_name) return null;
@@ -167,11 +146,12 @@ const customModalStyles = {
                 valueLabel={specificHotel}
                 handleChange={e=> setSpecificHotel(e.target.value)}
                 />
-                <SearchButton onClick={()=>console.log("HERE")}>Search by Area</SearchButton>
+                <SearchButton onClick={()=>setGetRoomByArea(true)}>Search by Area</SearchButton>
                 <SearchButton onClick={()=>getAllRoomsByAggregatedCapacity(specificHotel)}>View Capacity of Given Hotel</SearchButton>
                 <SearchButton onClick={()=>handleViewAllRooms()}>View all Rooms</SearchButton>
             </SearchCard>
                 {getRoomByHotel && <AggregateHotelCapacity/>}
+                {getRoomByArea && <ClientViewAllByArea/>}
             </div>
         )
     }

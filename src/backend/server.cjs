@@ -167,12 +167,25 @@ app.get("/hotel/:hotel_name", async (req, res) => {
     GROUP BY hotel.hotel_name
     `, [hotel_name]);
     res.json(getHotelCapacityByName.rows);
-    console.log(getHotelCapacityByName.rows);
+    // console.log(getHotelCapacityByName.rows);
   } catch (error) {
     console.error(error.message);
   }
 });
 
+// get all rooms in a specific location
+app.get("/hotel/address/:hotel_address", async(req, res)=>{
+  try{
+    const { hotel_address } = req.params;
+    const getRoomByLocation = await pool.query(`SELECT * FROM room 
+    JOIN hotel ON room.room_hotel_chain_id = hotel.hotel_id 
+    WHERE hotel.hotel_address = $1;
+    `, [hotel_address]);
+    res.json(getRoomByLocation.rows)
+  }catch(error){
+    console.error(error.message);
+  }
+})
 
 
 // update a hotel 
