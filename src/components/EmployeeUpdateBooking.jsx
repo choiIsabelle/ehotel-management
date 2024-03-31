@@ -1,4 +1,5 @@
 import { CondensedInput } from "./CondensedInput"
+import { useState } from "react"
 import { EmployeeNavigationButtons } from "./EmployeeNavigationButtons"
 import styled from 'styled-components'
 import * as c from './CustomComponents'
@@ -9,23 +10,44 @@ flex-direction: column;
 gap: 1rem;
 `
 
-
 export const EmployeeUpdateBooking=({goBack, goManage, goAdd, goRemove})=>{
+    const [employeeSSN, setEmployeeSSN] = useState('')
+    const [bookingID, setBookingID] = useState('')
+
+    const createRental=async()=>{
+        try {
+            const response = await fetch('http://localhost:5000/rental',{
+                method: "POST",
+                headers:{"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    booking_id: bookingID, 
+                    employee_SSN: employeeSSN
+                })
+            })
+            console.log(response)
+            alert("New Room Availability Added Successfully!")
+            
+        }  catch (error) {
+            console.error("Adding a new rental could not be completed", console.error)
+        }
+    }
     return(
         <Container>
         <c.Card id="EmployeeUpdateBooking-Container">
-            <form>
         <CondensedInput
         title='Check in a Customer'
         msg="What is your SSN?"
         subMsg="Enter your SSN as an employee"
+        valueLabel={employeeSSN}
+        handleChange={(e)=>setEmployeeSSN(e.target.value)}
         />
         <CondensedInput
         msg="What is the Booking ID you are checking in for?"
         subMsg="Enter numeric booking ID"
+        valueLabel={bookingID}
+        handleChange={(e)=>setBookingID(e.target.value)}
         />
-        <c.SearchButton>Check in Customer</c.SearchButton>
-        </form>
+        <c.SearchButton onClick={()=>createRental()}>Check in Customer</c.SearchButton>
             </c.Card>
         <button style={{borderColor: 'black', marginTop:'1rem'}} onClick={()=>goBack()}>Go back</button>
             <EmployeeNavigationButtons

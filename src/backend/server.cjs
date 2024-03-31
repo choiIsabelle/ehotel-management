@@ -361,12 +361,25 @@ app.post("/booking", async(req, res)=>{
   }
 })
 
+// update (convert) booking to a rental
+app.post("/rental", async(req, res)=>{
+  const {booking_id, employee_SSN} = req.body
+  try{
+    const convertToRental = await pool.query(`
+    INSERT INTO Rental (customer_SSN, employee_SSN, departure_date, arrival_date, room_of_rental)
+    SELECT customer_SSN, employee_SSN, departure_date, arrival_date, room_of_booking
+    FROM Booking 
+    WHERE booking_id = $1 AND employee_SSN = $2 
+    RETURNING *
+  `, [booking_id, employee_SSN]);
+    await pool.query("COMMIT");
+    res.json(convertToRental)
+    console.log(convertToRental)
 
-// add to booking archive
-
-
-// delete from booking archive
-
+  } catch(error){
+    console.error(error.message)
+  }
+})
 
 app.listen(5000, ()=>{
   console.log(`Server has started on port ${port}`)

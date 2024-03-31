@@ -36,16 +36,48 @@ export const EmployeeAddBookingAction=()=>{
     const radioButtonRef = useRef(null); 
 
     const [customerName, setCustomerName] = useState("SSN")
-    const [date, setDate] = useState("yyyy-mm-dd")
+    const [arrivalDate, setArrivalDate] = useState("yyyy-mm-dd")
+    const [departureDate, setDepartureDate] =useState("yyyy-mm-dd")
     const [selectedValue, setSelectedValue] = useState(null);
+    const[roomNumber, setRoomNumber] = useState('')
+    const[employeeSSN, setEmployeeSSN] = useState('')
 
     const radioHandleCheck = (value) => {
-        console.log(value); // Access the selected value here
         setSelectedValue(value);
       };
 
+      const createNewReservation=()=>{
+        if(selectedValue == 'Booking'){
+            createNewBooking()
+        }
+        createNewRental()
+      }
+
+      const createNewBooking=async()=>{
+        try {
+            const response = await fetch('http://localhost:5000/room',{
+                method: "POST",
+                headers:{"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    customer_SSN: customerName,
+                    employee_SSN: employeeSSN, 
+                    departure_date: departureDate, 
+                    arrival_date: arrivalDate, 
+                    room_of_booking: roomNumber})
+            })
+            console.log(response)
+            alert("New Booking Added Successfully!")
+            
+        }  catch (error) {
+            alert("Something went wrong in adding a new booking")
+            console.error("Adding a new booking could not be completed", console.error)
+            
+        }
+      }
+
     return(
         <Container>
+
             <CondensedInput
             title="Enter new booking details"
             msg={"Enter the customer's SSN"}
@@ -54,23 +86,31 @@ export const EmployeeAddBookingAction=()=>{
             handleClick={()=>setCustomerName('')}
             handleChange={(e)=>setCustomerName(e.target.value)}
             ></CondensedInput>
-
-            <CondensedInput
-            msg={"What is the check-in date?"}
-            valueLabel={date}
-            subMsg="Enter an 8-digit number"
-            handleClick={()=>setDate('')}
-            handleChange={(e)=>setDate(e.target.value)}
+             <CondensedInput
+            msg={"Enter your employee SSN"}
+            valueLabel={employeeSSN}
+            handleClick={()=>setEmployeeSSN('')}
+            handleChange={(e)=>setEmployeeSSN(e.target.value)}
             ></CondensedInput>
 
             <CondensedInput
-            msg={"What is the Employee name?"}
-            subMsg="Enter the employee name to be associated with this booking"
+            msg={"What is the arrival date?"}
+            valueLabel={arrivalDate}
+            handleClick={()=>setArrivalDate('')}
+            handleChange={(e)=>setArrivalDate(e.target.value)}
             ></CondensedInput>
-    
             <CondensedInput
-            msg={"What is the Employee SSN?"}
-            subMsg="Enter the employee SSN to be associated with this booking"
+            msg={"What is the departure date?"}
+            valueLabel={departureDate}
+            handleClick={()=>setDepartureDate('')}
+            handleChange={(e)=>setDepartureDate(e.target.value)}
+            ></CondensedInput>
+
+            <CondensedInput
+            msg={"What is the Room of booking?"}
+            valueLabel={roomNumber}
+            handleChange={(e)=>setRoomNumber(e.target.value)}
+            subMsg="Enter the room number associated with this booking"
             ></CondensedInput>
 
             <RadioButton
@@ -83,7 +123,7 @@ export const EmployeeAddBookingAction=()=>{
             radioTitle={"What type of reservation is this?"}
             ></RadioButton>
 
-            <SubmitButton>Submit</SubmitButton>
+            <SubmitButton onClick={()=>createNewReservation()}>Submit</SubmitButton>
         </Container>
     )
 }

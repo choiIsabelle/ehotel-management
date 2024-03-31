@@ -28,12 +28,12 @@ export const EmployeeAddNewRoom=({goBack, goManage, goAdd, goRemove})=>{
                 headers:{"Content-Type": "application/json"},
                 body: JSON.stringify({extendable: extendable, room_capacity: roomCapacity, room_type: roomType, daily_rate: dailyRate, amenities: amenities, damages: damages, room_hotel_chain_id: roomHotelId})
             })
+            console.log(response)
             alert("New Room Availability Added Successfully!")
             
         }  catch (error) {
             alert("Something went wrong in adding a new room")
             console.error("Adding a new room could not be completed", console.error)
-            
         }
     }
 
