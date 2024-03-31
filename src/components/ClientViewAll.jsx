@@ -124,16 +124,15 @@ const customModalStyles = {
                   const response = await fetch(`http://localhost:5000/Hotel/${hotel_name}`, {
                       method: 'GET'
                   });
-                  const jsonData = await response.json();     
-                  setSpecificHotelData(jsonData.rows[0])
-      
+                  const jsonData = await response.json();   
+                  setSpecificHotelData(jsonData[0]);
               } catch (error) {
                   console.error(error.message);
               }
           };
 
           const AggregateHotelCapacity=()=>{
-            if (!specificHotelData) return null;    
+            if (!specificHotelData || !specificHotelData.hotel_name) return null;
             return(
             <SearchCard>
                 <c.Title>The Aggregated Capacity of Your Search for {specificHotelData.hotel_name}</c.Title>
