@@ -71,7 +71,6 @@ gap: 0.5rem;
 const Title = styled.h3`
 font-size: 16px;
 padding: 0.3rem;
-margin-bottom: 0.5rem;
 font-weight: 600;
 `
 
@@ -124,12 +123,28 @@ const customModalStyles = {
                   const response = await fetch(`http://localhost:5000/Hotel/${hotel_name}`, {
                       method: 'GET'
                   });
-                  const jsonData = await response.json();   
+                  const jsonData = await response.json();
                   setSpecificHotelData(jsonData[0]);
               } catch (error) {
                   console.error(error.message);
               }
           };
+
+          const getAllRoomsByArea=async(hotel_address)=>{
+            setGetRoomByArea(true);
+            setGetRoomByHotel(false)
+            setGetAllRooms(false)
+          try {
+              const response = await fetch(`http://localhost:5000/Hotel/${hotel_address}`, {
+                  method: 'GET'
+              });
+              const jsonData = await response.json();
+              console.log("here", jsonData)     
+  
+          } catch (error) {
+              console.error(error.message);
+          }
+          }
 
           const AggregateHotelCapacity=()=>{
             if (!specificHotelData || !specificHotelData.hotel_name) return null;
@@ -145,13 +160,8 @@ const customModalStyles = {
         return(
             <div>
             <SearchCard>
-                <Title>Search for Rooms By Specification</Title>
                 <CondensedInput
-                msg={"What area are you interested in?"}
-                valueLabel={specificArea}
-                handleChange={e=> setSpecificArea(e.target.value)}
-                />
-                <CondensedInput
+                title={"Search for Rooms By Specification"}
                 msg={"View the capacity of a certain hotel"}
                 subMsg={"Enter the name of the hotel whose aggregated total capacity you would like to view"}
                 valueLabel={specificHotel}
