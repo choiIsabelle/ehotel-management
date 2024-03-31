@@ -69,7 +69,7 @@ export const ClientGetInfoSection=({sendClientInformation})=>{
     setHasSubmitted(true);
       // on submit, propagate data to parent component
       console.log('customer for total rooms', customerTotalRooms)
-    sendClientInformation(customerRoomCapacity, customerArea, customerHotelChain, customerHotelCategory, customerTotalRooms)
+    sendClientInformation(customerRoomCapacity, customerArea, customerHotelChain, customerHotelCategory, customerTotalRooms, customerUpperRoomPrice, customerLowerRoomPrice)
         setTimeout(()=>{
           setHasSubmitted(false)
           handleOpenModal()
@@ -128,13 +128,13 @@ export const ClientGetInfoSection=({sendClientInformation})=>{
       value: item.hotel_name
     }));
 
-    return(
-      !showResults ? (
+    return( 
+
         <Card className={cn}>
         <CondensedInput 
         id={`${cn}.customerPref`}
         title="Get Customer Preferences" 
-        msg="How many rooms do you want?" 
+        msg="What is the room capacity you would like?" 
         subMsg="Enter an integer"
         valueLabel={customerRoomCapacity}
         handleChange={(e)=>setCustomerRoomCapacity(e.target.value)}
@@ -170,14 +170,14 @@ vals ={hotelsByTotalCapacity }
 onChange={(value)=>handleOnHotelAggregateCapacitySelect(value)}
 />
          <CondensedInput 
-        msg="What is your price point?" 
+        msg="What is your upper price point?" 
         subMsg="Enter the upper bound"
         valueLabel={customerUpperRoomPrice}
         handleChange={(e)=>setCustomerUpperRoomPrice(e.target.value)}
         />
 
         <CondensedInput 
-        msg="What is your price point?" 
+        msg="What is your lower price point?" 
         subMsg="Enter the lower bound"
         valueLabel={customerLowerRoomPrice}
         handleChange={(e)=>setCustomerLowerRoomPrice(e.target.value)}
@@ -191,8 +191,5 @@ onChange={(value)=>handleOnHotelAggregateCapacitySelect(value)}
         message="Hotels found!"
         subMessage="View results on the next page" />
         </Card>
-      ) :
-      <ClientDisplayResults></ClientDisplayResults>
-
-    )
+      ) 
 }

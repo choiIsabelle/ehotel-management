@@ -290,6 +290,31 @@ app.get("/room/:id", async(req, res)=>{
   }
 })
 
+// get rooms based on customer preferences
+app.get("/hotel/by_specifications", async (req, res) => {
+  try {
+      const { room_capacity, hotel_address, hotel_related_chain } = req.query;
+      const getHotelByPreferences = await pool.query(`
+          SELECT room.* 
+          FROM hotel 
+          JOIN room ON hotel.hotel_id = room.room_hotel_chain_id 
+          WHERE room.room_capacity = $1 
+          AND hotel.hotel_address = $2
+          AND hotel.hotel_related_chain = $3;
+      `, [ room_capacity, hotel_address, hotel_related_chain ]);
+      res.json(getHotelByPreferences.rows);
+      console.log('here!!!', getHotelByPreferences.rows);
+  } catch (error) {
+      console.error(error.message);
+      res.status(500).send("Server Error");
+  }
+});
+
+
+
+
+
+
 // update a room
 app.post("/room:id", async(req,res)=>{
   try {

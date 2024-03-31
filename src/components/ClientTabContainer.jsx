@@ -4,6 +4,7 @@ import { ClientGetInfoSection } from './ClientGetInfoSection';
 import styled from 'styled-components';
 import ClientNavigationButtons from './ClientNavigationButtons';
 import { ClientDatePicker } from './ClientDatePicker';
+import { ClientDisplayResults } from './ClientDisplayResults';
 
 const Container = styled.div`
 display: flex;
@@ -47,6 +48,7 @@ export const ClientTabContainer = ({handleClick, handleGoBack }) => {
       <SwitchTab activeTab={activeTab} onTabChange={handleTabChange} />
       {activeTab === 1 && <ClientDatePicker sendDateInformation={handleDateData}></ClientDatePicker>}
       {activeTab ===2 && <ClientGetInfoSection sendClientInformation={handleClientInformation}/>}
+      {activeTab ===3 && <ClientDisplayResults clientPreferences={customerPreference}/>}
       <ClientNavigationButtons
       handleClick={handleClick}
         handleGoBack={handleGoBack}
