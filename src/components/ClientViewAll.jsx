@@ -260,7 +260,6 @@ const customModalStyles = {
                 body: JSON.stringify({
                     customer_SSN: customerSSN, 
                     employoee_SSN: employeeSSN, 
-                    is_a_rental: false,
                     departure_date: departureDate, 
                     arrival_date: arrivalDate, 
                     room_of_booking: roomData.room_number
@@ -293,7 +292,7 @@ const customModalStyles = {
     ))
 
     return (
-        <div>
+        <div style={{ width: '100%' }}>
             <ClientGoBackChevronButton 
             handleClick={handleGoBack}/>
             <c.Title>View All Available Rooms</c.Title>

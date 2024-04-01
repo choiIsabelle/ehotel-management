@@ -41,6 +41,7 @@ export const EmployeeAddBookingAction=()=>{
     const [selectedValue, setSelectedValue] = useState(null);
     const[roomNumber, setRoomNumber] = useState('')
     const[employeeSSN, setEmployeeSSN] = useState('')
+    const[rentalPrice, setRentalPrice] = useState('This is for rentals only')
 
     const radioHandleCheck = (value) => {
         setSelectedValue(value);
@@ -53,9 +54,33 @@ export const EmployeeAddBookingAction=()=>{
         createNewRental()
       }
 
+      const createNewRental=async()=>{
+        try {
+            const response = await fetch('http://localhost:5000/rental',{
+                method: "POST",
+                headers:{"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    customer_SSN: customerName,
+                    employee_SSN: employeeSSN, 
+                    departure_date: departureDate, 
+                    arrival_date: arrivalDate, 
+                    price: rentalPrice,
+                    room_of_booking: roomNumber})
+            })
+            console.log(response)
+            alert("New Rental Added Successfully!")
+            
+        }  catch (error) {
+            alert("Something went wrong in adding a new rental")
+            console.error("Adding a new rental could not be completed", console.error)
+            
+        }
+
+      }
+
       const createNewBooking=async()=>{
         try {
-            const response = await fetch('http://localhost:5000/room',{
+            const response = await fetch('http://localhost:5000/booking',{
                 method: "POST",
                 headers:{"Content-Type": "application/json"},
                 body: JSON.stringify({
@@ -110,6 +135,13 @@ export const EmployeeAddBookingAction=()=>{
             msg={"What is the Room of booking?"}
             valueLabel={roomNumber}
             handleChange={(e)=>setRoomNumber(e.target.value)}
+            subMsg="Enter the room number associated with this booking"
+            ></CondensedInput>
+            <CondensedInput
+            msg={"For rentals: What is the rental price?"}
+            valueLabel={rentalPrice}
+            onClick={(e)=>setRentalPrice('')}
+            handleChange={(e)=>setRentalPrice(e.target.value)}
             subMsg="Enter the room number associated with this booking"
             ></CondensedInput>
 

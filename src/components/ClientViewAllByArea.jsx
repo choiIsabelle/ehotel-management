@@ -33,7 +33,7 @@ const ClientViewAllByArea = () => {
           });
           const jsonData = await response.json();
           setHotelByAddressData(jsonData)
-          console.log(hotelByAddressData)
+          console.log('here',hotelByAddressData)
       } catch (error) {
           console.error(error.message);
       }
