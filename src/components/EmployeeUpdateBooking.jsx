@@ -31,6 +31,23 @@ export const EmployeeUpdateBooking=({goBack, goManage, goAdd, goRemove})=>{
             console.error("Adding a new rental could not be completed", console.error)
         }
     }
+
+    const confirmPaymentDetails=async(id)=>{
+        try {
+            const response = await fetch(`http://localhost:5000/rental/:${id}`,{
+                method: "UPDATE",
+                headers:{"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    booking_id: bookingID, 
+                    employee_SSN: employeeSSN
+                })
+            })
+            console.log(response)
+            
+        }  catch (error) {
+            console.error(console.error)
+        }
+    }
     return(
         <Container>
         <c.Card id="EmployeeUpdateBooking-Container">
@@ -48,6 +65,18 @@ export const EmployeeUpdateBooking=({goBack, goManage, goAdd, goRemove})=>{
         handleChange={(e)=>setBookingID(e.target.value)}
         />
         <c.SearchButton onClick={()=>createRental()}>Check in Customer</c.SearchButton>
+            </c.Card>
+
+            <c.Card>
+
+            <CondensedInput
+        title='Insert customer payment details'
+        msg="What is the customer's credit card information?"
+        subMsg="Enter a credit card number"
+        valueLabel={employeeSSN}
+        handleChange={(e)=>setEmployeeSSN(e.target.value)}
+        />
+               <c.SearchButton onClick={()=>confirmPaymentDetails()}>Confirm Payment Details</c.SearchButton>
             </c.Card>
         <button style={{borderColor: 'black', marginTop:'1rem'}} onClick={()=>goBack()}>Go back</button>
             <EmployeeNavigationButtons

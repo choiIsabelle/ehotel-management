@@ -173,9 +173,9 @@ app.get("/hotel/by_name/:hotel_name", async (req, res) => {
   try {
     const { hotel_name } = req.params;
     const getHotelCapacityByName = await pool.query(`
-    SELECT hotel.hotel_name, SUM(room.room_capacity) AS total_capacity 
+    SELECT hotel.hotel_id, SUM(room.room_capacity) AS total_capacity 
     FROM hotel 
-    JOIN room ON room.room_hotel_chain_id = hotel.hotel_id 
+    JOIN room ON room.room_hotel = hotel.hotel_id 
     WHERE hotel.hotel_name = $1 
     GROUP BY hotel.hotel_name
     `, [hotel_name]);
@@ -192,7 +192,7 @@ app.get("/hotel/address/:hotel_address", async(req, res)=>{
   try{
     const { hotel_address } = req.params;
     const getRoomByLocation = await pool.query(`SELECT * FROM room 
-    JOIN hotel ON room.room_hotel_chain_id = hotel.hotel_id 
+    JOIN hotel ON room.room_hotel = hotel.hotel_id 
     WHERE hotel.hotel_address = $1;
     `, [hotel_address]);
     res.json(getRoomByLocation.rows)
@@ -207,7 +207,7 @@ app.get("/hotel/total_capacity", async (req, res) => {
     const getAllHotelCapacity = await pool.query(`
     SELECT hotel.hotel_name, SUM(room.room_capacity) AS total_capacity 
     FROM hotel 
-    JOIN room ON room.room_hotel_chain_id = hotel.hotel_id 
+    JOIN room ON room.room_hotel = hotel.hotel_id 
     GROUP BY hotel.hotel_name
     `,);
     res.json(getAllHotelCapacity.rows);
@@ -270,7 +270,7 @@ app.post("/room", async(req,res)=>{
 app.get("/room", async(req, res)=>{
   try{
     const getRoom = await pool.query(
-      "SELECT room.*, hotel.hotel_address FROM room INNER JOIN hotel ON room.associated_hotel_name = hotel.hotel_name"
+      "SELECT room.*, hotel.hotel_address FROM room INNER JOIN hotel ON room.room_hotel = hotel.hotel_id"
     );
     res.json(getRoom)
   }catch(error){
@@ -298,7 +298,7 @@ app.get("/hotel/by_specifications", async (req, res) => {
       const getHotelByPreferences = await pool.query(`
           SELECT room.* 
           FROM hotel 
-          JOIN room ON hotel.hotel_id = room.room_hotel_chain_id 
+          JOIN room ON hotel.hotel_id = room.room_hotel
           WHERE room.room_capacity = $1 
           AND hotel.hotel_address = $2
           AND hotel.hotel_related_chain = $3;
@@ -378,6 +378,36 @@ app.post("/rental", async(req, res)=>{
 
   } catch(error){
     console.error(error.message)
+  }
+})
+
+// add a new rental
+app.post("/rental", async(req, res)=>{
+  try {
+    const {
+      customer_SSN,
+      employee_SSN,
+      departure_date,
+      arrival_date,
+      price,
+      room_of_booking
+  } = req.body;
+
+    const addBooking = await pool.query(
+      `INSERT INTO 
+      Booking(
+        customer_SSN, 
+        employee_SSN, 
+        departure_date, 
+        arrival_date, 
+        price,
+        room_of_booking) VALUES ($1, $2, $3, $4, $5, $6) RETURNING*`,
+      [customer_SSN, employee_SSN, departure_date, arrival_date, price, room_of_booking]
+    )
+    await pool.query("COMMIT");
+    res.json(addBooking.rows[0]);
+  } catch (error) {
+    console.error(error.message);
   }
 })
 
