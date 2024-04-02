@@ -1,5 +1,6 @@
 # Project Demo
-![overview-cropped](https://github.com/choiIsabelle/ehotel-management-g14/assets/67203277/0f764a53-62b5-4cbf-a109-9bdd4a3c87a5)
+![overview-latest](https://github.com/choiIsabelle/ehotel-management-g14/assets/67203277/667b52e8-d855-499a-8b8d-2a2119f27ca2)
+
 
 # Deliverable 1
 
