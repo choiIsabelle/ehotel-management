@@ -1,4 +1,8 @@
+# Project Demo
+![overview-cropped](https://github.com/choiIsabelle/ehotel-management-g14/assets/67203277/0f764a53-62b5-4cbf-a109-9bdd4a3c87a5)
+
 # Deliverable 1
+
 - ER diagram
 - Schema
 - Constraints
