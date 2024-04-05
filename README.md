@@ -24,4 +24,4 @@ How to Run:
    `npm run dev`
 
 4) Open `localhost:3000` in your broswer. You may interact with the website from here.
-5) To terminate the website session, press `Cntrl+C` in the terminal running the website. 
+5) To terminate the website session, press `Ctrl+C` in the terminal running the website. 
