@@ -1,4 +1,6 @@
 # Project Demo
+**Click [here](https://www.youtube.com/watch?v=ohaw83M96I8) to watch video**
+
 ![overview-latest](https://github.com/choiIsabelle/ehotel-management-g14/assets/67203277/667b52e8-d855-499a-8b8d-2a2119f27ca2)
 
 
